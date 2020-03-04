@@ -15,9 +15,9 @@
 <h2> INSTALLATION </h2> 
 <br> >> cd react-apps
 <br> >> npm install
-<br> >> npm run build
 <br>
 <h2> USAGE </h2>
+<br> >> cd .. 
 <br> >> python main.py debug
 <br>
 <h4> readme.md & .gitignore </h4>
