@@ -1,12 +1,14 @@
 # Easter Company Server Optimizations
 tmp/
+.local/
 
 # testing
 coverage/
+.vscode/
+.idea/
 
 # production
 build/
-.vscode/
 
 # misc
 .DS_Store
