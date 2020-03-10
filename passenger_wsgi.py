@@ -9,5 +9,4 @@ passenger_wsgi.py file is reserved for server deployment
 
 import os
 import sys
-from main import *
 sys.path.insert(0, os.path.dirname(__file__))
