@@ -1,0 +1,3 @@
+[submodule "elang"]
+	path = elang
+	url = http://github.com/eastercompany/elang.git
