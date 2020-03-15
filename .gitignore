@@ -1,5 +1,8 @@
 # user content
 tmp/
+reacts/package-lock.json
+reacts/package.json
+reacts/README.md
 .local/
 
 # testing
