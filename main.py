@@ -34,12 +34,6 @@ def _home_page_():
     return webApp.react_app("index.html")
 
 
-# WEB APP BACKEND API INDEX
-@webApp.end.route('/api')
-def _api_service_():
-    return api_service.browser()
-
-
 # ======================== MAIN.PY _INIT_ FUNC ========================
 
 if __name__ == "__main__":
