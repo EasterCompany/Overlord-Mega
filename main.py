@@ -31,7 +31,7 @@ for _table in _dbtb_:
 # WEB APP DEFAULT HOMEPAGE 
 @webApp.end.route('/')
 def _home_page_():
-    return webApp.react_app("home-page.html")
+    return webApp.react_app("index.html")
 
 
 # WEB APP BACKEND API INDEX
