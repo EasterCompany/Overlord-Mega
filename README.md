@@ -6,7 +6,7 @@ where you want to put the root directory <br>
 <code> git clone --recursive git@github.com:EasterCompany/easter.company.git </code>
 <br><br> inside of the reacts directory <br>
 <code> npm install </code>
-<br><br> depening on what the depth of your fork / pull you may need to <br>
+<br><br> you may need to <br>
 <code> npm build </code>
 
 # Execute Code to Post
