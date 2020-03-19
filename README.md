@@ -26,3 +26,7 @@ In Order <br>
 - run eLang test suite <br>
 - start flask web server if all pass <br>
 <code> /usr/bin/python3 main.py start debug </code>
+<br>
+<br>
+<br>
+read the docs @ https://www.easter.company/
