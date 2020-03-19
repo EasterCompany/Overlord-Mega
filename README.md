@@ -1,5 +1,5 @@
 # Easter.Company
-<br> easter company website source code (Flask / React) <br>
+easter company website source code (Flask / React) <br>
 
 # Installation
 where you want to put the root directory <br>
