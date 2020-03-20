@@ -1,22 +1,15 @@
 # STANDARD
 __pycache__
+elang/__pycache__
 modules/__pycache__
 reacts/node_modules
 .local
 .vscode
-
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-reacts/node_modules
-reacts/.pnp
 .pnp.js
-
-# testing
-reacts/coverage
 
 # production
 static/react
+templates/
 
 # misc
 .DS_Store

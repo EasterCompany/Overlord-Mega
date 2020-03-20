@@ -3,10 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
 ReactDOM.render(<App />, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+const posts = () => { 
+    var posts = null;
+    fetch('/api?q=hello_world&r=posts')
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        posts = data;
+    });
+    return posts;
+}
+document.getElementById("posts").innerText = posts
+
 serviceWorker.unregister();
