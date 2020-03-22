@@ -8,7 +8,7 @@ function App() {
 
       <header className="App-header">
         <h1> >> Hello World! </h1>
-        <h4> $ fmp.learning.hour </h4>
+        <h4> $ fmp.learning.hour || simple is better</h4>
       </header>
     
       <body className="App-body">
@@ -17,11 +17,22 @@ function App() {
           <h5> sign your post </h5>
           <input id="new_post_signature" maxLength="34" placeholder="email@findmypast.com" name="new_post_signature" type="email" />
         </form>
-        <br/>
-        <br/>
-        <p id="posts" className="App-body-posts">
-        </p>
-        <br/>
+
+        <div id="posts" className="App-body-posts">
+          <div id="post1" className="post">
+          </div>
+          <div id="post2" className="post">
+          </div>
+          <div id="post3" className="post">
+          </div>
+          <div id="post4" className="post">
+          </div>
+          <div id="post5" className="post">
+          </div>
+          <div id="post6" className="post">
+          </div>
+        </div>
+
       </body>
 
       <footer className="App-foot">

@@ -2,6 +2,7 @@
 
 # STANDARD LIBRARY IMPORTS
 from sys import argv
+from datetime import datetime
 from sqlite3 import connect as db_connect
 
 # EASTER LANGUAGE IMPORTS
@@ -41,14 +42,16 @@ def _home_page_():
 
 
 # HELLO WORLD POST-TO PAGE
-@webApp.end.route('/make/post')
+@webApp.end.route('/make/post', methods=["GET", "POST"])
 def _make_post_():
     np = webApp.arg('new_post')
     ps = webApp.arg('new_post_signature')
     Database("web.db").sql(
         """
         INSERT INTO hello_world_posts VALUES(
-           '""" + ps + """', '""" + np + """'
+           '""" + ps + """', '""" + np.\
+               replace("'", """ %" """).replace(""" %: """) + \
+                """', '""" + str(datetime.now()) + """'
             );
         """
     )
@@ -56,16 +59,16 @@ def _make_post_():
 
 
 # WEB APP API ACCESS PAGE
-@webApp.end.route('/api', methods=["GET", "POST"])
+@webApp.end.route('/api', methods=["GET"])
 def _api_():
     if webApp.arg("q") == "hello_world":
         if webApp.arg("r") == "posts":
             re = Database("web.db").sql(
-                "SELECT * FROM hello_world_posts LIMIT 10;")
-            se = str()
+                "SELECT * FROM hello_world_posts LIMIT 5;")
+            se = ""
             for r in re:
-                se = se + "{" + " '{}': '{}', '{}': '{}', ".format("n", r[0], "c", r[1]) + "}"
-            return webApp.json(to_make=se)
+                se = se + "{}: {}<br>".format(r[0], r[1])
+            return se
     return ""
 
 
