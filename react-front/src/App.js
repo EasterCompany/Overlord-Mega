@@ -12,25 +12,21 @@ function App() {
       </header>
     
       <body className="App-body">
-        <form action="/make/post" method="get">
-          <textarea id="new_post" className="App-post" maxLength="280" placeholder="make a new hello world learning note!" name="new_post" autoFocus />
-          <h5> sign your post </h5>
-          <input id="new_post_signature" maxLength="34" placeholder="email@findmypast.com" name="new_post_signature" type="email" />
+        <form action="/api?q=hello_world&r=make_post" method="get">
+          
+          <input id="q" name="q" type="hidden" value="hello_world"/>
+          <input id="r" name="r" type="hidden" value="make_post"/>
+        
+          <textarea id="new_post" className="App-post" maxLength="280" 
+            placeholder="make a new hello world learning note!" name="new_post" autoFocus />
+        
+          <h5> sign your post </h5>  
+          <input id="new_post_signature" maxLength="34" 
+            placeholder="email@findmypast.com" name="new_post_signature" type="email" />
+        
         </form>
 
         <div id="posts" className="App-body-posts">
-          <div id="post1" className="post">
-          </div>
-          <div id="post2" className="post">
-          </div>
-          <div id="post3" className="post">
-          </div>
-          <div id="post4" className="post">
-          </div>
-          <div id="post5" className="post">
-          </div>
-          <div id="post6" className="post">
-          </div>
         </div>
 
       </body>

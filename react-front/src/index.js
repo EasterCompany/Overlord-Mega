@@ -8,12 +8,20 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 async function catchPostData() {
     const response = await fetch("/api?q=hello_world&r=posts");
-    var my_data  = await response.text();
-    
+    var my_data  = await response.text();    
     my_data = my_data.split("<br>");
-    for (var post in my_data) {
-        console.log(my_data[post]);
-    
+    var posts = [];
+    for (var p=0;p<my_data.length-1;p++) {
+        posts.push(
+            [
+                my_data[p].split(" ")[0],
+                my_data[p].split(" ")[1],
+                my_data[p].split(" ")[2]
+            ]
+        );
+    }
+    for (p=0;p<posts.length;p++) {
+        console.log(posts[p]);
     }
 }
 

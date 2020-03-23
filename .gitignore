@@ -1,23 +1,24 @@
-# STANDARD
-__pycache__
-elang/__pycache__
-modules/__pycache__
-reacts/node_modules
-.local
-.vscode
-.pnp.js
+# USER GENERATED CONTENT
+__pycache__/
+elang/__pycache__/
+modules/__pycache__/
+reacts/node_modules/
+.local/
+.vscode/
 
-# production
+# PRODUCTION SERVER DIRS
 static/react
 templates/
 
-# misc
+# MISC FILE TYPES
+.pnp.js
 .DS_Store
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
+# TEMP LOGS
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
