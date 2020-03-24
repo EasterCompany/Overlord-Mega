@@ -7,7 +7,7 @@ reacts/node_modules/
 .vscode/
 
 # PRODUCTION SERVER DIRS
-static/react
+static/react/
 templates/
 
 # MISC FILE TYPES

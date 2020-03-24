@@ -7,8 +7,7 @@ function App() {
     <div className="App">
 
       <header className="App-header">
-        <h1> >> Hello World! </h1>
-        <h4> $ fmp.learning.hour || simple is better</h4>
+        <h2>>> Hello, World!<br/>$ simple is better</h2>
       </header>
     
       <body className="App-body">
@@ -18,11 +17,11 @@ function App() {
           <input id="r" name="r" type="hidden" value="make_post"/>
         
           <textarea id="new_post" className="App-post" maxLength="280" 
-            placeholder="make a new hello world learning note!" name="new_post" autoFocus />
+            placeholder="make a new hello world learning note!" name="new_post" autoFocus/>
         
           <h5> sign your post </h5>  
           <input id="new_post_signature" maxLength="34" 
-            placeholder="email@findmypast.com" name="new_post_signature" type="email" />
+            placeholder="email@findmypast.com" name="new_post_signature" type="email"/>
         
         </form>
 

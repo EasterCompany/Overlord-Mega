@@ -7,12 +7,16 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 
 async function catchPostData() {
+    
     const response = await fetch("/api?q=hello_world&r=posts");
     var my_data  = await response.text();    
     my_data = my_data.split("<br>");
+    
     var posts = [];
+    var post_data = [];
+    
     for (var p=0;p<my_data.length-1;p++) {
-        posts.push(
+        post_data.push(
             [
                 my_data[p].split(" ")[0],
                 my_data[p].split(" ")[1],
@@ -20,11 +24,15 @@ async function catchPostData() {
             ]
         );
     }
-    for (p=0;p<posts.length;p++) {
-        console.log(posts[p]);
+    
+    for (p=0;p<post_data.length;p++) {
+        const post_signature = React.createElement('p', {}, post_data[p][1]);
+        const post_content = React.createElement('p', {}, post_data[p][2]);
+        posts.push(post_signature);
+        posts.push(post_content);
     }
 }
 
 
-catchPostData();
+console.log(catchPostData());
 serviceWorker.unregister();
