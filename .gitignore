@@ -1,12 +1,10 @@
 # USER GENERATED CONTENT
 __pycache__/
-elang/__pycache__/
-modules/__pycache__/
-reacts/node_modules/
 .local/
 .vscode/
 
 # PRODUCTION SERVER DIRS
+react-front/node_modules/
 static/react/
 templates/
 
