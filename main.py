@@ -38,8 +38,8 @@ def _api_service_():
 
 # ======================== MAIN.PY _INIT_ FUNC ========================
 
-if __name__ == "__main__":
-    
+
+def __boot__():
     # IMPORT TABLES
     imported_tables = [
         client_database_tables, 
@@ -50,7 +50,11 @@ if __name__ == "__main__":
         for _name, _column in _table:
             dtaBse.new_table(_name, _column)
     dtaBse.db.commit(), dtaBse.db.close()
-    
+
+
+if __name__ == "__main__":
+    __boot__()
+
     # -- RUN DEBUG MODE --
     if "debug" in argv:
         basic.__unit_test__()
