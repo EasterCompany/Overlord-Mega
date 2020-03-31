@@ -1,4 +1,4 @@
-# https://www.Easter.Company/
+# Easter Company Website
 easter company website source code (Flask / React) <br>
 
 # Installation
