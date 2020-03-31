@@ -12,4 +12,4 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 # HOST MAIN AS APP
 wsgi = imp.load_source('wsgi', 'main.py')
-application = wsgi.webApp
+application = wsgi.webApp.end
