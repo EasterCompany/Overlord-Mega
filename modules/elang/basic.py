@@ -4,10 +4,12 @@
 from os import mkdir, system
 from os.path import exists, realpath
 from platform import uname
-from sys import executable
+from sys import executable, argv
 from urllib.request import urlopen
 
-print(system("python3 -m pip install --upgrade flask"))
+if "install" in argv:
+    system(realpath(executable) + " -m pip install --upgrade pip")
+    system(realpath(executable) + " -m pip install --upgrade flask")
 
 
 # ======================= EASTER LANGUAGE BASIC SUITE ==========================
