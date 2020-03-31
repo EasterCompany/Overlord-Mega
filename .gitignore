@@ -1,14 +1,15 @@
-# USER GENERATED CONTENT
+# USER
 __pycache__/
 .local/
 .vscode/
 
-# PRODUCTION SERVER DIRS
+# BUILD
+react-front/project-lock.json
 react-front/node_modules/
 static/react/
 templates/
 
-# MISC FILE TYPES
+# MISC
 .pnp.js
 .DS_Store
 .env.local
@@ -16,7 +17,21 @@ templates/
 .env.test.local
 .env.production.local
 
-# TEMP LOGS
+# TEMP
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+__pycache__/
+
+__pycache__/
+
+__pycache__/
+
+__pycache__/
+
+__pycache__/
+
+__pycache__/
+
+__pycache__/
