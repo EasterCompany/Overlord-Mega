@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 # Standard library imports
-from os import mkdir
+from os import mkdir, system
 from os.path import exists, realpath
 from platform import uname
 from sys import executable
 from urllib.request import urlopen
+
+print(system("python3 -m pip install --upgrade flask"))
 
 
 # ======================= EASTER LANGUAGE BASIC SUITE ==========================
