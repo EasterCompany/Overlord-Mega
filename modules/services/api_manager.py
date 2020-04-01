@@ -9,6 +9,7 @@ from modules.elang.basic import git
 
 # API MANAGER SERVICE
 def service():
+    
     # fetch requested parameter from url
     req = request.args.get("req")
     

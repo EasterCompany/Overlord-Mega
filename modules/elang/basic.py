@@ -7,6 +7,7 @@ from platform import uname
 from sys import executable, argv
 from urllib.request import urlopen
 
+# Fetch eLang Supported Modules
 if "install" in argv:
     system(realpath(executable) + " -m pip install --upgrade pip")
     system(realpath(executable) + " -m pip install --upgrade flask")
