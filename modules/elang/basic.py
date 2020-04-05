@@ -30,52 +30,17 @@ def make_path(path_to_make, return_path=False):
     return exists(path_to_make)
 
 
-# Checks if an item is in .gitignore file
-def _is_git_ignored(item):
-    _found = False
-    if exists("./.gitignore"):
-        for ignore in open("./.gitignore"):
-            if ignore == item:
-                _found = True
-                break
-    return _found 
-
-
-# Adds an item to .gitignore if not already
-def git_ignore(item, display=False):
-    if _is_git_ignored(item):
-        return True
-    if not exists("./.gitignore"):
-        open("./.gitignore", "w+")
-    
-    r = str(open("./.gitignore", "r").read())
-    f = open("./.gitignore", "w")
-    f.write(r + "\n" + item + "\n")
-    f.close()
-
-    if display:
-        return print(open("./.gitignore").read())
-    elif _is_git_ignored(item):
-        return True
-    return False
-
 # Fetches information from raw.githubusercontent.com
 def git(file_path, repo="documents", branch="master", source="EasterCompany"):
-    return urlopen("https://raw.githubusercontent.com/" + \
-            source + \
-            "/" + repo + \
-            "/" + branch + \
-            "/" + file_path
-        )
-
-# Open, View & Edit a file all at once
-def openEdit(path_to_file):
-    readOnly = open(path_to_file, "r").read()
-    editable = open(path_to_file, "w")
-    return readOnly, editable
+    return urlopen("https://raw.githubusercontent.com/" +
+                   source +
+                   "/" + repo +
+                   "/" + branch +
+                   "/" + file_path
+                   )
 
 
-# Returns input colourful text for console output
+# Returns input colorful text for console output
 class StringWithColour:
     content = None
     endOfString = '\033[0m'
@@ -123,7 +88,7 @@ def _Add_AutoTest_Function(_class, _funcs):
                 (
                     f[0],
                     f[1]
-                 ), True
+                ), True
             )
         )
     return __tests__
@@ -161,14 +126,14 @@ class TestSuite:
         if self.post:
             if fails == 0:
                 return print(
-                    "\n      ---- " + str(set_name) + \
-                        StringWithColour(" completed successfully ").green() + \
-                            "----        \n")
+                    "\n      ---- " + str(set_name) +
+                    StringWithColour(" completed successfully ").green() +
+                    "----        \n")
             else:
                 return print(
-            "\n      ---- " + StringWithColour(set_name).pink() + \
-            StringWithColour(" had " + str(fails) + " failure(s) ").red() + \
-            "----        \n")
+                    "\n      ---- " + StringWithColour(set_name).pink() +
+                    StringWithColour(" had " + str(fails) + " failure(s) ").red() +
+                    "----        \n")
 
     def test(self, name="test name", test_func=[type, "sample test"], expectation=str):
 
@@ -176,7 +141,8 @@ class TestSuite:
             return " => " + StringWithColour("PASSED").green()
 
         def failed(tag=name):
-            t = StringWithColour(tag).red() + " => " + StringWithColour("FAILED").red()
+            t = StringWithColour(tag).red() + " => " + \
+                StringWithColour("FAILED").red()
             if self.eject_on_fail:
                 t = t + "\n"
             else:
@@ -203,7 +169,7 @@ class TestSuite:
                     _test_ = passed()
                 else:
                     _test_ = failed()
-                
+
                 if len(self.tests) <= 4 or \
                     self.test_index == len(self.tests) - 1 or \
                         self.test_index == 0:
@@ -221,10 +187,10 @@ class TestSuite:
 def __unit_test__():
     from modules.elang.__test__.basic import make_tests
     te = TestSuite(
-        [], 
-        _name="elang/basic.py unit test", 
+        [],
+        _name="elang/basic.py unit test",
         _post=True, _eject_on_fail=False
-        )
+    )
     for each in make_tests():
         te.tests = each
         te.run()

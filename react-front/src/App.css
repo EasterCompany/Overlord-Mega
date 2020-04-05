@@ -2,20 +2,58 @@
   text-align: center;
   background-color: #282c34;
   font-size: 14px;
+  border-radius: 1%;
 }
 
 .App-header {
   background-color: #222222;
   min-height: 10vh;
+  min-height: 120px;
+  max-height: 25vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: left;
-  justify-content: center;
+  justify-content: left;
   color: white;
-  text-align: center;
+  text-align: left;
   margin-top: 1vh;
   margin-left: 32px;
   margin-right: 32px;
+  border-radius: 3%;
+}
+
+.App-header-logo {
+  background-color: #222222;
+  margin: 4px;
+  max-width: 100px;
+  min-height: 100px;
+  text-align: center;
+  align-content: center;
+  flex-direction: column;
+  border-radius: 3%;
+}
+
+.App-header-title {
+  background-color: #222222;
+  min-height: 10vh;
+  min-width: 30vh;
+  margin-left: 4vw;
+  text-align: center;
+  flex-direction: column;
+}
+
+.App-header-tool-mobile {
+  background-color: #222222;
+  align-content: center;
+  min-width: 10vw;
+  min-height: 8vh;
+  margin-left: 5vw;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  margin-right: 3vw;
+  text-align: center;
+  flex-direction: column;
+  border-radius: 3%;
 }
 
 .App-body {

@@ -4,8 +4,7 @@ from os import path, system, chdir, getcwd
 from sys import platform, argv
 from sqlite3 import connect
 from flask import Flask, render_template, redirect, request, jsonify
-from modules.elang.basic import make_path, StringWithColour, git_ignore, \
-    openEdit
+from modules.elang.basic import make_path, StringWithColour
 
 
 class ReFlask:

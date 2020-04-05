@@ -10,7 +10,7 @@ from modules.elang import basic
 from modules.elang.sqlmem import Database
 from modules.elang.reflask import ReFlask, webStr
 
-# PROJECT DATABASE IMPORTS 
+# PROJECT DATABASE IMPORTS
 from modules.database.client_tables import client_database_tables
 
 # PROJECT BACKEND APPLICATIONS
@@ -24,7 +24,7 @@ dtaBse = Database("web.db")
 # ======================== WEB APP ROUTE INDEX ========================
 
 
-# WEB APP DEFAULT HOMEPAGE 
+# WEB APP DEFAULT HOMEPAGE
 @webApp.end.route('/')
 def _home_page_():
     return webApp.html_app("index.html")
@@ -42,9 +42,9 @@ def _api_service_():
 def __boot__():
     # IMPORT TABLES
     imported_tables = [
-        client_database_tables, 
+        client_database_tables,
     ]
-    
+
     # MAKE TABLES THEY DONT EXIST
     for _table in imported_tables:
         for _name, _column in _table:
