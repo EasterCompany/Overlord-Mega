@@ -43,20 +43,25 @@ def _api_service_():
 def __boot__():
     # CONTROL VARIABLES
     global local
+    imported_tables = []
+    """ 
+    [TODO] REMOVE 
+        "imported_tables = []" 
+        once LIVE and LOCAL have conditions for it
+    """
     # BOOT REGISTRATION
     if 'secureserver' in uname().node:
         # Host mass.db as main server
         local = Database("mass.db")
+        imported_tables = [
+            client_database_tables,
+        ]
     elif 'liveconsole' in uname().node:
         # Host tiny.db as live server
         local = Database("tiny.db")
     else:
         # Set default .local database
         local = Database("data.db")
-    # IMPORT ALL TABLES
-    imported_tables = [
-        client_database_tables,
-    ]
     # MAKE TABLES THAT DON'T EXIST
     for _table in imported_tables:
         for _name, _column in _table:
