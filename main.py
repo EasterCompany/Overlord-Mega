@@ -18,7 +18,7 @@ from modules.database.client_tables import client_database_tables
 from modules.services.api_manager import service as api_service
 
 # PROJECT FLASK APP & DATABASE
-webApp = ReFlask(__name__)
+webApp = ReFlask("gypsy")
 local = "unassigned"
 
 

@@ -1,5 +1,12 @@
+# CACHE FILES
 __pycache__/
+
+# USER GENERATED FILES
 .local/
+.vscode/
+.idea/
+
+# PRODUCTION BUILD
 static/react/
 templates/
-react-front/node_modules/
+gypsy/

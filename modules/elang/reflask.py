@@ -17,9 +17,10 @@ class ReFlask:
         # REFLASK INSTANCE OBJECTS
         self.end = Flask(_name_)
         self.rwd = getcwd()
+        self.nme = _name_
         # CORE FUNCTIONALITY INITIALIZATION
         if "build" in argv:
-            chdir("react-front/")
+            chdir(_name_ + "/")
             system("npm run build")
             chdir(self.rwd)
 
