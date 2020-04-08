@@ -10,6 +10,7 @@ class Database:
         make_path('./.local')
         self.db = connect("./.local/" + filename)
         self.sql_cursor = self.db.cursor()
+        self.name = filename
 
     def sql(self, sql):
         r = self.sql_cursor.execute(sql).fetchall()
@@ -35,4 +36,3 @@ class Database:
             else:
                 _columns = _columns + _first_column + column
         return self.add("CREATE TABLE IF NOT EXISTS '" + str(name) + "' (" + str(_columns) + ");")
-

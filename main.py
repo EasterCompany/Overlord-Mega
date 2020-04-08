@@ -3,6 +3,7 @@
 # STANDARD LIBRARY IMPORTS
 from sys import argv
 from datetime import datetime
+from platform import uname
 from sqlite3 import connect as db_connect
 
 # EASTER LANGUAGE IMPORTS
@@ -18,7 +19,7 @@ from modules.services.api_manager import service as api_service
 
 # PROJECT FLASK APP & DATABASE
 webApp = ReFlask(__name__)
-dtaBse = Database("web.db")
+local = "unassigned"
 
 
 # ======================== WEB APP ROUTE INDEX ========================
@@ -40,25 +41,36 @@ def _api_service_():
 
 
 def __boot__():
-    # IMPORT TABLES
+    # CONTROL VARIABLES
+    global local
+    # BOOT REGISTRATION
+    if 'secureserver' in uname().node:
+        # Host mass.db as main server
+        local = Database("mass.db")
+    elif 'liveconsole' in uname().node:
+        # Host tiny.db as live server
+        local = Database("tiny.db")
+    else:
+        # Set default .local database
+        local = Database("data.db")
+    # IMPORT ALL TABLES
     imported_tables = [
         client_database_tables,
     ]
-
-    # MAKE TABLES THEY DONT EXIST
+    # MAKE TABLES THAT DON'T EXIST
     for _table in imported_tables:
         for _name, _column in _table:
-            dtaBse.new_table(_name, _column)
-    dtaBse.db.commit(), dtaBse.db.close()
+            local.new_table(_name, _column)
+    local.db.commit(), local.db.close()
 
 
+# INITIALIZATION ON MAIN FILE BOOT
 if __name__ == "__main__":
+    # -- BOOT WITH USER --
     __boot__()
-
     # -- RUN DEBUG MODE --
     if "debug" in argv:
         basic.__unit_test__()
-
     # -- RUN WEB APP --
     if "start" in argv:
         webApp.run()
