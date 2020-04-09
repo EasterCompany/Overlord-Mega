@@ -28,7 +28,7 @@ local = "unassigned"
 # WEB APP DEFAULT HOMEPAGE
 @webApp.end.route('/')
 def _home_page_():
-    return webApp.html_app("index.html")
+    return webApp.html_app("home.html")
 
 
 # WEB APP API ACCESS PAGE

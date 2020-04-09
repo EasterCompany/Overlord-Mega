@@ -16,6 +16,20 @@ if "install" in argv:
 # ======================= EASTER LANGUAGE BASIC SUITE ==========================
 
 
+# eTag PARSER
+def eTag(content=''):
+    # if content is path to file > read file
+    if exists(content):
+        content = open(content).read()
+    # if content is list > return list of eTags
+    elif isinstance(content, list):
+        tags = []
+        for c in content:
+            tags.append(eTag(c))
+        return tags
+    return content
+
+
 # Creates a directory path if not exists
 def make_path(path_to_make, return_path=False):
     p = path_to_make.split('/')

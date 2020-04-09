@@ -11,13 +11,14 @@ class ReFlask:
 
     def __init__(self, _name_):
         # DIRECTORY INITIALIZATION
-        make_path("./public")
-        make_path("./static/react")
-        make_path("./templates")
+        make_path("./public")               # PUBLIC INFORMATION
+        make_path("./static/react")         # GYPSY LOCAL CACHE
+        make_path("./templates/objects")    # HTML/CSS/JS Objects
+        make_path("./templates/pages")      # HTML/CSS/JS Templates
         # REFLASK INSTANCE OBJECTS
-        self.end = Flask(_name_)
-        self.rwd = getcwd()
-        self.nme = _name_
+        self.end = Flask(_name_)            # Backend app
+        self.rwd = getcwd()                 # Server Working Directory
+        self.nme = _name_                   # Frontend app
         # CORE FUNCTIONALITY INITIALIZATION
         if "build" in argv:
             chdir(_name_ + "/")
@@ -28,7 +29,38 @@ class ReFlask:
         self.end.run(debug=debug)
 
     def html_app(self, route):
-        return render_template(route)
+        # Open HTML_ROOT file
+        OUTPUT = open("templates/pages/" + route).read()
+        # Set HTML Parser Settings
+        include_css = False
+        include_obj = False
+        # Remove redundent spacing
+        while "  " in OUTPUT:
+            OUTPUT = OUTPUT.replace("  ", " ")
+        # Split OUTPUT for eTags
+        OUTPUT = OUTPUT.\
+            replace("<! ", "<!").\
+            replace(" !>", "!>").split("<! ")
+        # If any eTags in ROOT file
+        if isinstance(OUTPUT, list):
+            for i, tag in enumerate(OUTPUT):
+                # Find tag content and remove white space
+                tag = tag.split("!>")[0].replace(" ", "")
+                # Define eTag HTML inclusions
+                if tag.startswith("include:"):
+                    if tag.endswith("css"):
+                        # when including css
+                        include_css = True
+                        css_inclusions = []
+                    elif tag.endswith("obj"):
+                        # when including objs
+                        include_obj = True
+                # Inclusions
+                if include_css:
+                    return css_inclusions
+                if include_obj:
+                    return include_obj
+        return OUTPUT
 
     def goto(self, url):
         return redirect(url)
