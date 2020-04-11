@@ -1,3 +1,6 @@
 [submodule "genesis"]
 	path = apps/genesis
 	url = git@github.com:EasterCompany/genesis.git
+[submodule "apps/genesis"]
+	path = apps/genesis
+	url = git@github.com:EasterCompany/genesis.git
