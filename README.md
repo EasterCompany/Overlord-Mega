@@ -3,7 +3,7 @@ easter.company website source code (eLang Backend) <br>
 
 # Installation
 where you want to put the root directory <br>
-<code> git clone --recursive git@github.com:EasterCompany/easter.company.git </code>
+<code> git clone --recursive git@github.com:EasterCompany/overlord.git </code>
 <br><br> inside of the reacts directory <br>
 <code> npm install </code>
 <br><br> don't build - the backend automates. <br>
