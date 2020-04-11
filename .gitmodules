@@ -1,0 +1,3 @@
+[submodule "genesis"]
+	path = apps/genesis
+	url = git@github.com:EasterCompany/genesis.git
