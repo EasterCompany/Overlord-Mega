@@ -1,5 +1,5 @@
-# Easter Company Website
-easter company website source code (Flask / React) <br>
+# Easter Company Web-App
+easter.company website source code (eLang Backend) <br>
 
 # Installation
 where you want to put the root directory <br>
