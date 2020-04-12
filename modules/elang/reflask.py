@@ -1,31 +1,44 @@
 # -*- coding: utf-8 -*-
 
+# STANDARD LIBRARY IMPORTS
 from os import path, system, chdir, getcwd
 from sys import platform, argv
 from sqlite3 import connect
+
+# THIRD-PARTY IMPORTS
 from flask import Flask, render_template, redirect, request, jsonify
+
+# INTERNAL IMPORTS
 from modules.elang.basic import make_path, StringWithColour
 
 
+""" REFLASK CLASS
+
+    Allows for creating, installing,
+    building & serving flask based 
+    backend applications with HTML
+    and/or React-JS based front ends
+"""
 class ReFlask:
 
-    def __init__(self, _name_):
+    def __init__(self, _name_, react_enabled=False):
         # DIRECTORY INITIALIZATION
-        make_path("./public")               # PUBLIC INFORMATION
-        make_path("./static/react")         # GYPSY LOCAL CACHE
+        make_path("./public")               # PUBLIC Information
         make_path("./templates/objects")    # HTML/CSS/JS Objects
         make_path("./templates/pages")      # HTML/CSS/JS Templates
         # REFLASK INSTANCE OBJECTS
-        self.end = Flask(_name_)            # Backend app
-        self.rwd = getcwd()                 # Server Working Directory
-        self.nme = _name_                   # Frontend app
+        self.end = Flask(_name_)            # BACK-END App
+        self.rwd = getcwd()                 # ROOT Working Directory
+        self.nme = _name_                   # FRONT-END App
         # CORE FUNCTIONALITY INITIALIZATION
-        if "build" in argv:
-            chdir(_name_ + "/")
-            system("npm run build")
-            chdir(self.rwd)
+        if "build" in argv:                 # ON-RUN Build command
+            if react_enabled:
+                make_path("./static/react")     # REACT-JS Local Cache
+                chdir("apps/" + _name_)         # GO TO App Directory
+                system("npm run build")         # RUN npm build cmd
+                chdir(self.rwd)                 # GO TO Root Directory
 
-    def run(self, debug=False):
+    def run(self, debug=False):     # Runs the hosted web app
         self.end.run(debug=debug)
 
     def html_app(self, route):
@@ -62,31 +75,46 @@ class ReFlask:
                     return include_obj
         return OUTPUT
 
-    def goto(self, url):
+    def goto(self, url):                # Returns Redirect Method to URL
         return redirect(url)
 
-    def form(self, _req=None):
+    def form(self, _req=None):          # Returns Requested Form Attribute
         if _req is None:
             return request.form
         return request.form.get(_req)
 
-    def arg(self, _req=None):
+    def arg(self, _req=None):           # Returns Requested Argument 
         if _req is None:
             return request.args
         return request.args.get(_req)
 
-    def method(self):
+    def method(self):                   # Returns (GET/POST) Method
         return request.method
 
-    def redirect(self, href):
-        return redirect(href)
-
-    def json(self, to_make):
+    def json(self, to_make):            # Returns Json
         return jsonify(to_make)
 
 
-def webStr(to_format):
-    return str(to_format).\
-        replace("'", "&apos;").replace(" ", "&nbsp;").\
-        replace('"', "	&quot;").replace("<", "&lt;").\
-        replace(">", "&gt;")
+""" WEB STRING (reflask.webStr)
+
+    Formats a string to HTML-Friendly-Format
+    can be reversed to format HTML strings back
+    into ordinary raw strings.
+"""
+def webStr(to_format, reverse=False):
+    # Contains formatting logic
+    form = (
+        ("'", "&apos;"), (" ", "&nbsp;"), 
+        ('"', "&quot;"), ("<", "&lt;"), 
+        (">", "&gt;")
+    )
+    # Create new value
+    new_string = to_format
+    # Iterate and replace
+    for f in form:
+        if reverse:
+            new_string.replace(f[1], f[0])
+        else:
+            new_string.replace(f[0], f[1])
+    # Return value
+    return new_string

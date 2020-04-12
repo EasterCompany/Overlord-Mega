@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 
 
+""" MAKE TESTS (test)
+
+    imports required modules from eLang.basic
+    and tests functionality for expected output
+"""
 def make_tests():
     # Easter Language Basic module imports
     from modules.elang.basic import TestSuite, exists, make_path

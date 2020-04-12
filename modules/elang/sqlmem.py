@@ -1,9 +1,18 @@
 # -*- coding: utf-8 -*-
 
+# STANDARD LIBRARY IMPORTS
 from sqlite3 import connect
+
+# E-LANG MODULE IMPORTS
 from modules.elang.basic import make_path
 
 
+""" DATABASE CLASS
+
+    Allows for creating, connecting,
+    pushing & pulling from database
+    files.                       
+"""
 class Database:
 
     def __init__(self, filename='web.db'):

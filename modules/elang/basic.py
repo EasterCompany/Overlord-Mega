@@ -7,7 +7,7 @@ from platform import uname
 from sys import executable, argv
 from urllib.request import urlopen
 
-# Fetch eLang Supported Modules
+# Fetch eLang Supported Third-Party Modules
 if "install" in argv:
     system(realpath(executable) + " -m pip install --upgrade pip")
     system(realpath(executable) + " -m pip install --upgrade flask")
@@ -16,7 +16,12 @@ if "install" in argv:
 # ======================= EASTER LANGUAGE BASIC SUITE ==========================
 
 
-# eTag PARSER
+""" ETAG (basic.eTag)
+
+    converts eTag into file contents
+    can also convert lists into set 
+    of content.
+"""
 def eTag(content=''):
     # if content is path to file > read file
     if exists(content):
@@ -30,7 +35,14 @@ def eTag(content=''):
     return content
 
 
-# Creates a directory path if not exists
+""" MAKE PATH (basic.make_path)
+
+    capabale of creatings a list
+    of directories of embedding 
+    a new directory within other 
+    direcotories which may not
+    exist.
+"""
 def make_path(path_to_make, return_path=False):
     p = path_to_make.split('/')
     for i in enumerate(p):
@@ -44,7 +56,12 @@ def make_path(path_to_make, return_path=False):
     return exists(path_to_make)
 
 
-# Fetches information from raw.githubusercontent.com
+""" git (basic.git)
+
+    returns contents of a
+    raw.githubusercontent 
+    repo file
+"""
 def git(file_path, repo="documents", branch="master", source="EasterCompany"):
     return urlopen("https://raw.githubusercontent.com/" +
                    source +
@@ -54,7 +71,11 @@ def git(file_path, repo="documents", branch="master", source="EasterCompany"):
                    )
 
 
-# Returns input colorful text for console output
+""" String With Colour (basic.StringWithColour)
+
+    returns a string surrounded by 
+    BASH / BATCH colour code tags
+"""
 class StringWithColour:
     content = None
     endOfString = '\033[0m'
@@ -91,8 +112,12 @@ class StringWithColour:
 
 # ======================== EASTER LANGUAGE TEST SUITE ==========================
 
+""" Add Auto-test Function (basic._Add_AutoTest_Function)
 
-# Automatically adds a function test to test list
+    Creates a new automatic test for a 
+    function or functions of a class
+    and adds the test to a list of tests
+"""
 def _Add_AutoTest_Function(_class, _funcs):
     __tests__ = []
     for f in _funcs:
@@ -108,7 +133,13 @@ def _Add_AutoTest_Function(_class, _funcs):
     return __tests__
 
 
-# eLang TestSuite Class (wraps test lists & executes tests)
+""" ELANG TEST SUITE (basic.TestSuite)
+
+    Wraps a test list and executes tests
+    with a report on success and failure
+    should also report failures on live
+    platforms.
+"""
 class TestSuite:
 
     def __init__(self, tests, _name="__TestSuite__", _post=False, _eject_on_fail=True):
@@ -197,7 +228,10 @@ class TestSuite:
 # ======================== EASTER LANGUAGE TEST SUITE ==========================
 
 
-# Runs unit tests for this file
+""" Unit Test (basic.__unit_test__)
+
+    Runs this files unit tests
+"""
 def __unit_test__():
     from modules.elang.__test__.basic import make_tests
     te = TestSuite(

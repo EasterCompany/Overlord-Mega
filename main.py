@@ -6,7 +6,7 @@ from datetime import datetime
 from platform import uname
 from sqlite3 import connect as db_connect
 
-# EASTER LANGUAGE IMPORTS
+# E-LANG MODULE IMPORTS
 from modules.elang import basic
 from modules.elang.sqlmem import Database
 from modules.elang.reflask import ReFlask, webStr
@@ -18,50 +18,70 @@ from modules.database.client_tables import client_database_tables
 from modules.services.api_manager import service as api_service
 
 # PROJECT FLASK APP & DATABASE
-webApp = ReFlask("gypsy")
+webApp = ReFlask(
+    "genesis", 
+    react_enabled=False
+)
 local = "unassigned"
 
 
 # ======================== WEB APP ROUTE INDEX ========================
 
 
-# WEB APP DEFAULT HOMEPAGE
+""" HOME PAGE (www.easter.company/)
+
+    home page app and page index for
+    hosted domain (easter.company) 
+    and (eastercompany.co.uk)
+"""
 @webApp.end.route('/')
 def _home_page_():
     return webApp.html_app("home.html")
 
 
-# WEB APP API ACCESS PAGE
+""" API DISTRIBUTION (.../api)
+
+    capable of distributing api
+    services from this domain
+"""
 @webApp.end.route('/api', methods=["GET", "POST"])
-def _api_service_():
+def _api_distribution_():
     return api_service()
 
 
 # ======================== MAIN.PY _INIT_ FUNC ========================
 
 
+""" BOOT (__boot__)
+
+    runs the boot functionality
+    for eLang & server when installing
+    building, hosting or testing
+"""
 def __boot__():
-    # CONTROL VARIABLES
     global local
-    imported_tables = []
-    """ 
-    [TODO] REMOVE 
-        "imported_tables = []" 
-        once LIVE and LOCAL have conditions for it
-    """
     # BOOT REGISTRATION
     if 'secureserver' in uname().node:
         # Host mass.db as main server
         local = Database("mass.db")
+        # Mass Database Tables
         imported_tables = [
             client_database_tables,
         ]
     elif 'liveconsole' in uname().node:
         # Host tiny.db as live server
         local = Database("tiny.db")
+        # Tiny Databse Tables
+        imported_tables = [
+            client_database_tables,
+        ]
     else:
         # Set default .local database
         local = Database("data.db")
+        # Local Database Tables
+        imported_tables = [
+            client_database_tables,
+        ]
     # MAKE TABLES THAT DON'T EXIST
     for _table in imported_tables:
         for _name, _column in _table:
