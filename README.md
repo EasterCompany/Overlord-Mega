@@ -45,4 +45,4 @@ inside the root directory
 /usr/bin/python3 main.py start debug
 ```
 
-read the docs @ [https://www.easter.company/](easter.company)
+read the docs @ [easter.company](https://www.easter.company/)
