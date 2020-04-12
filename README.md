@@ -6,22 +6,34 @@ easter.company website source code (eLang Backend)
 # Installation
 
 where you want to put the root directory
-`git clone --recursive git@github.com:EasterCompany/Overlord.git`
+
+    ```
+    git clone --recursive git@github.com:EasterCompany/Overlord.git
+    ```
 
 # Execute Code to Post
 
 inside the root directory
-`/usr/bin/python3 main.py`
+
+    ```
+    /usr/bin/python3 main.py
+    ```
 
 # Host Flask Web Server
 
 inside the root directory
-`/usr/bin/python3 main.py start`
+
+    ```
+    /usr/bin/python3 main.py start
+    ```
 
 # Run eLang Python Unit Tests
 
 inside the root directory
-`/usr/bin/python3 main.py debug`
+
+    ```
+    /usr/bin/python3 main.py debug
+    ```
 
 # Do Everything
 
@@ -29,6 +41,8 @@ inside the root directory
 * run eLang test suite
 * start flask web server if all pass
 
-`/usr/bin/python3 main.py start debug`
+    ```
+    /usr/bin/python3 main.py start debug
+    ```
 
 read the docs @ [https://www.easter.company/](easter.company)
