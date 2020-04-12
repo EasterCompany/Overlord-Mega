@@ -36,7 +36,7 @@ local = "unassigned"
 """
 @webApp.end.route('/')
 def _home_page_():
-    return webApp.html_app("home.html")
+    return webApp.html_app("home")
 
 
 """ API DISTRIBUTION (.../api)
@@ -60,7 +60,8 @@ def _api_distribution_():
 """
 def __boot__():
     global local
-    # BOOT REGISTRATION
+    
+    # SECURE SERVER (EU SERVER)
     if 'secureserver' in uname().node:
         # Host mass.db as main server
         local = Database("mass.db")
@@ -68,6 +69,8 @@ def __boot__():
         imported_tables = [
             client_database_tables,
         ]
+    
+    # LIVE CONSOLE (NA SERVER)
     elif 'liveconsole' in uname().node:
         # Host tiny.db as live server
         local = Database("tiny.db")
@@ -75,6 +78,8 @@ def __boot__():
         imported_tables = [
             client_database_tables,
         ]
+    
+    # LOCAL SYSTEMS
     else:
         # Set default .local database
         local = Database("data.db")
@@ -82,6 +87,7 @@ def __boot__():
         imported_tables = [
             client_database_tables,
         ]
+    
     # MAKE TABLES THAT DON'T EXIST
     for _table in imported_tables:
         for _name, _column in _table:
@@ -91,11 +97,14 @@ def __boot__():
 
 # INITIALIZATION ON MAIN FILE BOOT
 if __name__ == "__main__":
+    
     # -- BOOT WITH USER --
     __boot__()
+    
     # -- RUN DEBUG MODE --
     if "debug" in argv:
         basic.__unit_test__()
+    
     # -- RUN WEB APP --
     if "start" in argv:
         webApp.run()

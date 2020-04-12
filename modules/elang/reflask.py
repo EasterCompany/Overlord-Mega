@@ -38,22 +38,24 @@ class ReFlask:
                 system("npm run build")         # RUN npm build cmd
                 chdir(self.rwd)                 # GO TO Root Directory
 
-    def run(self, debug=False):     # Runs the hosted web app
+    def run(self, debug=False):         # Serves the Back End Web App
         self.end.run(debug=debug)
 
-    def html_app(self, route):
+    def html(self, route):              # Returns a Compiled HTML App
         # Open HTML_ROOT file
-        OUTPUT = open("templates/pages/" + route).read()
+        OUTPUT = open(
+            "templates/pages/" + route + "/" + route + ".html"
+            ).read()
         # Set HTML Parser Settings
-        include_css = False
-        include_obj = False
+        include_css, css_inclusions = False, []
+        include_js, js_inclusions = False, []
         # Remove redundent spacing
         while "  " in OUTPUT:
             OUTPUT = OUTPUT.replace("  ", " ")
         # Split OUTPUT for eTags
         OUTPUT = OUTPUT.\
             replace("<! ", "<!").\
-            replace(" !>", "!>").split("<! ")
+            replace(" !>", "!>").split("<!")
         # If any eTags in ROOT file
         if isinstance(OUTPUT, list):
             for i, tag in enumerate(OUTPUT):
@@ -61,19 +63,11 @@ class ReFlask:
                 tag = tag.split("!>")[0].replace(" ", "")
                 # Define eTag HTML inclusions
                 if tag.startswith("include:"):
-                    if tag.endswith("css"):
-                        # when including css
-                        include_css = True
-                        css_inclusions = []
-                    elif tag.endswith("obj"):
-                        # when including objs
-                        include_obj = True
-                # Inclusions
-                if include_css:
-                    return css_inclusions
-                if include_obj:
-                    return include_obj
-        return OUTPUT
+                    if tag.endswith("css"): include_css = True
+                    elif tag.endswith("js"): include_js = True
+        if "debug" in argv:
+            return "<!".join(OUTPUT)
+        return "<!".join(OUTPUT).replace("\n", "")
 
     def goto(self, url):                # Returns Redirect Method to URL
         return redirect(url)
