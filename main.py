@@ -19,7 +19,7 @@ from modules.services.api_manager import service as api_service
 
 # PROJECT FLASK APP & DATABASE
 webApp = ReFlask(
-    "genesis", 
+    "genesis",
     react_enabled=False
 )
 local = "unassigned"
@@ -30,19 +30,19 @@ local = "unassigned"
 
 """ HOME PAGE (www.easter.company/)
 
-    home page app and page index for
-    hosted domain (easter.company) 
-    and (eastercompany.co.uk)
+	home page app and page index for
+	hosted domain (easter.company) 
+	and (eastercompany.co.uk)
 """
 @webApp.end.route('/')
 def _home_page_():
-    return webApp.html_app("home")
+    return webApp.html("home")
 
 
 """ API DISTRIBUTION (.../api)
 
-    capable of distributing api
-    services from this domain
+	capable of distributing api
+	services from this domain
 """
 @webApp.end.route('/api', methods=["GET", "POST"])
 def _api_distribution_():
@@ -54,13 +54,15 @@ def _api_distribution_():
 
 """ BOOT (__boot__)
 
-    runs the boot functionality
-    for eLang & server when installing
-    building, hosting or testing
+	runs the boot functionality
+	for eLang & server when installing
+	building, hosting or testing
 """
+
+
 def __boot__():
     global local
-    
+
     # SECURE SERVER (EU SERVER)
     if 'secureserver' in uname().node:
         # Host mass.db as main server
@@ -69,7 +71,7 @@ def __boot__():
         imported_tables = [
             client_database_tables,
         ]
-    
+
     # LIVE CONSOLE (NA SERVER)
     elif 'liveconsole' in uname().node:
         # Host tiny.db as live server
@@ -78,7 +80,7 @@ def __boot__():
         imported_tables = [
             client_database_tables,
         ]
-    
+
     # LOCAL SYSTEMS
     else:
         # Set default .local database
@@ -87,7 +89,7 @@ def __boot__():
         imported_tables = [
             client_database_tables,
         ]
-    
+
     # MAKE TABLES THAT DON'T EXIST
     for _table in imported_tables:
         for _name, _column in _table:
@@ -97,14 +99,14 @@ def __boot__():
 
 # INITIALIZATION ON MAIN FILE BOOT
 if __name__ == "__main__":
-    
+
     # -- BOOT WITH USER --
     __boot__()
-    
+
     # -- RUN DEBUG MODE --
     if "debug" in argv:
         basic.__unit_test__()
-    
+
     # -- RUN WEB APP --
     if "start" in argv:
         webApp.run()

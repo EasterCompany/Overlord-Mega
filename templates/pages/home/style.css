@@ -1,0 +1,53 @@
+body,
+html {
+	height: 100%;
+}
+
+.global {
+	font-size: x-small;
+	--text-color-normal: hsl(210, 10%, 62%);
+	--text-color-light: hsl(210, 15%, 35%);
+	--text-color-richer: hsl(210, 50%, 72%);
+	--text-color-highlight: hsl(25, 70%, 45%);
+}
+
+.page_header {
+	text-align: center;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	min-height: 420px;
+	min-width: 90%;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+		url("https://scontent-lhr8-1.xx.fbcdn.net/v/t1.0-9/85060792_625609174881774_588172483874521088_o.png?_nc_cat=104&_nc_sid=dd9801&_nc_oc=AQka9d9xgCkZ9iAOrBThmEYF_XYO4RyWJ3hF5BIZQEVdlmRE-pQvp7EcR40L6qoGHCk&_nc_ht=scontent-lhr8-1.xx&oh=b907dbd42273302c836f04f7883dac25&oe=5EBA4FF7");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	border-radius: 5px;
+	border: 2px solid #fe6200;
+	padding: 20px;
+}
+
+.icon-bar {
+	width: 100%; /* Full-width */
+	background-color: #555; /* Dark-grey background */
+	overflow: auto; /* Overflow due to float */
+}
+
+.icon-bar a {
+	float: left; /* Float links side by side */
+	text-align: center; /* Center-align text */
+	width: 20%; /* Equal width (5 icons with 20% width each = 100%) */
+	padding: 12px 0; /* Some top and bottom padding */
+	transition: all 0.3s ease; /* Add transition for hover effects */
+	color: white; /* White text color */
+	font-size: 36px; /* Increased font size */
+}
+
+.icon-bar a:hover {
+	background-color: #000; /* Add a hover color */
+}
+
+.active {
+	background-color: #4caf50; /* Add an active/current color */
+}

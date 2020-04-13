@@ -18,10 +18,12 @@ if "install" in argv:
 
 """ ETAG (basic.eTag)
 
-    converts eTag into file contents
-    can also convert lists into set 
-    of content.
+	converts eTag into file contents
+	can also convert lists into set 
+	of content.
 """
+
+
 def eTag(content=''):
     # if content is path to file > read file
     if exists(content):
@@ -37,12 +39,14 @@ def eTag(content=''):
 
 """ MAKE PATH (basic.make_path)
 
-    capabale of creatings a list
-    of directories of embedding 
-    a new directory within other 
-    direcotories which may not
-    exist.
+	capabale of creatings a list
+	of directories of embedding 
+	a new directory within other 
+	direcotories which may not
+	exist.
 """
+
+
 def make_path(path_to_make, return_path=False):
     p = path_to_make.split('/')
     for i in enumerate(p):
@@ -58,10 +62,12 @@ def make_path(path_to_make, return_path=False):
 
 """ git (basic.git)
 
-    returns contents of a
-    raw.githubusercontent 
-    repo file
+	returns contents of a
+	raw.githubusercontent 
+	repo file
 """
+
+
 def git(file_path, repo="documents", branch="master", source="EasterCompany"):
     return urlopen("https://raw.githubusercontent.com/" +
                    source +
@@ -73,9 +79,11 @@ def git(file_path, repo="documents", branch="master", source="EasterCompany"):
 
 """ String With Colour (basic.StringWithColour)
 
-    returns a string surrounded by 
-    BASH / BATCH colour code tags
+	returns a string surrounded by 
+	BASH / BATCH colour code tags
 """
+
+
 class StringWithColour:
     content = None
     endOfString = '\033[0m'
@@ -114,10 +122,12 @@ class StringWithColour:
 
 """ Add Auto-test Function (basic._Add_AutoTest_Function)
 
-    Creates a new automatic test for a 
-    function or functions of a class
-    and adds the test to a list of tests
+	Creates a new automatic test for a 
+	function or functions of a class
+	and adds the test to a list of tests
 """
+
+
 def _Add_AutoTest_Function(_class, _funcs):
     __tests__ = []
     for f in _funcs:
@@ -135,11 +145,13 @@ def _Add_AutoTest_Function(_class, _funcs):
 
 """ ELANG TEST SUITE (basic.TestSuite)
 
-    Wraps a test list and executes tests
-    with a report on success and failure
-    should also report failures on live
-    platforms.
+	Wraps a test list and executes tests
+	with a report on success and failure
+	should also report failures on live
+	platforms.
 """
+
+
 class TestSuite:
 
     def __init__(self, tests, _name="__TestSuite__", _post=False, _eject_on_fail=True):
@@ -152,12 +164,12 @@ class TestSuite:
         self.project = realpath(".").split('/')[-1]
         if self.post:
             print("""
-            """ + str(self.name) + """
-        """ + StringWithColour(self.project).purple() + """
-        DIST: """ + uname()[0] + """
-        NAME: """ + uname()[1] + """
-        PROJECT DIR: """ + realpath(".").split('/' + self.project)[0] + """
-        PYTHON  INT: """ + realpath(executable))
+			""" + str(self.name) + """
+		""" + StringWithColour(self.project).purple() + """
+		DIST: """ + uname()[0] + """
+		NAME: """ + uname()[1] + """
+		PROJECT DIR: """ + realpath(".").split('/' + self.project)[0] + """
+		PYTHON  INT: """ + realpath(executable))
 
     def run(self):
         name = None
@@ -196,9 +208,9 @@ class TestSuite:
 
         def unit(fin, tar=test_func, res=expectation):
             return """
-        UNIT TEST """ + name + """
-                { """ + str(tar) + """ }
-                { """ + str(res) + """ } """ + str(fin)
+		UNIT TEST """ + name + """
+				{ """ + str(tar) + """ }
+				{ """ + str(res) + """ } """ + str(fin)
 
         def test(t=test_func[0](test_func[1]), r=expectation):
             if (t == r) or (callable(r) and r()):
@@ -216,8 +228,8 @@ class TestSuite:
                     _test_ = failed()
 
                 if len(self.tests) <= 4 or \
-                    self.test_index == len(self.tests) - 1 or \
-                        self.test_index == 0:
+                        self.test_index == len(self.tests) - 1 or \
+                self.test_index == 0:
                     return print(unit(_test_))
                 elif self.test_index == len(self.tests) - 2:
                     return print("      .\n       .\n        .")
@@ -230,8 +242,10 @@ class TestSuite:
 
 """ Unit Test (basic.__unit_test__)
 
-    Runs this files unit tests
+	Runs this files unit tests
 """
+
+
 def __unit_test__():
     from modules.elang.__test__.basic import make_tests
     te = TestSuite(

@@ -9,10 +9,12 @@ from modules.elang.basic import make_path
 
 """ DATABASE CLASS
 
-    Allows for creating, connecting,
-    pushing & pulling from database
-    files.                       
+	Allows for creating, connecting,
+	pushing & pulling from database
+	files.                       
 """
+
+
 class Database:
 
     def __init__(self, filename='web.db'):
