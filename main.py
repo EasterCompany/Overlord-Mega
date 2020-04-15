@@ -14,41 +14,6 @@ from modules.elang.reflask import ReFlask, webStr
 # PROJECT DATABASE IMPORTS
 from modules.database.client_tables import client_database_tables
 
-# PROJECT BACKEND APPLICATIONS
-from modules.services.api_manager import service as api_service
-
-# PROJECT FLASK APP & DATABASE
-webApp = ReFlask(
-    "genesis",
-    react_enabled=False
-)
-local = "unassigned"
-
-
-# ======================== WEB APP ROUTE INDEX ========================
-
-
-""" HOME PAGE (www.easter.company/)
-
-	home page app and page index for
-	hosted domain (easter.company) 
-	and (eastercompany.co.uk)
-"""
-@webApp.end.route('/')
-def _home_page_():
-    return webApp.html("home")
-
-
-""" API DISTRIBUTION (.../api)
-
-	capable of distributing api
-	services from this domain
-"""
-@webApp.end.route('/api', methods=["GET", "POST"])
-def _api_distribution_():
-    return api_service()
-
-
 # ======================== MAIN.PY _INIT_ FUNC ========================
 
 
@@ -62,7 +27,6 @@ def _api_distribution_():
 
 def __boot__():
     global local
-
     # SECURE SERVER (EU SERVER)
     if 'secureserver' in uname().node:
         # Host mass.db as main server
@@ -102,6 +66,13 @@ if __name__ == "__main__":
 
     # -- BOOT WITH USER --
     __boot__()
+
+    # -- APP CONFIGURATION --
+    webApp = ReFlask(
+        "genesis",
+        react_enabled=False
+    )
+    local = "unassigned"
 
     # -- RUN DEBUG MODE --
     if "debug" in argv:
