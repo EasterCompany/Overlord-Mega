@@ -8,9 +8,22 @@ from sys import executable, argv
 from urllib.request import urlopen
 
 # Fetch eLang Supported Third-Party Modules
+
+
+def _install_support_modules(_run_tests=False, *args):
+    try:
+        if _run_tests:
+            from flask import Flask
+        else:
+            system(realpath(executable) + " -m pip install --upgrade pip")
+            system(realpath(executable) + " -m pip install --upgrade flask")
+        return True
+    except Exception as e:
+        return e
+
+
 if "install" in argv:
-    system(realpath(executable) + " -m pip install --upgrade pip")
-    system(realpath(executable) + " -m pip install --upgrade flask")
+    _install_support_modules()
 
 
 # ======================= EASTER LANGUAGE BASIC SUITE ==========================
@@ -229,7 +242,7 @@ class TestSuite:
 
                 if len(self.tests) <= 4 or \
                         self.test_index == len(self.tests) - 1 or \
-                self.test_index == 0:
+                    self.test_index == 0:
                     return print(unit(_test_))
                 elif self.test_index == len(self.tests) - 2:
                     return print("      .\n       .\n        .")
@@ -240,17 +253,16 @@ class TestSuite:
 # ======================== EASTER LANGUAGE TEST SUITE ==========================
 
 
-""" Unit Test (basic.__unit_test__)
-
-	Runs this files unit tests
+""" Unit Test (elang.__unit_test__)
+	Runs elang's unit tests
 """
 
 
 def __unit_test__():
-    from modules.elang.__test__.basic import make_tests
+    from modules.elang.__test__.elang import make_tests
     te = TestSuite(
         [],
-        _name="elang/basic.py unit test",
+        _name="Project Unit Tests",
         _post=True, _eject_on_fail=False
     )
     for each in make_tests():

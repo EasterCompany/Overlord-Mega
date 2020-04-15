@@ -6,11 +6,18 @@
     imports required modules from eLang.basic
     and tests functionality for expected output
 """
+
+
 def make_tests():
-    # Easter Language Basic module imports
+    # BASIC
     from modules.elang.basic import TestSuite, exists, make_path
     from modules.elang.basic import StringWithColour
     from modules.elang.basic import _Add_AutoTest_Function
+    from modules.elang.basic import _install_support_modules
+    # REFLASK
+    from modules.elang.reflask import ReFlask
+
+    def _test_reflask_initializes(sut): return ("test" == sut().nme)
 
     # eLang/basic.py Module Function Tests
     Function_tests = (
@@ -51,6 +58,18 @@ def make_tests():
                 (StringWithColour("-:-").white().endswith, "\x1b[0m"),
             ]
         ),
+        (
+            _install_support_modules,
+            [
+                (_install_support_modules, True)
+            ]
+        ),
+        (
+            _test_reflask_initializes,
+            [
+                (_test_reflask_initializes, ReFlask)
+            ]
+        )
     )
 
     # Easter Language Module - Adds Test Sets to Test Queue

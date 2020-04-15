@@ -27,38 +27,38 @@ def _home_page_():
     return EDOC("home").compiler()
 
 
-""" ELANG PAGE (www.easter.company/elang)
+""" ELANG PAGE (www.easter.company/e/elang)
 
     
 """
-@overlord.route('/elang')
+@overlord.route('/e/elang')
 def _elang_page_():
     return EDOC("elang").compiler()
 
 
-""" OVERLORD PAGE (www.easter.company/overlord)
+""" OVERLORD PAGE (www.easter.company/e/overlord)
 
     
 """
-@overlord.route('/overlord')
+@overlord.route('/e/overlord')
 def _overlord_page_():
     return EDOC("overlord").compiler()
 
 
-""" GENESIS PAGE (www.easter.company/gensis)
+""" GENESIS PAGE (www.easter.company/e/gensis)
 
     
 """
-@overlord.route('/genesis')
+@overlord.route('/e/genesis')
 def _genesis_page_():
     return EDOC("genesis").compiler()
 
 
-""" LOGIN PAGE (www.easter.company/login)
+""" LOGIN PAGE (www.easter.company/e/login)
 
     
 """
-@overlord.route('/login')
+@overlord.route('/e/login')
 def _login_page_():
     return EDOC("login").compiler()
 

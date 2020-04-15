@@ -24,7 +24,7 @@ from modules.elang.index import overlord
 
 class ReFlask:
 
-    def __init__(self, _name_, react_enabled=False, _sub_=False):
+    def __init__(self, _name_="test", react_enabled=False, _sub_=False):
         # PASS IF THIS IS A "SUB" APP
         if not _sub_:
             # DIRECTORY INITIALIZATION

@@ -27,34 +27,21 @@ from modules.database.client_tables import client_database_tables
 
 def __boot__():
     global local
-    # SECURE SERVER (EU SERVER)
     if 'secureserver' in uname().node:
-        # Host mass.db as main server
         local = Database("mass.db")
-        # Mass Database Tables
         imported_tables = [
             client_database_tables,
         ]
-
-    # LIVE CONSOLE (NA SERVER)
     elif 'liveconsole' in uname().node:
-        # Host tiny.db as live server
         local = Database("tiny.db")
-        # Tiny Databse Tables
         imported_tables = [
             client_database_tables,
         ]
-
-    # LOCAL SYSTEMS
     else:
-        # Set default .local database
         local = Database("data.db")
-        # Local Database Tables
         imported_tables = [
             client_database_tables,
         ]
-
-    # MAKE TABLES THAT DON'T EXIST
     for _table in imported_tables:
         for _name, _column in _table:
             local.new_table(_name, _column)
