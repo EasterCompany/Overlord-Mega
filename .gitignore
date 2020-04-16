@@ -2,12 +2,11 @@
 .local/
 .vscode/
 .idea/
+.db
 
 # PRODUCTION BUILD FILES
 static/react/
+static/html/
 
 # USER CACHE FILES
 __pycache__
-modules/database/__pycache__/*
-modules/database/__pycache__/__init__.cpython-37.pyc
-modules/database/__pycache__/client_tables.cpython-37.pyc

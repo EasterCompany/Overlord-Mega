@@ -7,7 +7,16 @@ from platform import uname
 from sys import executable, argv
 from urllib.request import urlopen
 
-# Fetch eLang Supported Third-Party Modules
+
+# ======================= EASTER LANGUAGE BASIC SUITE ==========================
+
+
+""" install support modules
+
+	installs supported third-party 
+    modulesthat may be essential 
+    to basic functionality.
+"""
 
 
 def _install_support_modules(_run_tests=False, *args):
@@ -24,9 +33,6 @@ def _install_support_modules(_run_tests=False, *args):
 
 if "install" in argv:
     _install_support_modules()
-
-
-# ======================= EASTER LANGUAGE BASIC SUITE ==========================
 
 
 """ ETAG (basic.eTag)

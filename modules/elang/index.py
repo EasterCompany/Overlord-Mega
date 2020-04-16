@@ -16,58 +16,35 @@ overlord = Blueprint(
 
 # ======================== WEB APP ROUTE INDEX ========================
 
-""" HOME PAGE (www.easter.company/)
 
-	home page app and page index for
-	hosted domain (easter.company) 
-	and (eastercompany.co.uk)
-"""
 @overlord.route('/')
 def _home_page_():
     return EDOC("home").compiler()
 
 
-""" ELANG PAGE (www.easter.company/e/elang)
-
-    
-"""
 @overlord.route('/e/elang')
 def _elang_page_():
     return EDOC("elang").compiler()
 
 
-""" OVERLORD PAGE (www.easter.company/e/overlord)
-
-    
-"""
 @overlord.route('/e/overlord')
 def _overlord_page_():
     return EDOC("overlord").compiler()
 
 
-""" GENESIS PAGE (www.easter.company/e/gensis)
-
-    
-"""
 @overlord.route('/e/genesis')
 def _genesis_page_():
     return EDOC("genesis").compiler()
 
 
-""" LOGIN PAGE (www.easter.company/e/login)
-
-    
-"""
 @overlord.route('/e/login')
 def _login_page_():
     return EDOC("login").compiler()
 
 
-""" API DISTRIBUTION (.../api)
-
-	capable of distributing api
-	services from this domain
-"""
 @overlord.route('/api', methods=["GET", "POST"])
 def _api_distribution_():
     return api_service()
+
+
+# =====================================================================
