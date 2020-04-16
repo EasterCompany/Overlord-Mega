@@ -1,4 +1,3 @@
-
 # Easter Company Web-App
 
 easter.company website source code (eLang Backend)
@@ -16,7 +15,7 @@ git clone --recursive git@github.com:EasterCompany/Overlord.git
 inside the root directory
 
 ```bash
-/usr/bin/python3 main.py
+/usr/bin/python3 overlord.py
 ```
 
 # Host Flask Web Server
@@ -24,7 +23,7 @@ inside the root directory
 inside the root directory
 
 ```bash
-/usr/bin/python3 main.py start
+/usr/bin/python3 overlord.py start
 ```
 
 # Run eLang Python Unit Tests
@@ -32,17 +31,17 @@ inside the root directory
 inside the root directory
 
 ```bash
-/usr/bin/python3 main.py debug
+/usr/bin/python3 overlord.py debug
 ```
 
 # Do Everything
 
-* execute to post with error messages
-* run eLang test suite
-* start flask web server if all pass
+- execute to post with error messages
+- run eLang test suite
+- start flask web server if all pass
 
 ```bash
-/usr/bin/python3 main.py start debug
+/usr/bin/python3 overlord.py start debug
 ```
 
 read the docs @ [easter.company](https://www.easter.company/)
