@@ -9,8 +9,8 @@ from modules.database.client_tables import client_database_tables
 
 # -- APP CONFIGURATION --
 overlord = ReFlask(
-	"overlord",
-	react_enabled=False
+    "overlord",
+    react_enabled=False
 )
 localDb = "unassigned"
 # -----------------------
