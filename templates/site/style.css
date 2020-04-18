@@ -1,53 +1,43 @@
 body,
-html {
-	height: 100%;
+html{
+  height: 100%;
+  background-color: #282c34;
 }
-
-.global {
-	font-size: x-small;
-	--text-color-normal: hsl(210, 10%, 62%);
-	--text-color-light: hsl(210, 15%, 35%);
-	--text-color-richer: hsl(210, 50%, 72%);
-	--text-color-highlight: hsl(25, 70%, 45%);
+footer{
+  position: fixed;
+  bottom: 5px;
+  z-index: 9;
+  max-width: 64px;
+  color:#ffffff;
+  background-color: #110f10;
+  overflow: fixed;
+  border-radius: 4px;
 }
-
-.page_header {
-	text-align: center;
-	margin-top: 1%;
-	margin-bottom: 1%;
-	min-height: 680px;
-	min-width: 90%;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-		url("https://scontent-lhr8-1.xx.fbcdn.net/v/t1.0-9/85060792_625609174881774_588172483874521088_o.png?_nc_cat=104&_nc_sid=dd9801&_nc_oc=AQka9d9xgCkZ9iAOrBThmEYF_XYO4RyWJ3hF5BIZQEVdlmRE-pQvp7EcR40L6qoGHCk&_nc_ht=scontent-lhr8-1.xx&oh=b907dbd42273302c836f04f7883dac25&oe=5EBA4FF7");
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	position: relative;
-	border-radius: 5px;
-	border: 2px solid #fe6200;
-	padding: 20px;
+.nav-bar{
+  position: fixed;
+  top: 5px;
+  z-index: 10;
+  background-color: #110f10;
+  overflow: fixed;
+  border-radius: 8px;
+  min-width: 420px;
 }
-
-.icon-bar {
-	width: 100%; /* Full-width */
-	background-color: #555; /* Dark-grey background */
-	overflow: auto; /* Overflow due to float */
+.nav-bar a{
+  float: left;
+  text-align: center;
+  width: 96px;
+  transition: all 0.3s ease;
+  color: white;
+  min-height: 48px;
 }
-
-.icon-bar a {
-	float: left; /* Float links side by side */
-	text-align: center; /* Center-align text */
-	width: 20%; /* Equal width (5 icons with 20% width each = 100%) */
-	padding: 12px 0; /* Some top and bottom padding */
-	transition: all 0.3s ease; /* Add transition for hover effects */
-	color: white; /* White text color */
-	font-size: 36px; /* Increased font size */
+.nav-bar a:hover{
+  background-color: #c2852a;
 }
-
-.icon-bar a:hover {
-	background-color: #000; /* Add a hover color */
-}
-
-.active {
-	background-color: #4caf50; /* Add an active/current color */
+.nav-logo{
+  padding-left:24px;
+  background-image:url("https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/85045562_625568818219143_8307134098187485184_n.jpg?_nc_cat=100&_nc_sid=85a577&_nc_oc=AQlbDzIXiHJJhRrS1E1KRvy0sLJIoR9hMRIJBAcQ4NTMZnIODW5hp3u5N73LrAAjNtc&_nc_ht=scontent-lht6-1.xx&oh=5b0011e9a60743fe46c6bf548753daec&oe=5EC0DFFC");
+  background-position: center;
+  background-size: 48px 48px;
+  background-repeat: no-repeat;
+  background-color: #110f10;
 }

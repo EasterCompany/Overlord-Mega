@@ -35,25 +35,15 @@ if "install" in argv:
   _install_support_modules()
 
 
-""" ETAG (basic.eTag)
-
-  converts eTag into file contents
-  can also convert lists into set
-  of content.
-"""
-
-
-def eTag(content=''):
-  # if content is path to file > read file
-  if exists(content):
-    content = open(content).read()
-  # if content is list > return list of eTags
-  elif isinstance(content, list):
-    tags = []
-    for c in content:
-      tags.append(eTag(c))
-    return tags
-  return content
+""" DE-FORMAT """
+def deformat(string):
+  while "  " in string:
+    string = string.replace("  ", " ")
+  return string.\
+    replace("<! ", "<!").replace(" !>", "!>").\
+    replace("\n", "").replace("\r", "").\
+      replace("\t", "").replace("\v", "").\
+        replace("> <", "><")
 
 
 """ MAKE PATH (basic.make_path)
@@ -269,3 +259,4 @@ def __unit_test__():
   for each in make_tests():
     te.tests = each
     te.run()
+

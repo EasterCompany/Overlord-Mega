@@ -1,54 +1,67 @@
-# PROJECT IMPORTS
-from modules.services.api_manager import service as api_service
-
-# SUPPORTED THIRD-PARTY IMPORTS
-from flask import Blueprint
-
+# STANDARD LIBRARY IMPORTS
+from sys import argv
 # ELANG IMPORTS
-from modules.elang.edocs import eDoc
+from modules.elang.reflask import etag, Blueprint
+from modules.services.api_manager import service as api_service
 
 # PROJECT APPLICTION
 overlord = Blueprint(
-    "overlord",
-    "overlord",
-    template_folder="templates"
+  "overlord",
+  "overlord",
+  template_folder="templates"
 )
+
+# APP CONFIGURATION
 app = {
-    "home": eDoc("home").local(),
-    "elang": eDoc("elang").local(),
-    "overlord": eDoc("overlord").local(),
-    "genesis": eDoc("genesis").local(),
-    "login": eDoc("login").local(),
+  'home': {
+    'uri': '/',
+    'root': './templates/pages/home.html'
+  },
+  'epanel': {
+    'uri': '/epanel',
+    'root': './templates/pages/panel.html'
+  },
+  'edocs': {
+    'uri': '/edocs',
+    'root': './templates/pages/home.html'
+  },
 }
 
-# ======================== WEB APP ROUTE INDEX ========================
+
+# E DOCUMENT
+def serve(name):
+  if "@ms" in argv:
+    return etag(name)['build']
+  if 'app' not in app[name]:
+    app[name]['app'] = etag(name)
+  return app[name]['app']['build']
+
+# HOME PAGE
+@overlord.route(app['home']['uri'])
+def home_page():
+  return serve(
+    app['home']['root']
+  )
 
 
-@overlord.route('/')
-def _home_page_():
-    return app["home"]
+# E PANEL PAGE
+@overlord.route(app['epanel']['uri'])
+def epanel_page():
+  return serve(
+      app['epanel']['root']
+    )
 
 
-@overlord.route('/e/elang')
-def _elang_page_():
-    return app["elang"]
+# E DOCS PAGE
+@overlord.route(app['edocs']['uri'])
+def edocs_page():
+  return serve(
+    app['edocs']['root']
+  )
 
 
-@overlord.route('/e/overlord')
-def _overlord_page_():
-    return app["overlord"]
-
-
-@overlord.route('/e/genesis')
-def _genesis_page_():
-    return app["genesis"]
-
-
-@overlord.route('/e/login')
-def _login_page_():
-    return app["login"]
-
-
+# API BACKEND CALL POINT
 @overlord.route('/api', methods=["GET", "POST"])
 def _api_distribution_():
-    return api_service()
+  return api_service()
+
