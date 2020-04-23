@@ -1,9 +1,9 @@
 # STANDARD LIBRARY IMPORTS ---
-from os import path
-from sys import argv, path as sysPath
+from os.path import dirname
+from sys import argv, path
 from platform import uname
 
-# WORKING PROJECT IMPORT -----
+# PROJECT IMPORTS --------------
 from modules.elang.sqlmem import Database
 from modules.elang.reflask import ReFlask
 
@@ -28,11 +28,11 @@ else:
 for _table in imported_tables:
     for _name, _column in _table:
         local.new_table(_name, _column)
-local.db.commit()
+local.db.commit(), local.db.close()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # SERVER REGISTRATION
-sysPath.insert(0, path.dirname(__file__))
+path.insert(0, dirname(__file__))
 application = ReFlask()
 
 # LOCAL SERVER BOOT REGISTRATION

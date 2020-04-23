@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from platform import uname
-from modules.elang.sqlmem import Database
 
 client_database_tables = (
     (

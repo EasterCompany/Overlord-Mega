@@ -15,7 +15,7 @@ git clone --recursive git@github.com:EasterCompany/Overlord.git
 inside the root directory
 
 ```bash
-/usr/bin/python3 overlord.py
+/usr/bin/python3 server.py
 ```
 
 # Host Flask Web Server
@@ -23,7 +23,7 @@ inside the root directory
 inside the root directory
 
 ```bash
-/usr/bin/python3 overlord.py start
+/usr/bin/python3 server.py start
 ```
 
 # Run eLang Python Unit Tests
@@ -31,7 +31,7 @@ inside the root directory
 inside the root directory
 
 ```bash
-/usr/bin/python3 overlord.py debug
+/usr/bin/python3 server.py debug
 ```
 
 # Do Everything
@@ -41,7 +41,7 @@ inside the root directory
 - start flask web server if all pass
 
 ```bash
-/usr/bin/python3 overlord.py start debug
+/usr/bin/python3 server.py start debug
 ```
 
 read the docs @ [easter.company](https://www.easter.company/)
