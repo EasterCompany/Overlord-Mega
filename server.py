@@ -3,7 +3,7 @@ from os.path import dirname
 from sys import argv, path
 from platform import uname
 
-# ELANG IMPORTs --------------
+# PROJECT IMPORTS --------------
 from modules.elang.sqlmem import Database
 from modules.elang.reflask import ReFlask
 
