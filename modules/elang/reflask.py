@@ -85,17 +85,18 @@ def etag(content):
       if tag.endswith("site.style"):
         doc['css'] = \
           doc['css'] + deformat(open("./templates/site/style.css").read())
+      elif tag.endswith("site.retro"):
+        doc['css'] = \
+          doc['css'] + deformat(open("./templates/site/retro.css").read())
       elif tag.endswith("site.header"):
         doc['head'] = deformat(open("./templates/site/header.html").read())
       elif tag.endswith("site.footer"):
         doc['foot'] = deformat(open("./templates/site/footer.html").read())
-      elif tag.endswith("site.retro"):
-        doc['css'] = \
-          doc['css'] + deformat(open("./templates/site/retro.css").read())
   # RENDER
-  doc['build'] = "<!DOCTYPE html><style>" + doc['css'] + "</style><html>" + \
+  doc['build'] = \
+    "<!DOCTYPE html><style>" + doc['css'] + "</style><html>" + \
     doc['head'] + doc['body'] + doc['foot'] + "</html><script>" + \
-      doc['js'] + "</script>"
+    doc['js'] + "</script>"
   return doc
 
 
