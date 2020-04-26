@@ -1,38 +1,79 @@
 .nav-bar{
   position: fixed;
-  top: 5px;
+  top: 4px;
+  left: 4px;
   z-index: 10;
   background-color: #110f10;
-  overflow: fixed;
+  overflow-y: hidden;
   border-radius: 8px;
-  min-width: 420px;
-  margin: unset unset unset;
+  min-width: 525px;
 }
 .nav-bar a{
   float: left;
   text-align: center;
-  width: 100px;
   transition: all 0.3s ease;
-  min-height: 48px;
-  border-radius: 96px
-}
-.nav-bar a:hover{
-  background-color: #3d362a9c;
-}
+  width: 109px;
+  height: 48px;
+} .nav-bar a:hover{background-color: #3d362a9c;}
 .nav-logo{
-  padding-left:24px;
   background-image:url("https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/85045562_625568818219143_8307134098187485184_n.jpg?_nc_cat=100&_nc_sid=85a577&_nc_oc=AQlbDzIXiHJJhRrS1E1KRvy0sLJIoR9hMRIJBAcQ4NTMZnIODW5hp3u5N73LrAAjNtc&_nc_ht=scontent-lht6-1.xx&oh=5b0011e9a60743fe46c6bf548753daec&oe=5EC0DFFC");
   background-position: center;
   background-size: 48px 48px;
   background-repeat: no-repeat;
   background-color: #110f10;
+  text-align: center;
+  text-indent: 48px;
+  text-overflow: auto;
+} .nav-logo a{transition: all 0.3s ease;} .nav-logo a:hover{background-color: #000000;}
+.nav-menu {
+  text-align: center;
+  text-decoration: solid;
+  text-justify: newspaper;
 }
-.nav-logo a{
-  transition: all 0.3s ease;
+.nav-page {
+  text-align: center;
+  text-decoration: solid;
+  text-justify: newspaper;
+  padding: 6px 8px;
+  max-width: 88px;
+  max-height: 36px;
 }
-.nav-logo a:hover{
-  background-color: #0f0f0f9c;
+.dex-btn {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  padding: 6px 8px;
+  max-width: 88px;
+  max-height: 36px;
+  box-shadow: -3px -3px red;
+  border-radius: 3px;
 }
-.nav-panel-icon{
-  background-image: url("https://static.vecteezy.com/system/resources/previews/000/571/795/non_2x/vector-control-panel-icon.jpg");
+.drop-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 6px 8px;
+  max-width: 88px;
+  max-height: 36px;
 }
+.drop-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.drop-content a {
+  color: black;
+  padding: 6px 8px;
+  width: 131px;
+  height: 36px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+.drop-content a:hover {background-color: #ddd;}
+.nav-menu:hover .drop-content {display: block;}
+.nav-menu:hover .drop-btn {background-color: #3e8e41;}
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.1); }

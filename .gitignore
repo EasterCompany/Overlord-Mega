@@ -6,7 +6,7 @@
 
 # PRODUCTION BUILD FILES
 static/react/
-static/html/
+static/build/
 
 # USER CACHE FILES
 __pycache__

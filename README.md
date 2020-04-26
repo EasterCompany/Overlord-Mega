@@ -4,7 +4,14 @@ easter.company website source code (eLang Backend)
 
 # Installation
 
-where you want to put the root directory
+To retrieve the Overlord Project Framework run this command within the directory you would like to create (and/or) host your project.
+
+```bash
+git clone http://github.com/EasterCompany/Overlord.git
+```
+
+If you would like to install the entire Overlord umbrella stack use command line argument '--recursive' as used below.
+If you would like to use ssh then use the git repo link as used below as well.
 
 ```bash
 git clone --recursive git@github.com:EasterCompany/Overlord.git

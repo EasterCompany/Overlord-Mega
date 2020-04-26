@@ -38,9 +38,12 @@ if "install" in argv:
 """ DE-FORMAT """
 
 
-def deformat(string):
-    while "  " in string:
-        string = string.replace("  ", " ")
+def deformat(string, remove_white_space=False):
+    if remove_white_space:
+      string = string.replace(" ", "")
+    else:
+      while "  " in string:
+          string = string.replace("  ", " ")
     return string.\
         replace("<! ", "<!").replace(" !>", "!>").\
         replace("\n", "").replace("\r", "").\

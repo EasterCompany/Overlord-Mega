@@ -64,13 +64,20 @@ def E(string):
 
 """ ETAG (basic.etag)
   converts eTags into file contents
+  if passing a directory as a parameter
+  make sure to use "./" and only pass
+  files contained within the working dir
 """
 
 
-def etag(content):
-  # DEFINE DOCUMENT SHAPE
+def etag(content, name='untitled'):
+  # DEFINE DOCUMENT NAME & CONTENT
   if content.startswith("./"):
+    name = content.split("/")[-1]
+    if '.' in name:
+      name = name.split('.')[0]
     content = open(content).read()
+  # DEFINE DOCUMENT CONTENT SHAPE
   doc = {
     'js': "",
     'css': "",
@@ -78,20 +85,29 @@ def etag(content):
     'body': "",
     'foot': "",
     'build': ""
-  } 
+  }
+  # DEFINE DOCUMENT E-TAG CONTENT
   for tag in etags(content):
-    # SITE INCLUSION TAGS
-    if tag.startswith("include:"):
-      if tag.endswith("site.style"):
-        doc['css'] = \
-          doc['css'] + deformat(open("./templates/site/style.css").read())
-      elif tag.endswith("site.retro"):
-        doc['css'] = \
-          doc['css'] + deformat(open("./templates/site/retro.css").read())
-      elif tag.endswith("site.header"):
-        doc['head'] = deformat(open("./templates/site/header.html").read())
-      elif tag.endswith("site.footer"):
-        doc['foot'] = deformat(open("./templates/site/footer.html").read())
+    tag = deformat(tag, remove_white_space=True)
+    # STATEMENT TAGS
+    if ":" in tag:
+      tag_state = tag.split(':')[0]
+      tag_value = tag.split(':')[1]
+      # STATEMENT: INCLUDE TAGS
+      if tag.startswith("include:"):
+        if tag.endswith("site.header"):   # includes easter company global header
+          doc['head'] = deformat(open("./templates/site/header.html").read())
+        elif tag.endswith("site.footer"): # includes EC / dexter global footer
+          doc['foot'] = deformat(open("./templates/site/footer.html").read())
+        elif tag.endswith("site.style"):  # includes default site style
+          doc['css'] = \
+            doc['css'] + deformat(open("./templates/site/style.css").read())
+        elif tag.endswith("site.retro"):  # includes retro site style theme
+          doc['css'] = \
+            doc['css'] + deformat(open("./templates/site/retro.css").read())
+        elif tag.endswith(".js"):         # includes various javascript files
+          doc['js'] = \
+            doc['js'] + deformat(open("./templates/pages/" + name + "/" + tag_value).read())
   # RENDER
   doc['build'] = \
     "<!DOCTYPE html><style>" + doc['css'] + "</style><html>" + \
@@ -115,9 +131,14 @@ class ReFlask:
     # PASS IF THIS IS A "SUB" APP
     if not _sub_:
       # DIRECTORY INITIALIZATION
-      make_path("./public") 							# PUBLIC Information
-      make_path("./templates/site") 			# HTML/CSS/JS Objects
-      make_path("./templates/pages")			# HTML/CSS/JS Templates
+      make_path("./public")     # PUBLIC Information
+      make_path("./static")     # STATIC DIRECTORY
+      make_path("./static/build")   # local edoc build files
+      make_path("./static/icon")    # local icon files
+      make_path("./static/image")   # local image files
+      make_path("./templates")  # TEMPLATES DIRECTORY
+      make_path("./templates/site")     # HTML/CSS/JS Objects
+      make_path("./templates/pages")    # HTML/CSS/JS Templates
       # REFLASK INSTANCE OBJECTS
       self.end = Flask(_name_)						# BACK-END App
       self.rwd = getcwd() 								# ROOT Working Directory
@@ -131,8 +152,6 @@ class ReFlask:
           chdir(self.rwd) 								# GO TO Root Directory
 
   def run(self, debug=False): 						# Serves the Back End Web App
-    from modules.elang.index import overlord
-    self.end.register_blueprint(overlord)
     self.end.run(debug=debug)
 
   def goto(self, url):										# Returns Redirect Method to URL
