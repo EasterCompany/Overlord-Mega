@@ -1,3 +1,9 @@
+.html {
+  color: #000000;
+}
+.a {
+  color: #000000;
+}
 .nav-bar{
   position: fixed;
   top: 4px;
@@ -45,8 +51,8 @@
   padding: 6px 8px;
   max-width: 88px;
   max-height: 36px;
-  box-shadow: -3px -3px red;
-  border-radius: 3px;
+  /* box-shadow: -3px -3px red; */
+  /* border-radius: 3px; */
 }
 .drop-btn {
   background-color: #4CAF50;
@@ -56,6 +62,7 @@
   max-height: 36px;
 }
 .drop-content {
+  color: #000000;
   display: none;
   position: absolute;
   background-color: #f1f1f1;
@@ -64,7 +71,7 @@
   z-index: 1;
 }
 .drop-content a {
-  color: black;
+  color: #000000;
   padding: 6px 8px;
   width: 131px;
   height: 36px;
@@ -75,5 +82,7 @@
 .drop-content a:hover {background-color: #ddd;}
 .nav-menu:hover .drop-content {display: block;}
 .nav-menu:hover .drop-btn {background-color: #3e8e41;}
-.grow { transition: all .2s ease-in-out; }
-.grow:hover { transform: scale(1.1); }
+.Grow { transition: all .2s ease-in-out; } /*object grows big on hover*/
+.Grow:hover { transform: scale(1.1); }
+.grow { transition: all .3s ease-in-out; } /*object grows a little bigger on hover*/
+.grow:hover { transform: scale(1.01); }

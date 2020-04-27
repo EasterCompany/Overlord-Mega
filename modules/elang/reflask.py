@@ -105,6 +105,9 @@ def etag(content, name='untitled'):
         elif tag.endswith("site.retro"):  # includes retro site style theme
           doc['css'] = \
             doc['css'] + deformat(open("./templates/site/retro.css").read())
+        elif tag.endswith("site.dex"):  # includes dex.js
+          doc['js'] = \
+            doc['js'] + deformat(open("./templates/site/dex.js").read())
         elif tag.endswith(".js"):         # includes various javascript files
           doc['js'] = \
             doc['js'] + deformat(open("./templates/pages/" + name + "/" + tag_value).read())
@@ -136,7 +139,7 @@ class ReFlask:
       make_path("./static/build")   # local edoc build files
       make_path("./static/icon")    # local icon files
       make_path("./static/image")   # local image files
-      make_path("./templates")  # TEMPLATES DIRECTORY
+      make_path("./templates")      # TEMPLATES DIRECTORY
       make_path("./templates/site")     # HTML/CSS/JS Objects
       make_path("./templates/pages")    # HTML/CSS/JS Templates
       # REFLASK INSTANCE OBJECTS
