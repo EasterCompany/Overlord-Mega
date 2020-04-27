@@ -50,16 +50,16 @@ local.db.commit(), local.db.close()
 
 # SERVER REGISTRATION
 path.insert(0, dirname(__file__))
-application = ReFlask()
+webapp = ReFlask()
 
 # ~~~~ DEFINE APP ROUTE INDEX ~~~~
 for app in hosted_apps:
-  application.end.register_blueprint(app)
+  webapp.end.register_blueprint(app)
 
 # LOCAL SERVER BOOT REGISTRATION
 if __name__ == "__main__" and "@ms" in argv:
   if ("t" in argv) or ("test" in argv):
     from modules.elang.basic import __unit_test__
-    __unit_test__(), application.run(debug=True)
+    __unit_test__(), webapp.run(debug=True)
   elif ("s" in argv) or ("start" in argv):
-    application.run()
+    webapp.run()

@@ -14,8 +14,9 @@ from urllib.request import urlopen
 """ install support modules
 
   installs supported third-party
-  modulesthat may be essential
-  to basic functionality.
+  modules that may be essential
+  to basic functionality. 
+  TO DO: ADD OFFLINE SUPPORT
 """
 
 
