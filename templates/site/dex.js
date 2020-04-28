@@ -1,7 +1,7 @@
 let dexBtnToggle = false;
 
-function dexRefresh () { 
-  
+function dexDrawGui () { 
+  return null;
 }
 
 function pressDexBtn () {
@@ -10,4 +10,5 @@ function pressDexBtn () {
   } else {
     dexBtnToggle = true;
   }
+  return dexDrawGui();
 }
