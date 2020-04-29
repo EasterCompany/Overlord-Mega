@@ -1,8 +1,8 @@
-# Easter Company Web-App
+# Easter Company Overlord Full Stack Web-App
 
 easter.company website source code (eLang Backend)
 
-# Installation
+## Installation
 
 To retrieve the Overlord Project Framework run this command within the directory you would like to create (and/or) host your project.
 
@@ -17,7 +17,7 @@ If you would like to use ssh then use the git repo link as used below as well.
 git clone --recursive git@github.com:EasterCompany/Overlord.git
 ```
 
-# Execute Code to Post
+## Execute Code to Post
 
 inside the root directory
 
@@ -25,7 +25,7 @@ inside the root directory
 /usr/bin/python3 server.py
 ```
 
-# Host Flask Web Server
+## Host Flask Web Server
 
 inside the root directory
 
@@ -33,7 +33,7 @@ inside the root directory
 /usr/bin/python3 server.py start
 ```
 
-# Run eLang Python Unit Tests
+## Run eLang Python Unit Tests
 
 inside the root directory
 
@@ -41,7 +41,7 @@ inside the root directory
 /usr/bin/python3 server.py debug
 ```
 
-# Do Everything
+## Do Everything
 
 - execute to post with error messages
 - run eLang test suite
