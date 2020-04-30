@@ -8,8 +8,8 @@ from modules.elang.sqlmem import Database
 from modules.elang.reflask import ReFlask
 
 # PROJECT PAGE INDEX IMPORTS ---
-from templates.pages.home import home
-from templates.pages.error import error
+from templates.pages.home.homeApp import home_app
+from templates.pages.error.errorApp import error_app
 
 # PROJECT DATABASE IMPORTS -----
 from modules.database.client_tables import client_database_tables
@@ -17,29 +17,35 @@ from modules.database.client_tables import client_database_tables
 # ~~~~ DEFINE SYSTEM SPECIFICS ~~~~
 if 'secureserver' in uname().node:
   local = Database("mass.db")
+  # TABLES TO RECORD ON EU SERVER (C-PANEL)
   imported_tables = [
     client_database_tables,
   ]
+  # APPS TO HOST ON EU SERVER (C-PANEL)
   hosted_apps = [
-    home.app,
-    error.app,
+    home_app,
   ]
+
 elif 'liveconsole' in uname().node:
   local = Database("tiny.db")
+  # TABLES TO RECORD ON NA SERVER (LIVE CONSOLE)
   imported_tables = [
     client_database_tables,
-  ]
+  ]  
+  # APPS TO HOST ON NA SERVER (LIVE CONSOLE)
   hosted_apps = [
-    home.app,
-    error.app,
+    home_app,
+    error_app,
   ]
 else:
   local = Database("data.db")
+  # TABLES TO RECORD ON USER.LOCAL
   imported_tables = [
   ]
+  # APPS TO HOST ON LOCALHOST
   hosted_apps = [
-    home.app,
-    error.app,
+    home_app,
+    error_app,
   ]
 
 # DATABASE REGISTRATION

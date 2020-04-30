@@ -52,6 +52,13 @@ def deformat(string, remove_white_space=False):
         replace("> <", "><")
 
 
+""" replace x, and y with r in z """
+def listReplace(c, l, r):
+    for x in l: 
+        c = c.replace(x, r)
+    return c
+
+
 """ MAKE PATH (basic.make_path)
 
   capable of creating a list

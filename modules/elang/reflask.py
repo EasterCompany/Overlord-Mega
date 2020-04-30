@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 # STANDARD LIBRARY IMPORTS
-from os import system, chdir, getcwd
+from os import system, chdir, getcwd, walk
 from os.path import realpath
 from sys import platform, argv, executable
 from sqlite3 import connect
 # THIRD-PARTY IMPORTS
 from flask import Flask, render_template, redirect, request, jsonify, Blueprint
 # INTERNAL IMPORTS
-from modules.elang.basic import make_path, deformat
+from modules.elang.basic import make_path, deformat, listReplace
 
 
 """ WEB STRING (reflask.webStr)
@@ -62,6 +62,34 @@ def E(string):
   return "<!" + string + "!>"
 
 
+""" ejs language tag openers """
+def _ejs_tag_openers(type):
+    return [
+        "<" + type + "{", 
+        "< " + type + "{", 
+        "< " + type + " {",
+        "<" + type + " {"
+        ]
+
+
+""" ejs language tag openers """
+def _ejs_tag_closers(type):
+    return [
+        "}" + type + ">", 
+        "} " + type + ">", 
+        "} " + type + " >",
+        "}" + type + " >"
+        ]
+    
+
+""" ejs language tags """
+def ejs_language_tags():
+  css = _ejs_tag_openers("css")
+  html = _ejs_tag_openers("html")
+  js = _ejs_tag_openers("javascript")
+  return css + html + js
+
+
 """ ETAG (basic.etag)
   converts eTags into file contents
   if passing a directory as a parameter
@@ -71,52 +99,80 @@ def E(string):
 
 
 def etag(content, name='untitled'):
-  # DEFINE DOCUMENT NAME & CONTENT
-  if content.startswith("./"):
-    name = content.split("/")[-1]
-    if '.' in name:
-      name = name.split('.')[0]
-    content = open(content).read()
-  # DEFINE DOCUMENT CONTENT SHAPE
-  doc = {
-    'js': "",
-    'css': "",
-    'head': "",
-    'body': "",
-    'foot': "",
-    'build': ""
+  
+  # OPEN ETAG-ED FILE
+  def etagDoc(document_containing_etags):
+    return deformat(open(document_containing_etags).read())
+  
+  # GET LOCAL TAGGABLE CONTENT
+  def localTags(_type):
+    for (dirpath, dirnames, filenames) in walk("./templates/site/" + _type):
+      _local = filenames
+      break
+    for index, theme in enumerate(_local):
+      if _type == "styles" or _type == "themes":
+        file_type = "css"
+      elif _type == "scripts":
+        file_type = "js"
+      elif _type == "docs":
+        file_type = "html"
+      else: 
+        return None
+      if _local[index].endswith("." + file_type):
+        _local[index] = [
+          "eDoc." + _local[index].split('.')[0], 
+          etagDoc("./templates/site/" + _type + "/" + _local[index])]  
+    return _local
+  
+  # DEFINE ELANG OPTIONS
+  _build_file_ = open('./static/build/' + name, "w+")
+  _compiled_script_ = open(content).read()
+  _script_has_tags = True
+  for tag in ejs_language_tags():
+    if tag in _compiled_script_:
+      break
+    _script_has_tags = False
+  if _script_has_tags:
+        _compiled_script_ = "<script>" + _compiled_script_ + "</script>"
+  else:
+    for tag in _ejs_tag_openers("css"):
+      _compiled_script_ = _compiled_script_.replace(tag, "<style>")
+    for tag in _ejs_tag_closers("css"):
+      _compiled_script_ = _compiled_script_.replace(tag, "</style>")
+    for tag in _ejs_tag_openers("html"):
+      _compiled_script_ = _compiled_script_.replace(tag, "<html>")
+    for tag in _ejs_tag_closers("html"):
+      _compiled_script_ = _compiled_script_.replace(tag, "</html>")
+    for tag in _ejs_tag_openers("javascript"):
+      _compiled_script_ = _compiled_script_.replace(tag, "<script>")
+    for tag in _ejs_tag_closers("javascript"):
+      _compiled_script_ = _compiled_script_.replace(tag, "</script>")
+  
+  eDoc = {
+    'name': name,
+    'tags': None,
+    'front': _compiled_script_,
+    'header': etagDoc("./templates/site/docs/header.html"),
+    'footer': etagDoc("./templates/site/docs/footer.html"),
+    'styles': localTags('styles'),
+    'themes': localTags('themes'),
+    'scripts': localTags('scripts'),
+    'build': None
   }
-  # DEFINE DOCUMENT E-TAG CONTENT
-  for tag in etags(content):
-    tag = deformat(tag, remove_white_space=True)
-    # STATEMENT TAGS
-    if ":" in tag:
-      tag_state = tag.split(':')[0]
-      tag_value = tag.split(':')[1]
-      # STATEMENT: INCLUDE TAGS
-      if tag.startswith("include:"):
-        if tag.endswith("site.header"):   # includes easter company global header
-          doc['head'] = deformat(open("./templates/site/header.html").read())
-        elif tag.endswith("site.footer"): # includes EC / dexter global footer
-          doc['foot'] = deformat(open("./templates/site/footer.html").read())
-        elif tag.endswith("site.style"):  # includes default site style
-          doc['css'] = \
-            doc['css'] + deformat(open("./templates/site/style.css").read())
-        elif tag.endswith("site.retro"):  # includes retro site style theme
-          doc['css'] = \
-            doc['css'] + deformat(open("./templates/site/retro.css").read())
-        elif tag.endswith("site.dex"):  # includes dex.js
-          doc['js'] = \
-            doc['js'] + deformat(open("./templates/site/dex.js").read())
-        elif tag.endswith(".js"):         # includes various javascript files
-          doc['js'] = \
-            doc['js'] + deformat(open("./templates/pages/" + name + "/" + tag_value).read())
-  # RENDER
-  doc['build'] = \
-    "<!DOCTYPE html><style>" + doc['css'] + "</style><html>" + \
-    doc['head'] + doc['body'] + doc['foot'] + "</html><script>" + \
-    doc['js'] + "</script>"
-  return doc
+  
+  # MAKE BUILD FILE FOR E-DOCUMENT
+  _build_file_.write("<!DOCTYPE html>\n<header>" + eDoc['header'] + "</header>\n\n<style>\n")
+  for style in eDoc['styles']:
+    _build_file_.write(style[1])
+  _build_file_.write("\n</style>\n\n" + eDoc['front'] + "\n\n<script>\n")
+  for script in eDoc['scripts']:
+    _build_file_.write(script[1])
+  _build_file_.write("\n</script>\n\n" + eDoc['footer'])
+  _build_file_.close()
+  eDoc['build'] = deformat(open('./static/build/' + name).read())
+  
+  # RETURN DOCUMENT DICTIONARY OBJECT
+  return eDoc
 
 
 """ REFLASK CLASS
@@ -136,7 +192,7 @@ class ReFlask:
       # DIRECTORY INITIALIZATION
       make_path("./public")     # PUBLIC Information
       make_path("./static")     # STATIC DIRECTORY
-      make_path("./static/build")   # local edoc build files
+      make_path("./static/build")   # local eDoc build files
       make_path("./static/icon")    # local icon files
       make_path("./static/image")   # local image files
       make_path("./templates")      # TEMPLATES DIRECTORY
@@ -175,4 +231,3 @@ class ReFlask:
 
   def json(self, to_make):								# Returns Json
     return jsonify(to_make)
-
