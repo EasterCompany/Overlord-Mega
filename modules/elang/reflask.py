@@ -2,7 +2,7 @@
 
 # STANDARD LIBRARY IMPORTS
 from os import system, chdir, getcwd, walk
-from os.path import realpath
+from os.path import realpath, exists
 from sys import platform, argv, executable
 from sqlite3 import connect
 # THIRD-PARTY IMPORTS
@@ -17,14 +17,12 @@ from modules.elang.basic import make_path, deformat, listReplace
   can be reversed to format HTML strings back
   into ordinary raw strings.
 """
-
-
 def webStr(to_format, reverse=False):
   # Contains formatting logic
   form = (
-    ("'", "&apos;"), (" ", "&nbsp;"),
-    ('"', "&quot;"), ("<", "&lt;"),
-    (">", "&gt;")
+  ("'", "&apos;"), (" ", "&nbsp;"),
+  ('"', "&quot;"), ("<", "&lt;"),
+  (">", "&gt;"), ("`", "&#96;")
   )
   # Create new value
   new_string = to_format
@@ -32,147 +30,94 @@ def webStr(to_format, reverse=False):
   for f in form:
     if reverse:
       new_string.replace(f[1], f[0])
-    else:
-      new_string.replace(f[0], f[1])
+  else:
+    new_string.replace(f[0], f[1])
   # Return value
   return new_string
 
 
 """ ETAGS (basic.etags)
-
   fetches and returns etags
   found within string or list
   of strings.
 """
-
-
-def etags(content):
+def find_eTags(content):
   tags, content = [], deformat(content)
   if "<!" in content:
     content = content.split("<!")
-    for index, tag in enumerate(content):
-      if "!>" in tag:
-        tags.append(tag.split("!>")[0])
+  for index, tag in enumerate(content):
+    if "!>" in tag:
+      tags.append(tag.split("!>")[0])
   else:
     return None
   return tags
 
 
+""" return string as etag """
 def E(string):
   return "<!" + string + "!>"
 
 
-""" ejs language tag openers """
-def _ejs_tag_openers(type):
-    return [
-        "<" + type + "{", 
-        "< " + type + "{", 
-        "< " + type + " {",
-        "<" + type + " {"
-        ]
+""" return ejs tag type as string """
+def ejs(_type):
+  return "!" + _type + "`"
 
-
-""" ejs language tag openers """
-def _ejs_tag_closers(type):
-    return [
-        "}" + type + ">", 
-        "} " + type + ">", 
-        "} " + type + " >",
-        "}" + type + " >"
-        ]
-    
 
 """ ejs language tags """
 def ejs_language_tags():
-  css = _ejs_tag_openers("css")
-  html = _ejs_tag_openers("html")
-  js = _ejs_tag_openers("javascript")
-  return css + html + js
+  return [
+    ejs("DOCTYPE"),
+    ejs("STYLE"),
+    ejs("ETML")
+    ]
 
 
-""" ETAG (basic.etag)
-  converts eTags into file contents
-  if passing a directory as a parameter
-  make sure to use "./" and only pass
-  files contained within the working dir
-"""
+""" ejs language tags """
+def ejs_language_tags_dictionary():
+  return {
+    ejs("DOCTYPE"): None,
+    ejs("STYLE"): ("<style>", "</style>"),
+    ejs("ETML"): ("<html>", "</html>")
+    }
 
 
-def etag(content, name='untitled'):
-  
-  # OPEN ETAG-ED FILE
-  def etagDoc(document_containing_etags):
-    return deformat(open(document_containing_etags).read())
-  
-  # GET LOCAL TAGGABLE CONTENT
-  def localTags(_type):
-    for (dirpath, dirnames, filenames) in walk("./templates/site/" + _type):
-      _local = filenames
-      break
-    for index, theme in enumerate(_local):
-      if _type == "styles" or _type == "themes":
-        file_type = "css"
-      elif _type == "scripts":
-        file_type = "js"
-      elif _type == "docs":
-        file_type = "html"
-      else: 
-        return None
-      if _local[index].endswith("." + file_type):
-        _local[index] = [
-          "eDoc." + _local[index].split('.')[0], 
-          etagDoc("./templates/site/" + _type + "/" + _local[index])]  
-    return _local
-  
-  # DEFINE ELANG OPTIONS
-  _build_file_ = open('./static/build/' + name, "w+")
-  _compiled_script_ = open(content).read()
-  _script_has_tags = True
-  for tag in ejs_language_tags():
-    if tag in _compiled_script_:
-      break
-    _script_has_tags = False
-  if _script_has_tags:
-        _compiled_script_ = "<script>" + _compiled_script_ + "</script>"
-  else:
-    for tag in _ejs_tag_openers("css"):
-      _compiled_script_ = _compiled_script_.replace(tag, "<style>")
-    for tag in _ejs_tag_closers("css"):
-      _compiled_script_ = _compiled_script_.replace(tag, "</style>")
-    for tag in _ejs_tag_openers("html"):
-      _compiled_script_ = _compiled_script_.replace(tag, "<html>")
-    for tag in _ejs_tag_closers("html"):
-      _compiled_script_ = _compiled_script_.replace(tag, "</html>")
-    for tag in _ejs_tag_openers("javascript"):
-      _compiled_script_ = _compiled_script_.replace(tag, "<script>")
-    for tag in _ejs_tag_closers("javascript"):
-      _compiled_script_ = _compiled_script_.replace(tag, "</script>")
-  
-  eDoc = {
-    'name': name,
-    'tags': None,
-    'front': _compiled_script_,
-    'header': etagDoc("./templates/site/docs/header.html"),
-    'footer': etagDoc("./templates/site/docs/footer.html"),
-    'styles': localTags('styles'),
-    'themes': localTags('themes'),
-    'scripts': localTags('scripts'),
-    'build': None
-  }
-  
-  # MAKE BUILD FILE FOR E-DOCUMENT
-  _build_file_.write("<!DOCTYPE html>\n<header>" + eDoc['header'] + "</header>\n\n<style>\n")
-  for style in eDoc['styles']:
-    _build_file_.write(style[1])
-  _build_file_.write("\n</style>\n\n" + eDoc['front'] + "\n\n<script>\n")
-  for script in eDoc['scripts']:
-    _build_file_.write(script[1])
-  _build_file_.write("\n</script>\n\n" + eDoc['footer'])
-  _build_file_.close()
-  eDoc['build'] = deformat(open('./static/build/' + name).read())
-  
-  # RETURN DOCUMENT DICTIONARY OBJECT
-  return eDoc
+""" fetch ejs tags and values """
+def fetch_ejs_tags(document):
+  ejs_tags = []
+  for ejs_tag in ejs_language_tags():
+    if ejs_tag in document:
+      _tag = document.split(ejs_tag)[1].split("`")[0]
+      ejs_tags.append([ejs_tag, _tag])
+  return ejs_tags
+
+
+""" build ejs file """
+def build_ejs(ejs_data, raw):
+  for tag in ejs_data:
+    raw = raw.replace(tag[0], ejs_language_tags_dictionary[tag[0]][0])
+    raw = raw.replace(tag[1] + "`", tag[1].replace("`", ejs_language_tags_dictionary[tag[0]][1]))
+  raw = "<script>" + raw + "</script>"
+  return ejs_data, raw
+
+
+""" render ejs file """
+def render_ejs(path_to_file):
+  return build_ejs(fetch_ejs_tags(open(path_to_file).read()), open(path_to_file).read())
+
+
+""" test function for: render ejs file """
+def _test_render_ejs(content):
+  return build_ejs(fetch_ejs_tags(content), content)
+
+
+""" etml file loader """
+def ETML(file_path):
+  if not exists(file_path):
+    return None
+  f = open(file_path, "r").read()
+  if not ejs("DOCTYPE") in f.upper():
+    return None
+  return fetch_ejs_tags(f)
 
 
 """ REFLASK CLASS
@@ -182,8 +127,6 @@ def etag(content, name='untitled'):
   backend applications with HTML
   and/or React-JS based front ends
 """
-
-
 class ReFlask:
 
   def __init__(self, _name_="overlord", react_enabled=False, _sub_=False):

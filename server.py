@@ -8,8 +8,8 @@ from modules.elang.sqlmem import Database
 from modules.elang.reflask import ReFlask
 
 # PROJECT PAGE INDEX IMPORTS ---
-from templates.pages.home.homeApp import home_app
-from templates.pages.error.errorApp import error_app
+from templates.pages.home.home import home_app
+from templates.pages.error.error import error_app
 
 # PROJECT DATABASE IMPORTS -----
 from modules.database.client_tables import client_database_tables
@@ -66,6 +66,6 @@ for app in hosted_apps:
 if __name__ == "__main__" and "@ms" in argv:
   if ("t" in argv) or ("test" in argv):
     from modules.elang.basic import __unit_test__
-    __unit_test__(), webapp.run(debug=True)
+    __unit_test__()
   elif ("s" in argv) or ("start" in argv):
     webapp.run()
