@@ -63,9 +63,8 @@ for app in hosted_apps:
   webapp.end.register_blueprint(app)
 
 # LOCAL SERVER BOOT REGISTRATION
-if __name__ == "__main__" and "@ms" in argv:
-  if ("t" in argv) or ("test" in argv):
-    from modules.elang.basic import __unit_test__
-    __unit_test__()
-  elif ("s" in argv) or ("start" in argv):
+if __name__ == "__main__" and len(argv) > 1:
+  if ("-t" in argv) or ("test" in argv):
+    pass
+  if ("-s" in argv) or ("start" in argv):
     webapp.run()
