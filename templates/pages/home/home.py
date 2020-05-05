@@ -1,11 +1,8 @@
-# REQUIRED APP MODULES
-from modules.elang.reflask import Blueprint
+from modules.elang.edoc import eDoc
 
-# TEMPLATE HEADER
-home_app = Blueprint("home", "overlord")
-home_eDoc = "etag(content='./templates/pages/home/homePage.js', name='index.html')"
+home = eDoc('home')
 
-# APP ROUTE & FUNCTION
+
 @home_app.route('/')
-def __home_app_backend__():
-  return "home_eDoc['build']"
+def index():
+  return home.run()

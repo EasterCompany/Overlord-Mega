@@ -4,11 +4,10 @@
 from os import system, chdir, getcwd, walk
 from os.path import realpath, exists
 from sys import platform, argv, executable
-from sqlite3 import connect
 # THIRD-PARTY IMPORTS
-from flask import Flask, render_template, redirect, request, jsonify, Blueprint
+from flask import Flask, render_template, redirect, request, jsonify, Blueprint as app
 # INTERNAL IMPORTS
-from modules.elang.basic import make_path, deformat, listReplace
+from .basic import make_path, deformat, listReplace
 
 
 """ WEB STRING (reflask.webStr)
@@ -56,68 +55,6 @@ def find_eTags(content):
 """ return string as etag """
 def E(string):
   return "<!" + string + "!>"
-
-
-""" return ejs tag type as string """
-def ejs(_type):
-  return "!" + _type + "`"
-
-
-""" ejs language tags """
-def ejs_language_tags():
-  return [
-    ejs("DOCTYPE"),
-    ejs("STYLE"),
-    ejs("ETML")
-    ]
-
-
-""" ejs language tags """
-def ejs_language_tags_dictionary():
-  return {
-    ejs("DOCTYPE"): None,
-    ejs("STYLE"): ("<style>", "</style>"),
-    ejs("ETML"): ("<html>", "</html>")
-    }
-
-
-""" fetch ejs tags and values """
-def fetch_ejs_tags(document):
-  ejs_tags = []
-  for ejs_tag in ejs_language_tags():
-    if ejs_tag in document:
-      _tag = document.split(ejs_tag)[1].split("`")[0]
-      ejs_tags.append([ejs_tag, _tag])
-  return ejs_tags
-
-
-""" build ejs file """
-def build_ejs(ejs_data, raw):
-  for tag in ejs_data:
-    raw = raw.replace(tag[0], ejs_language_tags_dictionary[tag[0]][0])
-    raw = raw.replace(tag[1] + "`", tag[1].replace("`", ejs_language_tags_dictionary[tag[0]][1]))
-  raw = "<script>" + raw + "</script>"
-  return ejs_data, raw
-
-
-""" render ejs file """
-def render_ejs(path_to_file):
-  return build_ejs(fetch_ejs_tags(open(path_to_file).read()), open(path_to_file).read())
-
-
-""" test function for: render ejs file """
-def _test_render_ejs(content):
-  return build_ejs(fetch_ejs_tags(content), content)
-
-
-""" etml file loader """
-def ETML(file_path):
-  if not exists(file_path):
-    return None
-  f = open(file_path, "r").read()
-  if not ejs("DOCTYPE") in f.upper():
-    return None
-  return fetch_ejs_tags(f)
 
 
 """ REFLASK CLASS

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-client_database_tables = (
+tables = (
     (
         "clients",
         (

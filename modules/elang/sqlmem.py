@@ -4,7 +4,7 @@
 from sqlite3 import connect
 
 # PROJECT IMPORTS
-from modules.elang.basic import make_path
+from .basic import make_path
 
 
 """ DATABASE CLASS
