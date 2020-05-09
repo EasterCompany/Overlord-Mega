@@ -2,7 +2,6 @@
 .local/
 .vscode/
 .idea/
-.db
 
 # PRODUCTION BUILD FILES
 static/react/

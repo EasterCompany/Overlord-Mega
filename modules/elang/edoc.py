@@ -1,8 +1,8 @@
-from .basic import exists
-from .reflask import app
+from .basic import path
+from .reflask import subApp
 
 
-class e:
+class eDoc:
 
   def __init__(self, name, etml='', style='', script=''):
     self.doc = {
@@ -10,7 +10,7 @@ class e:
       'etml': str(etml),
       'style': str(open('./templates/site/styles/style.css').read()) + str(style),
       'script': str(open('./templates/site/scripts/dex.js').read()) + str(script),
-      'app': app(name, name),
+      'app': subApp(name, name),
       'build': None,
       'ejs': None,
       'file': "./templates/pages/" + name + "/app.js",
@@ -18,7 +18,7 @@ class e:
     print(self.doc)
 
   def render(self):
-    if exists("./templates/pages/" + self.doc['name'] + "/app.js"):
+    if path.exists("./templates/pages/" + self.doc['name'] + "/app.js"):
       self.doc['ejs'] = open(self.doc['file']).read()
     else:
       self.doc['ejs'] = None

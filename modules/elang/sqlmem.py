@@ -1,38 +1,26 @@
-# -*- coding: utf-8 -*-
 
 # STANDARD LIBRARY IMPORTS
-from sqlite3 import connect
-
-# PROJECT IMPORTS
+from . import loadDatabase
 from .basic import make_path
-
-
-""" DATABASE CLASS
-
-  Allows for creating, connecting,
-  pushing & pulling from database
-  files.
-"""
 
 
 class Database:
 
     # constructor creates path to local file
-    def __init__(self, filename='web.db'):
+    def __init__(self, filename='main', path='./.local/dbs'):
         self.name = filename.split(".")[0]
-        make_path('./.local')
-        self.db = connect("./.local/" + self.name + ".db")
+        make_path(path)
+        self.db = loadDatabase(path + "/" + self.name + ".db")
         self.sql_cursor = self.db.cursor()
 
     # queries database, commits & closes
     def sql(self, sql):
         r = self.sql_cursor.execute(sql).fetchall()
-        self.commit()
         return r
 
     # adds data without committing
-    def add(self, sql):
-        return self.sql_cursor.execute(sql)
+    def add(self, to_table, values):
+        return self.sql_cursor.execute("INSERT INTO " + to_table + " VALUES(" + values + ");")
 
     # fetches data without committing
     def get(self, sql, fetch_all=False):
@@ -51,7 +39,7 @@ class Database:
                 _columns = _columns + column
             else:
                 _columns = _columns + _first_column + column
-        return self.add("CREATE TABLE IF NOT EXISTS '" + str(table_name) + "' (" + str(_columns) + ");")
+        return self.sql("CREATE TABLE IF NOT EXISTS '" + str(table_name) + "' (" + str(_columns) + ");")
 
     # commits changes to database and closes the connection
     def commit(self):

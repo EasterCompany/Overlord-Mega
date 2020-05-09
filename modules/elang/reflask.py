@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
-
 # STANDARD LIBRARY IMPORTS
-from os import system, chdir, getcwd, walk
-from os.path import realpath, exists
+from . import \
+  console, mkDir, chDir, \
+  workDir, walkDir, path
 from sys import platform, argv, executable
 # THIRD-PARTY IMPORTS
-from flask import Flask, render_template, redirect, request, jsonify, Blueprint as app
+from flask import Flask, render_template, redirect, request, jsonify, Blueprint as subApp
 # INTERNAL IMPORTS
 from .basic import make_path, deformat, listReplace
 
@@ -53,18 +52,18 @@ def find_eTags(content):
 
 
 """ return string as etag """
-def E(string):
-  return "<!" + string + "!>"
+def E(string=''):
+  return deformat("<! " + string + " !>")
 
 
-""" REFLASK CLASS
+""" REFLASK APP CLASS
 
   Allows for creating, installing,
   building & serving flask based
   backend applications with HTML
   and/or React-JS based front ends
 """
-class ReFlask:
+class app:
 
   def __init__(self, _name_="overlord", react_enabled=False, _sub_=False):
     # PASS IF THIS IS A "SUB" APP
