@@ -1,5 +1,5 @@
 # REQUIRED APP MODULES
-from modules.elang.reflask import Blueprint
+from src.elang.reflask import Blueprint
 
 # TEMPLATE HEADER
 error_app = Blueprint("error", "overlord")

@@ -1,5 +1,5 @@
-from modules.elang.basic import mock
-from modules.elang import reflask
+from src.elang.basic import mock
+from src.elang import reflask
 
 file = mock.file(reflask)
 test = file.test

@@ -1,6 +1,6 @@
-from modules.elang.basic import mock, path
-from modules.elang import sqlmem
-from modules.elang.sqlmem import Database
+from src.elang.basic import mock, path
+from src.elang import sqlmem
+from src.elang.sqlmem import Database
 
 # MOCK VARIABLES -----------
 file = mock.file(sqlmem)

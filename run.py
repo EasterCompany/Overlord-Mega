@@ -3,7 +3,7 @@
 #   webapp.end.register_blueprint(app)
 if __name__ == "__main__":
   # import modules
-  from modules.elang import \
+  from src.elang import \
     pyArgs, console, sysPath, path
   
   # interact with console

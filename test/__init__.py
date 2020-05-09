@@ -1,7 +1,7 @@
+# IMPORT SOURCE TESTS
+from .src import *
 
-from .modules.elang import \
-  basic, sqlmem, reflask
-
-basic.file.log()
-sqlmem.file.log()
-reflask.file.log()
+# ELANG UNIT TESTS
+elang.basic.file.log()
+elang.sqlmem.file.log()
+elang.reflask.file.log()

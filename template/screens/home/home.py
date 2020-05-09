@@ -1,4 +1,4 @@
-from modules.elang.edoc import eDoc
+from src.elang.edoc import eDoc
 
 home = eDoc('home')
 
