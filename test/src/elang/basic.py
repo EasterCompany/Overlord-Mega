@@ -1,8 +1,5 @@
 # TEST MODULE -----------------
-from src.elang.basic import mock
-
-# MODULE TO TEST --------------
-from src.elang import basic
+from src.elang import mock, basic
 
 # MOCK VARIABLES --------------
 file = mock.file(basic)

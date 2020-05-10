@@ -21,4 +21,4 @@ from .basic import \
 
 # Python Console Extensions
 from .basic import \
-  strColor, sysName, console
+  strColor, sysName, console, mock

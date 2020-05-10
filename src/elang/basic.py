@@ -162,10 +162,7 @@ class testSet:
       'name': file.__name__,
       'path': file.__file__,
       'status': undefined,
-      'tests': {
-        'passing': [],
-        'failing': [],
-      },
+      'tests': { 'passing': [], 'failing': [], },
       'warnings': [],
       'start-time': sysTime(),
       'end-time': undefined, 
@@ -173,10 +170,8 @@ class testSet:
     self.failures = 0
     self.passes = 0
 
-  def test(self, label,
-    test=None, equals=undefined, 
-    isNot=undefined, contains=undefined,
-    arg=undefined):
+  def test(self, label, test=None, equals=undefined, 
+    isNot=undefined, contains=undefined, arg=undefined):
     if test is None:
       test = label
       label = undefined
