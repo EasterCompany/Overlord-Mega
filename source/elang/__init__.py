@@ -34,3 +34,21 @@ from .basic import \
   mock, \
   deformat, \
   listReplace
+
+# (always) clear terminal on init
+console.clear()
+
+# (optional) install dependencies
+if "-i" in pyArgs or "install" in pyArgs:
+  from source.elang.basic import __install__
+  __install__()
+
+# (optional) update source
+if "-u" in pyArgs or "update" in pyArgs:
+  from source.elang.basic import __gitUpdate__
+  __gitUpdate__()
+
+# (optional) run tests
+if "-t" in pyArgs or "test" in pyArgs:
+  console.clear()
+  from source.elang import __tests__

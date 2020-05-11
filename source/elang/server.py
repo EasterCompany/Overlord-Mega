@@ -1,4 +1,5 @@
-from . import path, console, sysName, client, strColor
+from . import path, console, sysName, \
+  client, strColor, sysPath, pyArgs
 
 
 class __this__:
@@ -36,7 +37,7 @@ class __this__:
       'ssl': False,
       'name': 'localhost',
       'path': aliases[0],
-      'port': 3001,
+      'port': '3001/',
       'host': 'http://secure.easter.company/',
       'apps': [
         "home", "error"
@@ -49,6 +50,8 @@ class __this__:
 
   def __init__(self):
     self.server = self.specifiedServer()
+    sysPath.insert(0, path.dirname(__file__))
+    self.consoleLog()
 
   def sourceableApps(self):
     source = []
@@ -89,6 +92,10 @@ class __this__:
       return True
     return False
 
+  def ssl(self, b):
+    if b: return 'https://'
+    return 'http://'
+
   def consoleLog(self):
     return print(
       """
@@ -96,7 +103,9 @@ class __this__:
        """ + strColor.blue('NAME :'), str(self.domain) + """
        """ + strColor.blue('APPS :'), str(', '.join(self.server['apps'])),"""
        """ + strColor.blue('TEST :'), str(self.url()) + """
-       """ + strColor.blue('LIVE :'), str(self.server['host']) , """
+       """ + strColor.blue('LIVE :'), self.ssl(self.servers['stable']['ssl']) + self.servers['stable']['name'] +
+        self.servers['stable']['path'] +
+        str(self.servers['stable']['port']), """
       """
     )
 

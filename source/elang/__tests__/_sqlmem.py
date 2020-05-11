@@ -1,6 +1,5 @@
 from source.elang import mock, path, sqlmem
 
-# MOCK VARIABLES -----------
 file = mock.file(sqlmem)
 test = file.test
 
@@ -8,7 +7,7 @@ testDB = sqlmem.Database('test', './.local/dbt/')
 newDB = sqlmem.Database("test", './.local/dbt/')
 delDB = sqlmem.Database("test", './.local/dbt/')
 
-# MOCK FUNCTIONS -----------
+
 def test_closed_database():
   d = sqlmem.Database('test', './.local/dbt/')
   d.commit()
@@ -17,6 +16,7 @@ def test_closed_database():
   except Exception as close_error:
     return str(close_error)
   return False
+
 
 def test_database_closes():
   r = False
@@ -36,10 +36,12 @@ def test_database_closes():
       r = True
   return r
 
+
 def test_data_with_commit():
   r = newDB.get("SELECT * FROM test LIMIT 1;")
   newDB.commit()
   return r
+
 
 def test_data_after_delete():
   r = delDB.sql("DELETE FROM test WHERE test=1")
@@ -55,7 +57,7 @@ def test_add_data():
 def test_without_commit():
   return testDB.commit()
 
-# MODULE UNIT TESTS 
+
 test(
   label="try create a test database",
   test=sqlmem.Database,
