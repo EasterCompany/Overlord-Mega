@@ -1,4 +1,4 @@
-from .sqlmem import Database
+from .eql import Database
 
 
 class comRaid:

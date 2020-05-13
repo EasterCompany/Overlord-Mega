@@ -1,3 +1,11 @@
+# Python 2 / 3 Test
+try:
+  from urllib.request import urlopen as openUrl
+except Exception as e:
+  if 'No module named request' in str(e):
+    print("Python 2 is not compatible with Overlord. (use python 3.2 or greater)")
+    exit()
+
 # Standard Library Extensions
 import atexit as onExit
 from os import \
@@ -10,8 +18,6 @@ from sys import \
   executable as pyExe, \
   argv as pyArgs, \
   path as sysPath
-from urllib.request import \
-  urlopen as openUrl
 from sqlite3 import \
   connect as loadDB
 from datetime import \
@@ -33,22 +39,36 @@ from .basic import \
   console, \
   mock, \
   deformat, \
-  listReplace
+  listReplace, \
+  __install__, \
+  __gitUpdate__
 
-# (always) clear terminal on init
-console.clear()
+# define test module
+from source.elang.__tests__ import run_elang_tests
+from source.scripts import host_server
 
-# (optional) install dependencies
-if "-i" in pyArgs or "install" in pyArgs:
-  from source.elang.basic import __install__
-  __install__()
+# Clears the terminal before optional inits
+optional_inits = {
+  'install': __install__,
+  'update': __gitUpdate__,
+  'test': run_elang_tests,
+  'server': host_server.run
+}
 
-# (optional) update source
-if "-u" in pyArgs or "update" in pyArgs:
-  from source.elang.basic import __gitUpdate__
-  __gitUpdate__()
+# Create a list of user input parameters
+inits = []
 
-# (optional) run tests
-if "-t" in pyArgs or "test" in pyArgs:
-  console.clear()
-  from source.elang import __tests__
+# (if any) Parse user input parameters
+for arg in pyArgs:
+  if arg.startswith('-') and not arg == '-':
+    arg = arg.split('-')[1]
+    for init in optional_inits:
+      if init.startswith(arg):
+        arg = init
+  if arg in optional_inits and callable(optional_inits[arg]):
+    inits.append(arg)
+
+# (if any) Run user input parameters
+if len(inits) > 0:
+  for init in inits:
+    optional_inits[init]()

@@ -59,7 +59,7 @@ class app:
     return jsonify(to_make)
 
   def has_app(self, app_name):
-    mkDir(self.cwd + "/template/app/" + app_name + "/scripts")
+    mkDir(self.cwd + "/template/app/" + app_name + "/src")
     root_file = self.cwd + "/template/app/" + app_name + "/" + app_name + ".html"
     if not path.exists(root_file):
       return open(root_file, 'w').read()

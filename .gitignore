@@ -9,3 +9,4 @@ static/build/
 
 # USER CACHE FILES
 __pycache__
+.pyc

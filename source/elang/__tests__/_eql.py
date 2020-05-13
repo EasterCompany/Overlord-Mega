@@ -1,15 +1,15 @@
-from source.elang import mock, path, sqlmem
+from source.elang import mock, path, eql
 
-file = mock.file(sqlmem)
+file = mock.file(eql)
 test = file.test
 
-testDB = sqlmem.Database('test', './.local/dbt/')
-newDB = sqlmem.Database("test", './.local/dbt/')
-delDB = sqlmem.Database("test", './.local/dbt/')
+testDB = eql.Database('test', './.local/dbt/')
+newDB = eql.Database("test", './.local/dbt/')
+delDB = eql.Database("test", './.local/dbt/')
 
 
 def test_closed_database():
-  d = sqlmem.Database('test', './.local/dbt/')
+  d = eql.Database('test', './.local/dbt/')
   d.commit()
   try:
     d.get("SELECT * FROM test")
@@ -60,7 +60,7 @@ def test_without_commit():
 
 test(
   label="try create a test database",
-  test=sqlmem.Database,
+  test=eql.Database,
   arg=('test', './.local/dbt'),
   isNot=None
 )

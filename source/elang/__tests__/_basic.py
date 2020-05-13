@@ -53,10 +53,10 @@ test(
 )
 
 test(
-  label="retrieves raw content from github repo file (*requires readme to be up-to-date in commit*)",
+  label="retrieves raw content from github repo file\n(*requires robots.txt to be up-to-date with the easter.company master branch\n ignore this test if you have edited 'public/robots.txt'\nas it just simply uses it as an example file to pass another function.*)",
   test=basic.git,
-  arg="README.md",
-  equals=open("./README.md").read()
+  arg="public/robots.txt",
+  equals=open("./public/robots.txt").read()
 )
 
 test(

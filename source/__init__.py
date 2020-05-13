@@ -1,2 +1,3 @@
-from . import \
-  elang
+version_template = {
+  'elang': 1.0,
+}

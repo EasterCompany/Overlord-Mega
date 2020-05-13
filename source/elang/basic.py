@@ -52,13 +52,12 @@ def __install__(__testfunction__=False):
   if __testfunction__:
     try:
       from flask import Flask
-    except:
+    except Exception as e:
       return False
     return True
   else:
     console.log(path.realpath(pyExe) + " -m pip install --upgrade pip")
     console.log(path.realpath(pyExe) + " -m pip install --upgrade flask")
-
 
 # Git Pull Command Function
 def __gitUpdate__(__testfunction__=False):
@@ -364,7 +363,7 @@ class __testFile__:
     # Console print styling
     self.logs['end-time'] = sysTime()
     _pad_ = "   "
-    title = strColor.highlight(_pad_ + str(self.logs['name']) + _pad_ + _pad_)
+    title = strColor.highlight(self.logs['name'])
     subtitle = strColor.black(self.logs['path'][-20:])
     
     # Stylise path to file
@@ -399,13 +398,9 @@ class __testFile__:
         failed_line + \
         "   "
     
-    # When a test pass
+    # When all tests pass
     else:
-      header = header + \
-        strColor.green(title) + \
-        '\n' + _pad_ + \
-        subtitle + '\n' + \
-        _pad_
+      header = header + strColor.green(title)
     
     # Build console output
     prefix = ''
@@ -417,14 +412,14 @@ class __testFile__:
       passed_line = ' '
 
     if self.failures > 0:
-      header = header + strColor.black(passed_line) + '\n' + _pad_
-    
+      header = header + strColor.black(passed_line)
     elif self.passes > 0: 
-      header = header + strColor.green(_pad_ + '\u2714' + _pad_ + passed_line) + '\n' + _pad_
-    header = header + \
-      strColor.black("spent  " + str(round(time, 13)) + "s")
+      header = header + strColor.green('\n       \u2714   ' + passed_line)
     
-    print(strColor.bold(header), '\n')
+    header = header + '\n' + _pad_ + strColor.black(" spent  " + str(round(time, 13)) + "s")
+    print(strColor.bold(header))
+    if self.failures > 0:
+      print('')
     
     for fail in self.logs['tests']['failing']:
     
@@ -443,8 +438,8 @@ class __testFile__:
 class __testModule__:
   sets = []
 
-  def print(self):
-    for log in self.test.logs:
+  def log(self):
+    for log in self.sets:
       print(log)
   
   def file(self, file):
