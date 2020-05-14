@@ -127,3 +127,12 @@ test(
   test=test_database_closes,
   equals=True
 )
+
+from source.elang.schema import comRaid
+comDB = eql.Database(filename='test', path='./.local/dbt')
+
+test(
+  label="try import a schema from elang.schema",
+  test=comDB.import_schema,
+  arg=comRaid,
+)

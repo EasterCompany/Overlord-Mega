@@ -8,13 +8,13 @@ def run_elang_tests():
     from . import \
       _basic, _eql, _reflask, \
       _server, _edoc, _etags, \
-      _client, _comrade 
+      _comrade 
 
     # Tests to Log
     log = [
       _basic, _eql, _reflask,
       _server, _edoc, _etags,
-      _client, _comrade
+      _comrade
     ]
 
     # Log Tests
@@ -55,4 +55,4 @@ def run_elang_tests():
       from . import \
         _basic, _eql, _reflask, \
         _server, _edoc, _etags, \
-        _client, _comrade
+        _comrade

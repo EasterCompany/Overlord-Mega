@@ -1,5 +1,6 @@
 from . import path, console, sysName, \
-  client, strColor, sysPath, pyArgs
+  strColor, sysPath, pyArgs
+from source.elang.schema import client
 
 
 class __this__:
@@ -109,4 +110,5 @@ class __this__:
       """
     )
 
-server = __this__()
+
+host = __this__()

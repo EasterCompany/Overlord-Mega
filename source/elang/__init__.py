@@ -39,6 +39,7 @@ from .basic import \
   console, \
   mock, \
   deformat, \
+  dataType, \
   listReplace, \
   __install__, \
   __gitUpdate__

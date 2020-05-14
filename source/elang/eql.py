@@ -43,3 +43,14 @@ class Database:
     # commits changes to database and closes the connection
     def commit(self):
         return self.db.commit(), self.db.close()
+
+    # import a schema into this database
+    def import_schema(self, schema):
+        for table in schema.tables:
+            values = []
+            for column in schema.tables[table]:
+                values.append(column + " " + schema.tables[table][column])
+            if len(values) > 0:
+                query = \
+                "CREATE TABLE IF NOT EXISTS " + table + " (" + ', '.join(values) + ");"
+                self.sql(query)
