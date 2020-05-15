@@ -1,7 +1,7 @@
 from . import dataType
 from .eql import Database
 from .schema import comRaid
-from .server import host
+from .server import host, api
 from .reflask import main
 
 
@@ -41,6 +41,8 @@ class __comRaid__:
         self.map[name] = self.name
         self.add_to_local_mass(name, value)
         self.save()
+        if name != '__test__': 
+          api("comraid-share", host.server['name'], name)
 
   def add_to_local_mass(self, name, value):
     if self.owns(name):
@@ -62,8 +64,13 @@ class __comRaid__:
 comrade = __comRaid__()
 
 
-def api_request(name, unit=comrade):
-  if unit.owns(name):
-    return unit.get(name)
+def api_request(req, unit=comrade):
+  if unit.owns(req):
+    return unit.get(req)
   return None
+
+
+def api_map_reqest(unit=comrade):
+  if host.hasNoMaster():
+    return unit.map 
 

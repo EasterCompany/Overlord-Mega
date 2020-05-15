@@ -59,6 +59,12 @@ test(
   equals=("2", "int")
 )
 
+test(
+  label="Get 'data map' via api call function",
+  test=sut.api_map_reqest,
+  equals=None
+)
+
 # remove test data and reset tests
 comrade.mass.sql("DELETE FROM mass")
 comrade.mass.commit()
