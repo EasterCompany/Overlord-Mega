@@ -2,6 +2,7 @@ from . import dataType
 from .eql import Database
 from .schema import comRaid
 from .server import host
+from .reflask import main
 
 
 class __comRaid__:
@@ -24,11 +25,15 @@ class __comRaid__:
   def close(self):
     self.mass.db.close()
 
-  def get(self, name):
+  def get(self, name, raw=False):
     if self.owns(name):
-      return self.mass_fetch(name)
+      r = self.mass_fetch(name)
     else:
       return None
+    if raw and r is not None:
+      if r[1] == 'list': return r[0].split(' ')
+      elif r[1] == 'int': return int(r[0])
+    return r
 
   def share(self, name, value):
     if not self.owns(name):
@@ -44,14 +49,7 @@ class __comRaid__:
       self.mass.add("mass", values)
 
   def mass_fetch(self, name):
-    if self.owns(name):
-      r = self.mass.get("SELECT value, type FROM mass WHERE name='" + name + "' LIMIT 1;")
-      if r is not None:
-        if r[1] == 'list': return r[0].split(' ')
-        elif r[1] == 'int': return int(r[0])
-        else: return r[0]
-    elif self.exists(name):
-      return None
+    return self.mass.get("SELECT value, type FROM mass WHERE name='" + name + "' LIMIT 1;")
 
   def mass_update(self, name, value):
     if self.owns(name):
@@ -62,3 +60,10 @@ class __comRaid__:
 
 
 comrade = __comRaid__()
+
+
+def api_request(name, unit=comrade):
+  if unit.owns(name):
+    return unit.get(name)
+  return None
+

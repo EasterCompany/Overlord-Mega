@@ -1,6 +1,6 @@
 from . import \
   mkDir, chDir, workDir, \
-  console, pyArgs, path
+  console, pyArgs, path, sysName
 from flask import \
   Flask, Blueprint, \
   redirect, request, jsonify
@@ -8,7 +8,7 @@ from flask import \
 
 class app:
   default_sub_apps = [
-    'error', 'api'
+    'api', 'error', 'home'
   ]
 
   def __init__(self, name=__name__, react_enabled=False, sub=False):
@@ -65,3 +65,6 @@ class app:
       return open(root_file, 'w').read()
     else:
       return open(root_file).read()
+
+
+main = app(name=sysName)
