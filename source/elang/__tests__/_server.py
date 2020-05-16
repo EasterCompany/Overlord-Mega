@@ -5,12 +5,12 @@ test = file.test
 
 test(
   label="server.py can initialize",
-  test=server.server.domain,
+  test=server.host.domain,
   equals="easter.company"
 )
 
 def isLocalOrSecureOrStable():
-  return server.server.isLocalServer() or server.server.isSecureServer() or server.server.isStableServer()
+  return server.host.isLocalServer() or server.host.isSecureServer() or server.host.isStableServer()
 
 test(
   label="server is localhost, secure or stable",
@@ -19,7 +19,7 @@ test(
 )
 
 def sslDisabledOnLocal():
-  return (server.server.isLocalServer() and not server.server.sslEnabled()) or not server.server.isLocalServer()
+  return (server.host.isLocalServer() and not server.host.sslEnabled()) or not server.host.isLocalServer()
 
 test(
   label="server ssl is disabled when locally hosted",
@@ -28,7 +28,7 @@ test(
 )
 
 def sslDisabledOnSecure():
-  return (server.server.isSecureServer() and not server.server.sslEnabled()) or not server.server.isLocalSecure()
+  return (server.host.isSecureServer() and not server.host.sslEnabled()) or not server.host.isLocalSecure()
 
 test(
   label="server ssl is disabled when on the secure server",
@@ -37,7 +37,7 @@ test(
 )
 
 def sslDisabledOnLocal():
-  return (server.server.isStableServer() and server.server.sslEnabled()) or not server.server.isStableServer()
+  return (server.host.isStableServer() and server.host.sslEnabled()) or not server.host.isStableServer()
 
 test(
   label="server ssl is enabled when on the stable server",
@@ -46,8 +46,8 @@ test(
 )
 
 def serverHasMasterTest():
-  return (server.server.isSecureServer() and server.server.server['host'] is None) or \
-    (not server.server.isSecureServer() and server.server.server['host'] is not None)
+  return (server.host.isSecureServer() and server.host.server['host'] is None) or \
+    (not server.host.isSecureServer() and server.host.server['host'] is not None)
 
 test(
   label="secure server has no master",
@@ -56,7 +56,7 @@ test(
 )
 
 def serverMasterTest():
-  return server.server.isSecureServer() or (server.server.server['host'] == "http://secure.easter.company/")
+  return server.host.isSecureServer() or (server.host.server['host'] == "http://secure.easter.company/")
 
 test(
   label="all non-secure servers have secure server has their master",

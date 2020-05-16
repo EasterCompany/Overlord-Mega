@@ -1,5 +1,6 @@
 from . import path, console, sysName, \
-  client, strColor, sysPath, pyArgs
+  strColor, sysPath, pyArgs, openUrl
+from source.elang.schema import client
 
 
 class __this__:
@@ -81,6 +82,9 @@ class __this__:
       http = 'http://'
     return http + self.server['name'] + self.server['path'] + str(self.server['port'])
 
+  def hasNoMaster(self):
+    return self.server['host'] is None
+
   def isSecureServer(self):
     return 'secureserver' in sysName
 
@@ -109,4 +113,15 @@ class __this__:
       """
     )
 
-server = __this__()
+
+host = __this__()
+
+
+def api(service, *args):
+  Args = ""
+  for arg in args:
+    if Args != "":
+      Args = Args + "\\*\\"
+    Args += str(arg)
+  return openUrl(host.server['host'] + 'api?req=' + service + '&args=' + Args)
+

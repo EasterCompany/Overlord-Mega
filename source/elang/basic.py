@@ -66,6 +66,11 @@ def __gitUpdate__(__testfunction__=False):
   console.log("git pull")
 
 
+# Get data type as string
+def dataType(v):
+      return str(type(v)).split("'")[1]
+
+
 # Makes A String More Machine Readable
 def deformat(string, remove_white_space=False, *args):
   string = string.\
@@ -431,8 +436,8 @@ class __testFile__:
       if 'label' in fail:
         print(' ', strColor.red(str(fail['label'])))
       for failed in fail['failed']:
-        print(_pad_, strColor.red(str(failed['test']) + ' -> ' + str(failed['expected'])))
-        print(_pad_, strColor.red('received -> ' + str(failed['result']) + '\n'))
+        print(_pad_, strColor.red(str(failed['test']) + ' -> ' + dataType(failed['expected']) + ' => ' + str(failed['expected'])))
+        print(_pad_, strColor.red('received -> ' + dataType(failed['result']) + ' => ' + str(failed['result']) + '\n'))
 
 
 class __testModule__:
