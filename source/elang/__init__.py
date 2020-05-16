@@ -43,20 +43,16 @@ from .basic import \
   __install__, \
   __gitUpdate__
 
-# define test module
+# Optional inits
 from source.elang.__tests__ import run_elang_tests
 from source.scripts import host_server
-
-# Clears the terminal before optional inits
+inits = []
 optional_inits = {
   'install': __install__,
   'update': __gitUpdate__,
   'test': run_elang_tests,
   'server': host_server.run
 }
-
-# Create a list of user input parameters
-inits = []
 
 # (if any) Parse user input parameters
 for arg in pyArgs:
