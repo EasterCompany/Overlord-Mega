@@ -1,8 +1,11 @@
+import base64
+from os import urandom
+from random import randint
 from platform import uname
 from os import system as _console, \
   mkdir as mkDir
 from . import path, pyExe, openUrl, \
-  sysTime, sysOS
+  sysTime, sysOS, dateTime
 
 
 # PyLanguage Extensions
@@ -58,6 +61,7 @@ def __install__(__testfunction__=False):
   else:
     console.log(path.realpath(pyExe) + " -m pip install --upgrade pip")
     console.log(path.realpath(pyExe) + " -m pip install --upgrade flask")
+    console.log(path.realpath(pyExe) + " -m pip install --upgrade cryptography")
 
 # Git Pull Command Function
 def __gitUpdate__(__testfunction__=False):
@@ -453,3 +457,76 @@ class __testModule__:
 
 
 mock = __testModule__()
+
+
+class crypt:
+  
+  def __init__(self):
+    from cryptography.hazmat.backends import default_backend
+    from cryptography.hazmat.primitives import hashes
+    from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+    if not path.exists("./.local/prv/num"):
+      self.pNum = bytes(randint(1000, 999999999))
+      f = open("./.local/prv/num", "wb")
+      f.write(self.pNum)
+      f.close()
+    else:
+      self.pNum = open("./.local/prv/num", "rb").read()
+    if not path.exists("./.local/prv/slt"):
+      self.salt = urandom(16)
+      f = open("./.local/prv/slt", "wb")
+      f.write(self.salt)
+      f.close()
+    else:
+      self.salt = open("./.local/prv/slt", "rb").read()
+    self.kdf = PBKDF2HMAC(
+      algorithm=hashes.SHA256(),
+      length=32,
+      salt=self.salt,
+      iterations=100000,
+      backend=default_backend()
+    )
+    self.pKey = \
+      base64.urlsafe_b64encode(self.kdf.derive(self.pNum))
+  
+  def en(self, secret):
+    from cryptography.fernet import Fernet
+    res = Fernet(
+      self.pKey
+    ).encrypt(
+      bytes(
+        str(
+          secret
+        ).encode(
+          'utf-8'
+        )
+      )
+    )
+    return res
+  
+  def de(self, token):
+    from cryptography.fernet import Fernet
+    res = Fernet(
+      self.pKey
+    ).decrypt(
+      token
+    )
+    return res
+
+
+def formatDateTime(datetime):
+  date, time = \
+    str(dateTime.now()).split(' ')[0], str(dateTime.now()).split(' ')[1]
+  _Date, _Time = \
+    datetime.split(' ')[0], datetime.split(' ')[1]
+  if date == _Date:
+    hours = int(_Time.split(':')[0]) - int(time.split(':')[0])
+    if hours >= 2:
+      return str(hours) + " hours ago"
+    elif hours == 1:
+      return str(hours) + " hour ago"
+    else:
+      return "minutes ago"  
+  else:
+    return _Date
+

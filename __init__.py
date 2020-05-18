@@ -1,5 +1,3 @@
-from source import version_template
-from source import elang
 '''
 
   >    do not modify your program init    <

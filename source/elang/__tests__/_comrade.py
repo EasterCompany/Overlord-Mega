@@ -54,15 +54,26 @@ test(
 
 test(
   label="Get '__test__' via api call function",
-  test=sut.api_request,
+  test=sut.com_api_request,
   arg=('__test__', comrade),
   equals=("2", "int")
 )
 
+def test_api_map_request():
+  if sut.host.isSecureServer():
+    r = sut.com_api_map_reqest()
+    if r is not None:
+      return True
+  else:
+    r = sut.com_api_map_reqest()
+    if r is None:
+      return True
+  return False
+
 test(
-  label="Get 'data map' via api call function",
-  test=sut.api_map_reqest,
-  equals=None
+  label="Get 'data map' via api call function\n  (should return None on localhost or map data on secure server)",
+  test=test_api_map_request,
+  equals=True
 )
 
 # remove test data and reset tests

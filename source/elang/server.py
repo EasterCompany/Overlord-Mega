@@ -1,6 +1,7 @@
 from . import path, console, sysName, \
-  strColor, sysPath, pyArgs, openUrl
+  strColor, sysPath, openUrl
 from source.elang.schema import client
+from source.elang.basic import crypt
 
 
 class __this__:
@@ -99,7 +100,7 @@ class __this__:
   def ssl(self, b):
     if b: return 'https://'
     return 'http://'
-
+  
   def consoleLog(self):
     return print(
       """
@@ -115,13 +116,14 @@ class __this__:
 
 
 host = __this__()
+host_crypt = crypt()
 
 
-def api(service, *args):
-  Args = ""
-  for arg in args:
-    if Args != "":
-      Args = Args + "\\*\\"
-    Args += str(arg)
-  return openUrl(host.server['host'] + 'api?req=' + service + '&args=' + Args)
+def api(service, args):
+  _host = host.server['host']
+  service = host_crypt.en(service).decode('utf-8')
+  parameters = []
+  for i, a in enumerate(args):
+    parameters.append(host_crypt.en(a).decode('utf-8'))
+  return openUrl(_host + 'api?req=' + service + "&".join(parameters))
 

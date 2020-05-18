@@ -1,2 +1,4 @@
 def run():
-  from source.elang.server import host
+  from __app__ import webApp
+  webApp.run()
+  

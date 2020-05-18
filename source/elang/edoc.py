@@ -1,4 +1,4 @@
-from . import path, deformat
+from . import path, deformat, pyArgs
 from .reflask import app
 from .etags import eTags
 
@@ -36,6 +36,7 @@ def etags(content):
         tags.append(t)
   return tags
 
+
 # Finds & Replaces etags with content
 def etag(content):
   tags = etags(content)
@@ -47,20 +48,25 @@ def etag(content):
       replacement = eTags[tag]
       if callable(replacement):
         replacement = replacement()
-      content = content.replace(E(tag), replacement)
+      content = content.replace(E(tag), etag(replacement))
   return content
 
 
 class make:
 
   def __init__(self, name, etml='', style='', script=''):
+    self.name, self.etml, self.script, self.style = \
+      name, etml, script, style
+    self.create(name, etml, style, script)
+
+  def create(self, name, etml, style, script):
     ejs_root_file = "./template/app/" + str(name) + "/" + str(name) + ".js"
     etg_root_file = "./template/app/" + str(name) + "/" + str(name) + ".html"
     self.doc = {
       'name': str(name),
       'etml': str(etml),
       'style': str(open('./template/global/styles/style.css').read()) + str(style),
-      'script': str(open('./template/global/script/dex.js').read()) + str(script),
+      'script': str(open('./template/global/script/dexter.js').read()) + str(script),
       'app': app(str(name), str(name), sub=True),
       'file': etg_root_file,
     }
@@ -89,7 +95,8 @@ class make:
         """ . \
         replace("<! .css !>", ess) . \
         replace("<! .html !>", etml) . \
-        replace("<! .js !>", ejs)
+        replace("<! .js !>", ejs),
+        remove_white_space=False
       )
     return self.doc
 
@@ -98,4 +105,8 @@ class make:
     return self.doc['build']
 
   def deploy(self):
+    if '-t' in pyArgs or 'test' in pyArgs:
+      self.create(self.name, self.etml, self.style, self.script)
+      self.render()
     return self.doc['build']
+
