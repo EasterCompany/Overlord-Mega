@@ -45,11 +45,7 @@ from .basic import \
   __install__, \
   __gitUpdate__
 
-<<<<<<< HEAD
 # Optional inits
-=======
-# Define test module
->>>>>>> 24/7
 from source.elang.__tests__ import run_elang_tests
 from source.scripts import host_server
 inits = []
