@@ -12,10 +12,8 @@
   You will need to enter the directory you just downloaded inside your terminal.<br>
   like so; <code> cd Overlord </code> <br>
   <br>
-  Then to use the elang interface when inside of this directory<br>
-  you just need to start any command line with <code> ./e </code><br>
-  The full overlord stack doesn't require many external dependencies although there is an in built installation<br>
-  process for redundency; this will check for (and/or) acquire any external packages that may be required for your system. To use this installation feature simply use the <code> install </code> argument with the elang interface.<br>
+  To use the elang interface you will need to be inside of this directory and start any command line with <code> ./e </code> <br><br>
+  The full overlord stack doesn't require many external dependencies and most should already be on your system -- however there is an installation process for redundency. This will check (and/or) acquire any external packages that may be required for your system including those that may need upgraded. To use this installation feature simply use the <code> install </code> argument with the elang interface.<br>
   The install argument can either be used two ways;<br>
   firstly <code> ./e install </code><br>
   secondly <code> ./e -i </code><br>
