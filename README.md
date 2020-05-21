@@ -3,7 +3,7 @@
 <h3> Download </h3>
 <p>
   To begin you'll need to either download or clone the Overlord Repository.<br>
-  On the github.com repo you can download a .zip of the latest version or alternatively you can clone the repository using<br>"git" -> this way you can update your framework to a newer version easily at a later date.<br>
+  On the github.com repo you can download a .zip of the latest version or alternatively you can clone the repository using<br>git -> this way you can update your framework to a newer version easily at a later date.<br>
   To do that enter into your terminal interface:<br>
   <code>git clone https://github.com/EasterCompany/Overlord.git</code>
 </p>
