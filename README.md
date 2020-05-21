@@ -24,14 +24,7 @@
   <code>ETML</code> is our raw index html file for our app.<br>
   <code>FILE</code> is our read e-doc virtual file object.<br>
   for example we could add after that;<br>
-  <pre>items = archive(<br>
-    'inventory',<br>
-    default_cols = [<br>
-      ('item', 'text'),<br> 
-      ('quantity', 'int')<br> 
-    ]<br>
-  )</pre>
-  <br>
+  <pre>items = archive(<br>&nbsp;&nbsp;'inventory',<br>&nbsp;&nbsp;default_cols = [<br>&nbsp;&nbsp;&nbsp;&nbsp;('item', 'text'),<br>&nbsp;&nbsp;&nbsp;&nbsp;('quantity', 'int')<br>&nbsp;&nbsp;]<br>)</pre><br>
   and this will use elang.archive to make an automated backend database for a inventory <br>
   with "item", "quantity" -> "date_added", "date_modified" and "unique_id" as properities.<br>
 </p>
