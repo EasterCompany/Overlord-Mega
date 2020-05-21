@@ -4,7 +4,6 @@
   To begin you'll need to either download or clone the Overlord Repository.<br>
   On the github.com repo you can download a .zip of the latest version or alternatively you can clone the repository using "git" -> this way you can update your framework to a newer version easily at a later date. 
   To do that enter into your terminal interface:<br>
-  <br>
   <code bash>git clone https://github.com/EasterCompany/Overlord.git</code>
 </p>
 <h2> Make a New App </h2>
@@ -21,6 +20,6 @@
   The root.py will contain boiler plate to get you started.  
 </p>
 <h4> ELANG BACKEND </h4>
-<p>  </p>
+<p> We can control our elang backend with Python within our "root.py" file. </p>
 <h4> EDOCS FRONTEND </h4>
-<p> eLang & eDocs web development framework </p>
+<p> We can control our edocs frontend with ETML & JS within our "index html" file. </p>
