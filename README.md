@@ -4,7 +4,8 @@
 <p>
   To begin you'll need to either download or clone the Overlord Repository.<br>
   On the github repo you can download a .zip of the latest version.<br>
-  Or alternatively clone the repository using "git" in your (console / terminal) window. To do that enter:<br>
+  Or alternatively clone the repository using "git". 
+  To do that enter into your console / terminal interface:<br>
   <br>
   git clone https://github.com/EasterCompany/Overlord.git
 </p>
