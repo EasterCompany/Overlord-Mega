@@ -24,12 +24,12 @@
   <code>ETML</code> is our raw index html file for our app.<br>
   <code>FILE</code> is our read e-doc virtual file object.<br>
   for example we could add after that;<br>
-  <pre>items = archive(\n
-    'inventory',\n
-    default_cols = [</br>
-      ('item', 'text'),</br> 
+  <pre>items = archive(<br>
+    'inventory',<br>
+    default_cols = [<br>
+      ('item', 'text'),<br> 
       ('quantity', 'int')<br> 
-    ]\n
+    ]<br>
   )</pre>
   <br>
   and this will use elang.archive to make an automated backend database for a inventory <br>
