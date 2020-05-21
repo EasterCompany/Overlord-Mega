@@ -1,14 +1,14 @@
-let dexBtnToggle = false;
+var dexBtnToggle = false;
 
-function dexDrawGui () { 
-  return null;
+function dexDrawGui() {
+    return null;
 }
 
-function pressDexBtn () {
-  if ( dexBtnToggle ) {
-    dexBtnToggle = false;
-  } else {
-    dexBtnToggle = true;
-  }
-  return dexDrawGui();
+function pressDexBtn() {
+    if (dexBtnToggle) {
+        dexBtnToggle = false;
+    } else {
+        dexBtnToggle = true;
+    }
+    return dexDrawGui();
 }

@@ -8,7 +8,7 @@ from flask import \
 
 class app:
   default_sub_apps = [
-    'api', 'error', 'home'
+    'api', 'error', 'home', 'documentation', 'epanel'
   ]
 
   def __init__(self, name=__name__, react_enabled=False, sub=True):
@@ -69,8 +69,7 @@ from source.elang.reflask import __mainWebApp__ as webApp'''
     if not path.exists(html_root_file):
       f = open(html_root_file, 'w')
       f.write(
-"""
-<! site.header !>
+"""<! site.header !>
 
 <body class="content">
     <img
@@ -86,24 +85,21 @@ from source.elang.reflask import __mainWebApp__ as webApp'''
 </body>
 
 <! site.footer !>
-"""   )
+""")
       f.close()
     if not path.exists(py_root_file):
       f = open(py_root_file, 'w')
       f.write(
-"""
-from __app__ import webApp
+"""from __app__ import webApp
 from source.elang.edoc import etags, etag, make
 
 ETML = open("./template/app/""" + app_name + "/" + app_name + """.html").read()
 FILE = make(name='""" + app_name + """', etml=ETML)
-RNDR = FILE.render()
 
 
 @webApp.end.route('/""" + app_name + """', methods=['GET', 'POST'])
 def """ + app_name + """_index():
   return FILE.deploy()
-
 
 """   )
       f.close()

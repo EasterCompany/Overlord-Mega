@@ -11,21 +11,21 @@ from . import path, pyExe, openUrl, \
 # PyLanguage Extensions
 def __undefined__():
   pass
+
+
 def __crashed__():
   pass
 
-
-# Python Language Extenders
-undefined = __undefined__
-crashed = __crashed__
-sysName = uname().node
 
 # PyArgument Extension
 def __defined__(arg):
   return arg != undefined
 
 
-# Python Argument Extension
+# Python Language Extenders
+undefined = __undefined__
+crashed = __crashed__
+sysName = uname().node
 defined = __defined__
 
 
@@ -92,6 +92,24 @@ def deformat(string, remove_white_space=False, *args):
   return string
 
 
+# Format datetime object into readable output
+def formatDateTime(datetime):
+  current_date, current_time = \
+    str(dateTime.now()).split(' ')[0], str(dateTime.now()).split(' ')[1]
+  post_date, post_time = \
+    str(datetime).split(' ')[0], str(datetime).split(' ')[1]
+  if current_date == post_date:
+    hours_ago = int(post_time.split(':')[0]) - int(current_time.split(':')[0])
+    if hours_ago >= 2:
+      return str(hours_ago) + " hours ago"
+    elif hours_ago == 1:
+      return str(hours_ago) + " hour ago"
+    else:
+      return "minutes ago"
+  else:
+    return post_date
+
+
 # return content; with list contents replaced with variable 'r'
 def listReplace(c, l, r):
   for x in l: 
@@ -119,7 +137,7 @@ def git(file_path, repo="Overlord", branch="master", source="EasterCompany"):
     return openUrl("https://raw.githubusercontent.com/" +
              source + "/" + repo + "/" + branch + "/" + file_path).read().decode('utf-8')
   except Exception as error:
-    return error
+    return str(error)
 
 
 # ENCLOSE A STRING WITH COLOUR TAGS
@@ -467,6 +485,7 @@ class crypt:
     from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
     if not path.exists("./.local/prv/num"):
       self.pNum = bytes(randint(1000, 999999999))
+      make_path("./.local/prv")
       f = open("./.local/prv/num", "wb")
       f.write(self.pNum)
       f.close()
@@ -512,21 +531,3 @@ class crypt:
       token
     )
     return res
-
-
-def formatDateTime(datetime):
-  date, time = \
-    str(dateTime.now()).split(' ')[0], str(dateTime.now()).split(' ')[1]
-  _Date, _Time = \
-    datetime.split(' ')[0], datetime.split(' ')[1]
-  if date == _Date:
-    hours = int(_Time.split(':')[0]) - int(time.split(':')[0])
-    if hours >= 2:
-      return str(hours) + " hours ago"
-    elif hours == 1:
-      return str(hours) + " hour ago"
-    else:
-      return "minutes ago"  
-  else:
-    return _Date
-

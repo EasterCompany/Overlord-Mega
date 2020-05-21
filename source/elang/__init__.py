@@ -48,25 +48,17 @@ from .basic import \
 # Optional inits
 from source.elang.__tests__ import run_elang_tests
 from source.scripts import host_server
+from source.scripts import make_web_app
 inits = []
 optional_inits = {
   'install': __install__,
   'update': __gitUpdate__,
   'test': run_elang_tests,
-  'server': host_server.run
+  'server': host_server.run,
+  'make-app': make_web_app.run
 }
 
-# (if any) Parse user input parameters
-for arg in pyArgs:
-  if arg.startswith('-') and not arg == '-':
-    arg = arg.split('-')[1]
-    for init in optional_inits:
-      if init.startswith(arg):
-        arg = init
-  if arg in optional_inits and callable(optional_inits[arg]):
-    inits.append(arg)
-
-# (if any) Run user input parameters
-if len(inits) > 0:
-  for init in inits:
+# (if any) Parse & init user input parameters
+for init in optional_inits:
+  if init in pyArgs or "-" + init[0] in pyArgs:
     optional_inits[init]()

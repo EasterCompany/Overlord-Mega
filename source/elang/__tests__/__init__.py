@@ -1,3 +1,5 @@
+
+
 def run_elang_tests():
   try:
 
@@ -8,13 +10,13 @@ def run_elang_tests():
     from . import \
       _basic, _eql, _reflask, \
       _server, _edoc, _etags, \
-      _comrade 
+      _comrade, _archive
 
     # Tests to Log
     log = [
       _basic, _eql, _reflask,
       _server, _edoc, _etags,
-      _comrade
+      _comrade, _archive
     ]
 
     # Log Tests
@@ -55,4 +57,5 @@ def run_elang_tests():
       from . import \
         _basic, _eql, _reflask, \
         _server, _edoc, _etags, \
-        _comrade
+        _comrade, _archive
+

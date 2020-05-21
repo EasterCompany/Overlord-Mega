@@ -12,6 +12,10 @@ class Database:
         self.db = loadDB(path + "/" + self.name + ".mem")
         self.sql_cursor = self.db.cursor()
 
+    # queries database for columns within a table
+    def data(self, table):
+        return self.sql("PRAGMA table_info(" + table + ");")
+
     # queries database, commits & closes
     def sql(self, sql):
         r = self.sql_cursor.execute(sql).fetchall()
@@ -42,7 +46,10 @@ class Database:
 
     # commits changes to database and closes the connection
     def commit(self):
-        return self.db.commit(), self.db.close()
+        try:
+            return self.db.commit(), self.db.close()
+        except Exception as e:
+            print('[ DATABASE ERROR: ' + str(e) + ' ]')
 
     # import a schema into this database
     def import_schema(self, schema):

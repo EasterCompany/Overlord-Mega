@@ -1,4 +1,3 @@
-
 from __app__ import webApp
 from source.elang.edoc import etags, etag, make
 
@@ -7,8 +6,7 @@ FILE = make(name='home', etml=ETML)
 RNDR = FILE.render()
 
 
-@webApp.end.route('/home', methods=['GET', 'POST'])
+@webApp.end.route('/', methods=['GET', 'POST'])
 def home_index():
   return FILE.deploy()
-
 

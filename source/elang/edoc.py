@@ -1,6 +1,6 @@
 from . import path, deformat, pyArgs
 from .reflask import app
-from .etags import eTags
+from .etags import eTags, eClasses
 
 
 # Convert value to web string (or reverse)
@@ -44,11 +44,20 @@ def etag(content):
     .replace('<! ', '<!') \
     .replace(' !>', '!>')
   for tag in tags:
+    
     if tag in eTags:
       replacement = eTags[tag]
       if callable(replacement):
         replacement = replacement()
       content = content.replace(E(tag), etag(replacement))
+    else:
+      for eClass in eClasses:
+        if tag.startswith(eClass):
+          r = eClasses[eClass](tag.split(':')[1])
+          if r is None:
+            r = ""
+          content = content.replace(E(tag), r)
+          break
   return content
 
 

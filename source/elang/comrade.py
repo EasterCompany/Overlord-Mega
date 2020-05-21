@@ -33,7 +33,7 @@ class __comRaid__:
     if self.owns(name):
       r = self.mass_fetch(name)
     else:
-      return None
+      return api("cGet", (host.server['name'], name))
     if raw and r is not None:
       if r[1] == 'list': return r[0].split(' ')
       elif r[1] == 'int': return int(r[0])
