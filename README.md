@@ -15,9 +15,8 @@
   Or:<br>
   <code>./e make-web-app hello-world</code><br>
   <br>
-  Your new (app / page) will exist within your <code>template/app</code> directory with named "hello_world".<br>
-  Your app folder will contain an index html document with the same name as your app; it is important that it remains this<br>way - it should contain some boiler plate to help you get started. Inside of your app folder you will have a "src"<br>folder. This folder should contain a <code>root.py</code> file.<br>
-  The root.py will also contain boiler plate to get you started.<br>
+  Your new app-folder will exist within your <code>template/app</code> directory named "hello_world" or other wise named how you instructed.
+  Your app folder will contain an index html document with the same name as your app;<br>it is important that it remains this way - the file should also contain some boiler plate to help you get started.<br>Also inside of your app folder you will have a "src"folder. This folder should contain a <code>root.py</code> file.<br> The root.py should also contain boiler plate to get you started.<br>
 </p>
 <h4> ELANG BACKEND </h4>
 <p> 
