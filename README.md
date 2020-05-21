@@ -13,17 +13,17 @@
   like so; <code> cd Overlord </code> <br>
   <br>
   To use the elang interface you will need to be inside of this directory and start any command line with <code> ./e </code> <br><br>
-  The full overlord stack doesn't require many external dependencies and most should already be on your system -- however there is an installation process for redundency. This will check (and/or) acquire any external packages that may be required for your system including those that may need upgraded. To use this installation feature simply use the <code> install </code> argument with the elang interface.<br>
+  The full overlord stack doesn't require many external dependencies and most should already be on your system -- however there is an installation process for redundency. This will check (and/or) acquire any external packages that may be required for your system including those that may need upgraded. To use this installation feature simply use the <code>install</code> argument with the elang interface.<br>
   The install argument can either be used two ways;<br>
   firstly <code> ./e install </code><br>
   secondly <code> ./e -i </code><br>
   There aren't many interace arguments and they can all be shortned down to "-" + the first characater of the argument.<br>
   Other need-to-know arugments are:<br>
-  <code> server || -s </code> starts the elang server<br>
-  <code> make-web-app || -m </code> makes an edoc app<br>
-  <code> test || -t </code> runs & logs all testing envrionments<br>
+  <code>server || -s</code> starts the elang server<br>
+  <code>make-web-app || -m</code> makes an edoc app<br>
+  <code>test || -t</code> runs & logs all testing envrionments<br>
   for example you could string all these together like this:<br>
-  <code> ./e -i -m new-app -t -s </code> to install any required dependencies, make a new app called 'new-app', run and log any local testing envrionments and then start the server.<br>
+  <code>./e -i -m new-app -t -s</code> to install any required dependencies, make a new app called 'new-app', run and log any local testing envrionments and then start the server.<br>
 </p>
 <h3> Make a New App </h3>
 <p> 
