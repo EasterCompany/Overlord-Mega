@@ -1,5 +1,5 @@
-<h2 class="redline">FULLSTACK DOCUMENTATION</h2>
-<h6> you can view this documentation @ <a href='https://www.easter.company/documentation'>easter.company</a> & <a href='https://github.com/EasterCompany/Overlord/blob/master/README.md'>github</a></h6>
+<h2 class="redline" style="text-align:center;">FULLSTACK DOCUMENTATION</h2>
+<h6 style="text-align:center;"> you can view this documentation @ <a href='https://www.easter.company/documentation'>easter.company</a> & <a href='https://github.com/EasterCompany/Overlord/blob/master/README.md'>github</a></h6>
 <h3> Download </h3>
 <p>
   To begin you'll need to either download or clone the Overlord Repository.<br>
