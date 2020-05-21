@@ -3,9 +3,29 @@
 <h3> Download </h3>
 <p>
   To begin you'll need to either download or clone the Overlord Repository.<br>
-  On the github.com repo you can download a .zip of the latest version or alternatively you can clone the repository using<br>git -> this way you can update your framework to a newer version easily at a later date.<br>
-  To do that enter into your terminal interface:<br>
+  On github.com you can download a .zip of the latest version of Overlord or alternatively you can clone the repository using<br>git from your terminal -> this way you can update your framework to a newer version easily at a later date.<br>
+  To do that - enter the following into your terminal:<br>
   <code>git clone https://github.com/EasterCompany/Overlord.git</code>
+</p>
+<h3> Install </h3>
+<p>
+  You will need to enter the directory you just downloaded inside your terminal.<br>
+  like so; <code> cd Overlord </code> <br>
+  <br>
+  Then to use the elang interface when inside of this directory<br>
+  you just need to start any command line with <code> ./e </code><br>
+  The full overlord stack doesn't require many external dependencies although there is an in built installation<br>
+  process for redundency; this will check for (and/or) acquire any external packages that may be required for your system. To use this installation feature simply use the <code> install </code> argument with the elang interface.<br>
+  The install argument can either be used two ways;<br>
+  firstly <code> ./e install </code><br>
+  secondly <code> ./e -i </code><br>
+  There aren't many interace arguments and they can all be shortned down to "-" + the first characater of the argument.<br>
+  Other need-to-know arugments are:<br>
+  <code> server || -s </code> starts the elang server<br>
+  <code> make-web-app || -m </code> makes an edoc app<br>
+  <code> test || -t </code> runs & logs all testing envrionments<br>
+  for example you could string all these together like this:<br>
+  <code> ./e -i -m new-app -t -s </code> to install any required dependencies, make a new app called 'new-app', run and log any local testing envrionments and then start the server.<br>
 </p>
 <h3> Make a New App </h3>
 <p> 
