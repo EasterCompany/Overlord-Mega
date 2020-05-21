@@ -6,6 +6,7 @@
 # PRODUCTION BUILD FILES
 static/react/
 static/build/
+README.md
 
 # USER CACHE FILES
 __pycache__
