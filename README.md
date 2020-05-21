@@ -33,7 +33,7 @@
   <code>ETML</code> is our raw index html file for our app.<br>
   <code>FILE</code> is our read e-doc virtual file object.<br>
   for example we could add after that;<br>
-  <pre style=”white-space: pre-wrap;”>items = archive(
+  <pre>items = archive(
     'inventory',
     default_cols = [ 
       ('item', 'text'), 
