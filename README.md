@@ -1,4 +1,4 @@
-<h2 class="redline"> OVERLORD FULLSTACK WEB FRAMEWORK DOCUMENTATION </h2>
+<h2 class="redline">FULLSTACK DOCUMENTATION</h2>
 <h3> Download </h3>
 <p>
   To begin you'll need to either download or clone the Overlord Repository.<br>
