@@ -1,15 +1,15 @@
-<h2 class="redline"> OVERLORD FULLSTACK WEB FRAMEWORK </h2>
+<h2 class="redline"> OVERLORD FULLSTACK WEB FRAMEWORK DOCUMENTATION </h2>
 <br>
-<h2> download </h2>
+<h2> Download </h2>
 <p>
   To begin you'll need to either download or clone the Overlord Repository.<br>
   On the github repo you can download a .zip of the latest version.<br>
   Or alternatively clone the repository using "git" in your (console / terminal) window. To do that enter:<br>
   <br>
-    >> git clone https://github.com/EasterCompany/Overlord.git
+  git clone https://github.com/EasterCompany/Overlord.git
 </p>
 <br>
-<h2> make a new web-page / application </h2>
+<h2> Make a New App </h2>
 <p> 
   To create a new web-app<br>while inside of the overlord directory in your terminal<br>
   Enter:<br>
