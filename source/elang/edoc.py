@@ -1,14 +1,15 @@
-from . import path, deformat, pyArgs
+from . import path, deformat, pyArgs, sysTime
 from .reflask import app
 from .etags import eTags, eClasses
+from .server import host
 
 
 # Convert value to web string (or reverse)
 def txt(to_format, reverse=True):
   form = (
-  ("'", "&apos;"), (" ", "&nbsp;"),
-  ('"', "&quot;"), ("<", "&lt;"),
-  (">", "&gt;"), ("`", "&#96;")
+    ("'", "&apos;"), (" ", "&nbsp;"),
+    ('"', "&quot;"), ("<", "&lt;"),
+    (">", "&gt;"), ("`", "&#96;")
   )
   new_string = str(to_format)
   for f in form:
@@ -39,26 +40,35 @@ def etags(content):
 
 # Finds & Replaces etags with content
 def etag(content):
-  tags = etags(content)
-  content = content \
+  tags = etags(str(content))
+  content = str(content) \
     .replace('<! ', '<!') \
     .replace(' !>', '!>')
   for tag in tags:
-    
     if tag in eTags:
       replacement = eTags[tag]
       if callable(replacement):
         replacement = replacement()
-      content = content.replace(E(tag), etag(replacement))
+      tag_result = etag(replacement)
+      if callable(tag_result): tag_result = tag_result()
+      content = str(content).replace(E(tag), tag_result)
     else:
       for eClass in eClasses:
         if tag.startswith(eClass):
-          r = eClasses[eClass](tag.split(':')[1])
-          if r is None:
-            r = ""
-          content = content.replace(E(tag), r)
+          if ':' in tag:
+            args = tag.split(':')[1].split(';')
+            for i, arg in enumerate(args):
+              args[i] = etag(arg)
+          else:
+            args = ()
+          rest = eClasses[eClass](*args)
+          if rest is None:
+            rest = ""
+          content = etag(
+            deformat(str(content)).replace(deformat(E(str(tag))), str(rest))
+          )
           break
-  return content
+  return str(content)
 
 
 class make:
@@ -110,12 +120,12 @@ class make:
     return self.doc
 
   def run(self):
-    self.render()
     return self.doc['build']
 
   def deploy(self):
-    if '-t' in pyArgs or 'test' in pyArgs:
-      self.create(self.name, self.etml, self.style, self.script)
-      self.render()
-    return self.doc['build']
+    t = sysTime()
+    self.create(self.name, self.etml, self.style, self.script)
+    self.render()
+    host.record("edoc_render_times", sysTime() - t)
+    return self.run()
 

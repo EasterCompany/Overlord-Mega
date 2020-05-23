@@ -1,406 +1,373 @@
-    .html {
-        color: <! color.darkMetal !>;
+.html {
+    color: <! color.darkMetal !>;
+}
+
+.a {
+    color: <! color.darkMetal !>;
+}
+
+.nav-bar {
+    font-size: large;
+    color: <! color.titaniumDark !>;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    background-color: <! color.titaniumWhite !>;
+    overflow-y: hidden;
+    min-width: 500px;
+    box-shadow: 0px 8px 16px 0px <! color.pinkMetal !>;
+}
+
+.nav-bar a {
+    float: left;
+    text-align: center;
+    transition: all 0.3s ease;
+    width: 83px;
+    min-width: 83px;
+    max-height: 18px;
+}
+
+.nav-bar a:hover {
+    background-color: <! color.darkMetal !>;
+}
+
+.nav-logo {
+    background-image: url("/static/icon/android-icon-48x48.png");
+    background-position: center;
+    background-size: 34px 34px;
+    background-repeat: no-repeat;
+    background-color: <! color.gunMetal !>;
+    text-align: center;
+    text-indent: 34px;
+    text-overflow: auto;
+    min-width: 34px;
+    min-height: 34px;
+}
+
+.nav-logo a {
+    transition: all 0.3s ease;
+}
+
+.nav-logo a:hover {
+    background-color: <! color.pinkMetal !>;
+}
+
+.nav-menu {
+    text-align: center;
+    text-decoration: solid;
+    text-justify: newspaper;
+}
+
+.nav-page {
+    text-align: center;
+    text-decoration: solid;
+    text-justify: newspaper;
+    padding: 8px 8px;
+    max-width: 68px;
+    height: 18px
+}
+
+.dex-btn {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    padding: 6px 8px;
+    max-width: 88px;
+    max-height: 36px;
+}
+
+.drop-btn {
+    color: <! color.titaniumGrey !>;
+    background-color: <! color.titaniumWhite !>;
+    padding: 8px 8px;
+    margin-right: 0.5px max-width: 88px;
+}
+
+.drop-content {
+    color: <! color.darkMetal !>;
+    display: none;
+    position: absolute;
+    background-color: <! color.redMetal !>;
+    box-shadow: 0px 8px 18px 0px <! color.paleMetal !>;
+    z-index: 1;
+}
+
+.drop-content a {
+    color: <! color.darkMetal !>;
+    padding: 8px 8px;
+    width: 116px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.drop-content a:hover {
+    background-color: <! color.deepRed !>;
+}
+
+.nav-menu:hover .drop-content {
+    display: block;
+}
+
+.nav-menu:hover {
+    background-color: <! color.pinkMetal !>;
+}
+
+.drop-btn:hover {
+    background-color: <! color.deepRed !>;
+}
+
+.Grow {
+    transition: all .2s ease-in-out;
+}
+
+.Grow:hover {
+    transform: scale(1.1);
+}
+
+.grow {
+    transition: all .3s ease-in-out;
+}
+
+.grow:hover {
+    transform: scale(1.01);
+}
+
+.redline {
+    background: url(/static/image/redline.png) left bottom/0% 3px no-repeat;
+    animation: unterstreichen .2s ease 1s forwards;
+}
+
+@keyframes unterstreichen {
+    100% {
+        background-size: 100% 3px
     }
-    
-    .a {
-        color: <! color.darkMetal !>;
+}
+
+.meter {
+    position: relative;
+    background: #555;
+    background-color: <! color.titaniumGrey !>;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 15px;
+    box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.meter>span {
+    display: block;
+    height: 100%;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3), inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.groW {
+    animation-name: groW;
+    animation-timing-function: ease;
+}
+
+@keyframes groW {
+    100% {
+        background-size: 100% 3px;
     }
-    
-    .nav-bar {
-        color: <! color.titaniumDark !>;
-        position: fixed;
-        top: 8px;
-        left: 6px;
-        z-index: 10;
-        background-color: <! color.titaniumWhite !>;
-        overflow-y: hidden;
-        border-radius: 8px;
-        min-width: 500px;
-        box-shadow: 0px 8px 16px 0px <! color.pinkMetal !>;
-    }
-    
-    @media only screen and (max-width: 633px) {
-        .nav-bar {
-            left: 32px;
-            border-radius: 0px;
-        }
-    }
-    
-    @media only screen and (max-width: 575px) {
-        .nav-bar {
-            top: 0px;
-            left: 0px;
-            padding-left: 33px;
-            vertical-align: middle;
-            border-radius: 1px;
-            min-width: 100%;
-        }
-    }
-    
-    @media only screen and (max-width: 545px) {
-        .nav-bar {
-            top: 0px;
-            left: 0px;
-            padding-left: 16px;
-            border-radius: 0px;
-            min-width: 100%;
-        }
-    }
-    
-    @media only screen and (max-width: 520px) {
-        .nav-bar {
-            top: 0px;
-            left: 0px;
-            padding-left: 0px;
-            min-width: 100%;
-        }
-    }
-    
-    .nav-bar a {
-        float: left;
-        text-align: center;
-        transition: all 0.3s ease;
-        min-width: 83px;
-        height: 48px;
-    }
-    
-    .nav-bar a:hover {
-        background-color: <! color.darkMetal !>;
-    }
-    
-    .nav-logo {
-        background-image: url("/static/icon/android-icon-48x48.png");
-        background-position: center;
-        background-size: 48px 48px;
-        background-repeat: no-repeat;
-        background-color: <! color.gunMetal !>;
-        text-align: center;
-        text-indent: 48px;
-        text-overflow: auto;
-    }
-    
-    .nav-logo a {
-        transition: all 0.3s ease;
-    }
-    
-    .nav-logo a:hover {
-        background-color: <! color.pinkMetal !>;
-    }
-    
-    .nav-menu {
-        text-align: center;
-        text-decoration: solid;
-        text-justify: newspaper;
-    }
-    
-    .nav-page {
-        text-align: center;
-        text-decoration: solid;
-        text-justify: newspaper;
-        padding: .5rem .5rem;
-        max-width: 68px;
-        max-height: 30px;
-    }
-    
-    .dex-btn {
-        position: fixed;
-        bottom: 18px;
-        right: 18px;
-        padding: 6px 8px;
-        max-width: 88px;
-        max-height: 36px;
-    }
-    
-    .drop-btn {
-        color: <! color.titaniumWhite !>;
-        background-color: <! color.redMetal !>;
-        padding: 6px 8px;
-        max-width: 88px;
-        max-height: 36px;
-    }
-    
-    .drop-content {
-        color: <! color.darkMetal !>;
-        display: none;
-        position: absolute;
-        background-color: <! color.redMetal !>;
-        box-shadow: 0px 8px 16px 0px <! color.paleMetal !>;
-        z-index: 1;
-    }
-    
-    .drop-content a {
-        color: <! color.darkMetal !>;
-        padding: 6px 8px;
-        width: 118px;
-        height: 36px;
-        text-decoration: none;
-        display: block;
-        text-align: center;
-    }
-    
-    .drop-content a:hover {
-        background-color: <! color.deepRed !>;
-    }
-    
-    .nav-menu:hover .drop-content {
-        display: block;
-    }
-    
-    .nav-menu:hover {
-        background-color: <! color.pinkMetal !>;
-    }
-    
-    .drop-btn:hover {
-        background-color: <! color.deepRed !>;
-    }
-    
-    .Grow {
-        transition: all .2s ease-in-out;
-    }
-    /*object grows big on hover*/
-    
-    .Grow:hover {
-        transform: scale(1.1);
-    }
-    
-    .grow {
-        transition: all .3s ease-in-out;
-    }
-    /*object grows a little bigger on hover*/
-    
-    .grow:hover {
-        transform: scale(1.01);
-    }
-    
-    .redline {
-        background: url(/static/image/redline.png) left bottom/0% 3px no-repeat;
-        animation: unterstreichen .2s ease 1s forwards;
-    }
-    
-    @keyframes unterstreichen {
-        100% {
-            background-size: 100% 3px
-        }
-    }
-    
-    .post-banner {
-        min-width: 100%;
-        max-height: 100px;
-        object-fit: cover;
-        object-position: 0 50%;
-    }
-    
-    .post-image {
-        max-width: 50%;
-        max-height: 50%;
-        text-align: center;
-        margin-top: 5%;
-        margin-left: 25%;
-    }
-    /*
+}
+
+.post-banner {
+    min-width: 100%;
+    max-height: 100px;
+    object-fit: cover;
+    object-position: 0 50%;
+}
+
+.post-image {
+    max-width: 50%;
+    max-height: 50%;
+    text-align: center;
+    margin-top: 5%;
+    margin-left: 25%;
+    margin-right: 25%
+}
+
+
+/*
 
 ------------------------------------------------------ 
 
 */
-    
-    pre,
-    code {
-        font-family: Menlo, Monaco, "Courier New", monospace;
+
+pre,
+code {
+    font-family: Menlo, Monaco, "Courier New", monospace;
+}
+
+pre {
+    padding: .5rem;
+    line-height: 1.25;
+    overflow-x: scroll;
+}
+
+@media print {
+    *,
+    *:before,
+    *:after {
+        background: transparent !important;
+        color: <! color.darkMetal !> !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
     }
-    
-    pre {
-        padding: .5rem;
-        line-height: 1.25;
-        overflow-x: scroll;
-    }
-    
-    @media print {
-        *,
-        *:before,
-        *:after {
-            background: transparent !important;
-            color: <! color.darkMetal !> !important;
-            box-shadow: none !important;
-            text-shadow: none !important;
-        }
-        a,
-        a:visited {
-            text-decoration: underline;
-        }
-        a[href]:after {
-            content: " (" attr(href) ")";
-        }
-        abbr[title]:after {
-            content: " (" attr(title) ")";
-        }
-        a[href^="#"]:after,
-        a[href^="javascript:"]:after {
-            content: "";
-        }
-        pre,
-        blockquote {
-            border: 1px solid <! color.titaniumWhite !>;
-            page-break-inside: avoid;
-        }
-        thead {
-            display: table-header-group;
-        }
-        tr,
-        img {
-            page-break-inside: avoid;
-        }
-        img {
-            max-width: 100% !important;
-        }
-        p,
-        h2,
-        h3 {
-            orphans: 3;
-            widows: 3;
-        }
-        h2,
-        h3 {
-            page-break-after: avoid;
-        }
-    }
-    
     a,
     a:visited {
-        color: <! color.pinkGrey !>
+        text-decoration: underline;
     }
-    
-    a:hover,
-    a:focus,
-    a:active {
-        color: <! color.paleMetal !>;
+    a[href]:after {
+        content: " (" attr(href) ")";
     }
-    
-    .retro-no-decoration {
-        text-decoration: none;
+    abbr[title]:after {
+        content: " (" attr(title) ")";
     }
-    
-    html {
-        font-size: 12px;
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
     }
-    
-    @media screen and (min-width: 32rem) and (max-width: 48rem) {
-        html {
-            font-size: 15px;
-        }
-    }
-    
-    @media screen and (min-width: 48rem) {
-        html {
-            font-size: 16px;
-        }
-    }
-    
-    body {
-        line-height: 1.85;
-    }
-    
-    p,
-    .retro-p {
-        font-size: 1rem;
-        margin-bottom: 1.3rem;
-    }
-    
-    h1,
-    .retro-h1,
-    h2,
-    .retro-h2,
-    h3,
-    .retro-h3,
-    h4,
-    .retro-h4 {
-        margin: 1.414rem 0 .5rem;
-        font-weight: inherit;
-        line-height: 1.42;
-    }
-    
-    h1,
-    .retro-h1 {
-        margin-top: 0;
-        font-size: 3.998rem;
-    }
-    
-    h2,
-    .retro-h2 {
-        font-size: 2.827rem;
-    }
-    
-    h3,
-    .retro-h3 {
-        font-size: 1.999rem;
-    }
-    
-    h4,
-    .retro-h4 {
-        font-size: 1.414rem;
-    }
-    
-    h5,
-    .retro-h5 {
-        font-size: 1.121rem;
-    }
-    
-    h6,
-    .retro-h6 {
-        font-size: .88rem;
-    }
-    
-    small,
-    .retro-small {
-        font-size: .707em;
-    }
-    
-    img,
-    canvas,
-    iframe,
-    video,
-    svg,
-    select,
-    textarea {
-        max-width: 100%;
-    }
-    
-    html,
-    body {
-        background-color: <! color.titaniumWhite !>;
-        min-height: 100%;
-    }
-    
-    html {
-        font-size: 18px;
-    }
-    
-    .content {
-        color: <! color.paleMetal !>;
-        font-family: "Courier New";
-        line-height: 1.45;
-        margin: 6rem auto 1rem;
-        max-width: 48rem;
-        padding: .25rem;
-    }
-    
     pre,
-    code {
-        color: <! color.titaniumWhite !>;
-        background-color: <! color.redMetal !>;
-        overflow: auto;
-        border-radius: 3px;
-        font-family: courier, monospace;
-        padding: 0 3px;
-        word-wrap: normal;
-        white-space: pre-line;
-    }
-    
     blockquote {
-        border-left: 3px solid <! color.paleMetal !>;
-        padding-left: 1rem;
+        border: 1px solid <! color.titaniumWhite !>;
+        page-break-inside: avoid;
     }
-    /*
+    thead {
+        display: table-header-group;
+    }
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+    img {
+        max-width: 100% !important;
+    }
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
+
+a,
+a:visited {
+    color: <! color.pinkGrey !>
+}
+
+a:hover,
+a:focus,
+a:active {
+    color: <! color.paleMetal !>;
+}
+
+.retro-no-decoration {
+    text-decoration: none;
+}
+
+html {
+    font-size: 12px;
+}
+
+@media screen and (min-width: 32rem) and (max-width: 48rem) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media screen and (min-width: 48rem) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    line-height: 1.85;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Courier New";
+}
+
+img,
+canvas,
+iframe,
+video,
+svg,
+select,
+textarea {
+    max-width: 100%;
+}
+
+html,
+body {
+    background-color: <! color.titaniumWhite !>;
+    max-height: 50%;
+}
+
+.content {
+    color: <! color.paleMetal !>;
+    font-family: "fira-sans-2", Verdana, sans-serif;
+    line-height: 1.45;
+    margin: 6rem auto 1rem;
+    max-width: 48rem;
+    padding: .25rem;
+}
+
+pre,
+code {
+    color: <! color.titaniumWhite !>;
+    background-color: <! color.redMetal !>;
+    overflow: auto;
+    border-radius: 3px;
+    font-family: courier, monospace;
+    padding: 0 3px;
+    word-wrap: normal;
+    white-space: pre-line;
+}
+
+blockquote {
+    border-left: 3px solid <! color.paleMetal !>;
+    padding-left: 1rem;
+}
+
+
+/*
 
 ------------------------------------------------------ 
 
 */
+
+@media only screen and (min-width: 360px) {
+    .nav-bar {
+        min-width: 100%;
+    }
+}
+
+@media only screen and (min-width: 720px) {
+    .nav-bar {
+        margin-left: 5%;
+        margin-right: 5%;
+        min-width: 90%;
+    }
+}
+
+@media only screen and (min-width: 1080px) {
+    .nav-bar {
+        min-width: 100%;
+        margin: 0 0 0 0;
+    }
+}

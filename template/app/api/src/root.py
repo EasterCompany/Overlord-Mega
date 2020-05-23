@@ -5,7 +5,6 @@ from source.elang.comrade import comrade, com_api_map_reqest, com_api_request
 
 @webApp.end.route('/api', methods=['GET', 'POST'])
 def api_index():
-  
   _decrypt = crypt().de
   args = webApp.arg()
   
@@ -26,7 +25,7 @@ def api_index():
     ).decode('utf-8')
   
   # API PARAMETER ORDER
-  api = bytes(webApp.arg('req').encode('utf-8'))
+  api = bytes(str(webApp.arg('req')).encode('utf-8'))
   api = _decrypt(api).decode('utf-8')
   
   # API SET VARIABLE 
@@ -44,12 +43,19 @@ def api_index():
           )
         )
     return vs
+  v = values()
   
   if api == "cMap":
     return webApp.json(com_api_map_reqest())
 
   elif api == "cShare":
-    v = values()
     comrade.share(str(v[0]), str(v[1]), str(v[2]))
   
+  elif api == "cHits":
+    return comrade.get("cHits")
+
+  elif api == "cReqs":
+    return comrade.get("cReqs")
+  
   return webApp.json({ 'status': 1 })
+

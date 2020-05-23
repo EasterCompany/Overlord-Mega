@@ -42,18 +42,25 @@ class __this__:
       'port': '3001/',
       'host': 'http://secure.easter.company/',
       'apps': [
-        "home", "error"
+        "home", "error", "api", 
+        "overlord_documentation", "epanel"
       ],
       'tables': []
     }
 
   }
   server = servers['system']
+  stats = {}
 
   def __init__(self):
     self.server = self.specifiedServer()
     sysPath.insert(0, path.dirname(__file__))
     self.consoleLog()
+
+  def record(self, stat, record):
+    if stat not in self.stats:
+      self.stats[stat] = []
+    self.stats[stat].append(record)
 
   def sourceableApps(self):
     source = []
@@ -125,5 +132,8 @@ def api(service, args):
   parameters = []
   for i, a in enumerate(args):
     parameters.append(host_crypt.en(a).decode('utf-8'))
-  return openUrl(_host + 'api?req=' + service + "&".join(parameters))
-
+  try:
+    return openUrl(_host + 'api?req=' + service + "&".join(parameters))
+  except Exception as error:
+    if str(error) == "<urlopen error [Errno -2] Name or service not known>":
+      return ""

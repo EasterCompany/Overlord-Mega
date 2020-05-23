@@ -4,12 +4,22 @@ from . import \
 from flask import \
   Flask, Blueprint, \
   redirect, request, jsonify
+from .server import host
+from .comrade import comrade
+from source import __version__
 
 
 class app:
-  default_sub_apps = [
-    'api', 'error', 'home', 'documentation', 'epanel'
-  ]
+  default_sub_apps = host.server['apps']
+  request_count = 0
+  hit_count = 0
+  lm_request_count = 0
+  lm_hit_count = 0
+  tm_request_count = 0
+  tm_hit_count = 0
+  mm_request_count = 0
+  mm_hit_count = 0
+  end = None
 
   def __init__(self, name=__name__, react_enabled=False, sub=True):
     self.nme = name
@@ -38,6 +48,11 @@ from source.elang.reflask import __mainWebApp__ as webApp'''
         r += py_import
       r += '\n""" /                                     / """'
       f.write(r), f.close()
+    
+    @self.end.before_request
+    def _count_global_request():
+      comrade.mass_update("cReqs", int(self.request_count) + 1)
+      comrade.mass_update("cHits", int(self.hit_count) + 1)
 
   def run(self):
     self.debug = ("-t" in pyArgs or "test" in pyArgs)
@@ -106,3 +121,4 @@ def """ + app_name + """_index():
 
 
 __mainWebApp__ = app(name=sysName, react_enabled=False, sub=False)
+

@@ -137,7 +137,7 @@ def git(file_path, repo="Overlord", branch="master", source="EasterCompany"):
     return openUrl("https://raw.githubusercontent.com/" +
              source + "/" + repo + "/" + branch + "/" + file_path).read().decode('utf-8')
   except Exception as error:
-    return str(error)
+    return "connection error, session timed out."
 
 
 # ENCLOSE A STRING WITH COLOUR TAGS
@@ -528,6 +528,6 @@ class crypt:
     res = Fernet(
       self.pKey
     ).decrypt(
-      token
+      bytes(token)
     )
     return res

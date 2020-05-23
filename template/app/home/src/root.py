@@ -3,7 +3,6 @@ from source.elang.edoc import etags, etag, make
 
 ETML = open("./template/app/home/home.html").read()
 FILE = make(name='home', etml=ETML)
-RNDR = FILE.render()
 
 
 @webApp.end.route('/', methods=['GET', 'POST'])
