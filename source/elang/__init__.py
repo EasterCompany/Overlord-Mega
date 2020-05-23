@@ -60,5 +60,7 @@ optional_inits = {
 
 # (if any) Parse & init user input parameters
 for init in optional_inits:
+  if init == 'server' and ('secureserver' in sysName or 'liveconsole' in sysName):
+    optional_inits[init]()
   if init in pyArgs or "-" + init[0] in pyArgs:
     optional_inits[init]()
