@@ -1,4 +1,4 @@
-from __app__ import webApp
+from passenger_wsgi import webApp
 from source.elang.comrade import comrade
 from source.elang.edoc import etags, etag, make
 

@@ -18,7 +18,6 @@ class archive:
     self.db.sql("CREATE TABLE IF NOT EXISTS " + archive_name + \
       " ( 'id' INT, 'date_added' datetime, 'date_modified' datetime ) ")
     self.db.db.commit()
-    onExit.register(self.db.commit)
     self.rebuild_cols()
     previous_data = self.db.sql("SELECT * FROM " + self.nm)
     self.db.sql("DELETE FROM " + self.nm)

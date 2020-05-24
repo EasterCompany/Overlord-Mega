@@ -1,5 +1,5 @@
 from . import path, console, sysName, \
-  strColor, sysPath, openUrl
+  strColor, sysPath, openUrl, pyArgs
 from source.elang.schema import client
 from source.elang.basic import crypt
 
@@ -16,7 +16,8 @@ class __this__:
       'port': '/',
       'host': None,
       'apps': [
-        "home", "error"
+        "home", "error", "api", 
+        "overlord_documentation", "epanel"
       ],
       'tables': [
         client.tables,
@@ -30,7 +31,8 @@ class __this__:
       'port': '/',
       'host': 'http://secure.easter.company/',
       'apps': [
-        "home", "error"
+        "home", "error", "api", 
+        "overlord_documentation", "epanel"
       ],
       'tables': []
     },
@@ -50,17 +52,18 @@ class __this__:
 
   }
   server = servers['system']
-  stats = {}
+  stats = [
+    "cReqs", 
+    "cHits", "clmReqs", 
+    "clmHits", "ctmReqs", 
+    "ctmHits", "cmmReqs", 
+    "cmmHits"
+  ]
 
   def __init__(self):
     self.server = self.specifiedServer()
     sysPath.insert(0, path.dirname(__file__))
     self.consoleLog()
-
-  def record(self, stat, record):
-    if stat not in self.stats:
-      self.stats[stat] = []
-    self.stats[stat].append(record)
 
   def sourceableApps(self):
     source = []
@@ -94,7 +97,7 @@ class __this__:
     return self.server['host'] is None
 
   def isSecureServer(self):
-    return 'secureserver' in sysName
+    return 'secureserver' in sysName or '-t' in pyArgs or 'test' in pyArgs
 
   def isStableServer(self):
     return 'liveconsole' in sysName

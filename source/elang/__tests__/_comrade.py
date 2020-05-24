@@ -41,7 +41,7 @@ test(
 
 test(
   label="Update '__test__' in the raid network (when hosted by self)",
-  test=comrade.mass_update,
+  test=comrade.raid_update,
   arg=("__test__", 2),
 )
 

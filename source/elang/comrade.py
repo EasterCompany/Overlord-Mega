@@ -16,7 +16,9 @@ class __comRaid__:
       self.map[data[0]] = (data[1], data[2])
     self.name = host.url()
     self.save()
-
+    for stat in host.stats:
+      self.share(stat, 0)
+  
   def exists(self, name):
     return name in self.map
   
@@ -70,14 +72,19 @@ class __comRaid__:
     return self.mass.get("SELECT value, type FROM mass WHERE name='" + name + "' LIMIT 1;")
 
   def mass_update(self, name, value, _type=None):
-    if self.owns(name):
-      if _type is None: 
-        _type = dataType(value)
-      self.mass.sql("DELETE FROM mass WHERE name='" + name + "'")
-      self.save()
-      self.add_to_local_mass(name, value, _type)
-      self.save()
+    if _type is None:
+      _type = dataType(value)
+    self.mass.sql("DELETE FROM mass WHERE name='" + name + "'")
+    self.save()
+    self.add_to_local_mass(name, value, _type)
+    self.save()
 
+  def raid_update(self, name, value):
+    if self.owns(name):
+      self.mass_update(name, value)
+    else:
+      api("cRaidU", [ name, value ] )
+    
 
 comrade = __comRaid__()
 

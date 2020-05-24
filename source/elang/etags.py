@@ -2,6 +2,7 @@ from . import dateTime, sysTime, sysName
 from .basic import formatDateTime, git
 from .archive import archive
 from .server import host
+from .comrade import comrade
 from source import __version__
 
 _g = "./template/global/"
@@ -21,34 +22,17 @@ months = [
   "Sep", "Oct", "Nov", "Dec"
 ]
 
+def table_names(schema):
+  names = []
+  for scheme in schema:
+    for table in scheme:
+      names.append(str(table[0]))
+  return ", ".join(names)
+
 def lastMonth():
   m = dateTime.now().month - 1
   if m == 0: return months[-1]
   return months[m]
-
-def getMostHits():
-  from __app__ import webApp
-  return webApp.mm_hit_count
-
-def getMostReqs():
-  from __app__ import webApp
-  return webApp.mm_request_count
-
-def getLastHits():
-  from __app__ import webApp
-  return webApp.lm_hit_count
-
-def getLastReqs():
-  from __app__ import webApp
-  return webApp.lm_request_count
-
-def getThisHits():
-  from __app__ import webApp
-  return webApp.tm_hit_count
-
-def getThisReqs():
-  from __app__ import webApp
-  return webApp.tm_request_count
 
 eTags = {
   
@@ -61,17 +45,20 @@ eTags = {
   'site.footer': file(_g + "source/footer.html"),
   'site.dexter': file(_g + "script/dexter.js"),
   'site.post': file(_g + "source/elements/post.html"),
-  'site.mostHits': getMostHits,
-  'site.mostRequests': getMostReqs,
-  'site.lastMonthsHits': getLastHits,
-  'site.thisMonthsHits': getThisHits,
-  'site.lastMonthsRequests': getLastReqs,
-  'site.thisMonthsRequests': getThisReqs,
+  'site.hits': comrade.get('hits'),
+  'site.requests': comrade.get('reqs'),
+  'site.mostHits': comrade.get('mmHits', True),
+  'site.mostRequests': comrade.get('mmReqs', True),
+  'site.uas': "",
+  'site.lastMonthsHits': comrade.get('lmHits', True),
+  'site.thisMonthsHits': comrade.get('tmHits', True),
+  'site.lastMonthsRequests': comrade.get('lmReqs', True),
+  'site.thisMonthsRequests': comrade.get('tmReqs', True),
   'host.domain': host.domain,
   'host.host': host.server['host'],
   'host.name': host.server['name'],
   'host.apps': ', '.join(host.server['apps']),
-  'host.tables': ', '.join(host.server['tables']),
+  'host.tables': table_names(host.server['tables']),
   
   # e-doc footer objects
   'footer.dexter': file(_g + "source/elements/dexterFooter.html"),
@@ -142,11 +129,11 @@ def two_bar_graph(*args):
   return r
   
 def webAppRequests(*args):
-  from __app__ import webApp
+  from passenger_wsgi import webApp
   return str(webApp.request_count)
 
 def webAppHits(*args):
-  from __app__ import webApp
+  from passenger_wsgi import webApp
   return str(webApp.hit_count)
 
 eClasses = {
@@ -155,8 +142,6 @@ eClasses = {
   'return': hive_data,
   'image': static_image,
   'graph.bar': two_bar_graph,
-  'site.requests': webAppRequests,
-  'site.hits': webAppHits,
   'site.date.lastMonth': lastMonth,
 }
 

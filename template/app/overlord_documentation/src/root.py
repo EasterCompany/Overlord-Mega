@@ -1,5 +1,5 @@
 
-from __app__ import webApp
+from passenger_wsgi import webApp
 from source.elang.edoc import etags, etag, make
 
 ETML = open("./template/app/overlord_documentation/overlord_documentation.html").read()

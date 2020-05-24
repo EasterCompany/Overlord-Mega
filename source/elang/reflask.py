@@ -11,14 +11,6 @@ from source import __version__
 
 class app:
   default_sub_apps = host.server['apps']
-  request_count = 0
-  hit_count = 0
-  lm_request_count = 0
-  lm_hit_count = 0
-  tm_request_count = 0
-  tm_hit_count = 0
-  mm_request_count = 0
-  mm_hit_count = 0
   end = None
 
   def __init__(self, name=__name__, react_enabled=False, sub=True):
@@ -38,7 +30,7 @@ class app:
       mkDir("./template/global/themes")
       mkDir("./template/app")       # APP HTML/CSS/JS Templates
       self.end = Flask(name)
-      f = open('./__app__.py', 'w+')
+      f = open('./passenger_wsgi.py', 'w+')
       r = f.read()
       r = '''"""   MAIN PYTHON IMPORT FILE FOR APP   """
 from source.elang.reflask import __mainWebApp__ as webApp'''
@@ -48,11 +40,6 @@ from source.elang.reflask import __mainWebApp__ as webApp'''
         r += py_import
       r += '\n""" /                                     / """'
       f.write(r), f.close()
-    
-    @self.end.before_request
-    def _count_global_request():
-      comrade.mass_update("cReqs", int(self.request_count) + 1)
-      comrade.mass_update("cHits", int(self.hit_count) + 1)
 
   def run(self):
     self.debug = ("-t" in pyArgs or "test" in pyArgs)
@@ -105,7 +92,7 @@ from source.elang.reflask import __mainWebApp__ as webApp'''
     if not path.exists(py_root_file):
       f = open(py_root_file, 'w')
       f.write(
-"""from __app__ import webApp
+"""from passenger_wsgi import webApp
 from source.elang.edoc import etags, etag, make
 
 ETML = open("./template/app/""" + app_name + "/" + app_name + """.html").read()

@@ -123,9 +123,7 @@ class make:
     return self.doc['build']
 
   def deploy(self):
-    t = sysTime()
     self.create(self.name, self.etml, self.style, self.script)
     self.render()
-    host.record("edoc_render_times", sysTime() - t)
     return self.run()
 

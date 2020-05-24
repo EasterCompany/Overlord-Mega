@@ -1,4 +1,4 @@
-from __app__ import webApp
+from passenger_wsgi import webApp
 from source.elang.basic import crypt
 from source.elang.comrade import comrade, com_api_map_reqest, com_api_request
 
@@ -47,7 +47,7 @@ def api_index():
   
   if api == "cMap":
     return webApp.json(com_api_map_reqest())
-
+  
   elif api == "cShare":
     comrade.share(str(v[0]), str(v[1]), str(v[2]))
   
@@ -56,6 +56,9 @@ def api_index():
 
   elif api == "cReqs":
     return comrade.get("cReqs")
+  
+  elif api == "cRaidU":
+    return comrade.raid_update(str(v[0]), str(v[1]))
   
   return webApp.json({ 'status': 1 })
 

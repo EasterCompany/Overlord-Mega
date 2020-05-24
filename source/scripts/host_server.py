@@ -1,6 +1,6 @@
 
 
 def run():
-  from __app__ import webApp
+  from passenger_wsgi import webApp
   webApp.run()
 
